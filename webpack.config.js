@@ -10,6 +10,11 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  devtool: "eval-source-map",
+  devServer: {
+    watchFiles: ["./src/template.html"],
+    static: "./dist",
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
@@ -22,5 +27,5 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
-  }
+  },
 };
