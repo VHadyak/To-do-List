@@ -1,9 +1,7 @@
 import "./styles/styles.css";
 
-
-//import { taskArr, addTask } from "./modules/tasks";
 import { addProject } from "./modules/events";
+import { addTask } from "./modules/events";
 
 addProject();
-
-//addTask();
+addTask();
