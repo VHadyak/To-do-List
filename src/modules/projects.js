@@ -1,9 +1,6 @@
 
 // Module for handling projects
 
-//const btn = document.querySelector("button");
-//const input = document.querySelector("input");
-
 export const projectArr = []; // update arr after addProject()
 
 class Project {
@@ -13,7 +10,7 @@ class Project {
 };
 
 function createProject() {
-  //const name1 = input.value;
+  //const projectTitle = textInput.value;
 
   const projectTest = new Project("Vlad");
   projectArr.push(projectTest);
@@ -22,8 +19,10 @@ function createProject() {
 createProject();
 createProject();
 
+// Export createProject() later and import to eventListener/DOM Module
+
 // ADD PROJECT TO THE ARRAY ON CLICK
-//export function addProject() {
+//function addProject() {
   //btn.addEventListener("click", () => {
     //createProject();
   //});
