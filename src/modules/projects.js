@@ -17,7 +17,7 @@ function createProject() {
 };
 
 createProject();
-createProject();
+createProject(); 
 
 // Export createProject() later and import to eventListener/DOM Module
 
