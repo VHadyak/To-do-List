@@ -1,32 +1,20 @@
 
 // Module for handling projects
 
-export const projectArr = []; // update arr after addProject()
-
+const projectArr = []; 
 class Project {
   constructor(name) {
     this.name = name;                
   };
 };
 
-function createProject() {
-  //const projectTitle = textInput.value;
-
-  const projectTest = new Project("Vlad");
-  projectArr.push(projectTest);
+export function createProject(title) {
+  const projectObj = new Project(title);
+  projectArr.push(projectObj);
+  
+  console.log(projectArr);     // Update projectArr after button was clicked
 };
 
-createProject();
-createProject(); 
-
-// Export createProject() later and import to eventListener/DOM Module
-
-// ADD PROJECT TO THE ARRAY ON CLICK
-//function addProject() {
-  //btn.addEventListener("click", () => {
-    //createProject();
-  //});
-//};
 
 
 

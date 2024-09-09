@@ -1,8 +1,9 @@
 import "./styles/styles.css";
 
-import { projectArr } from "./modules/projects";
-import { taskArr, addTask } from "./modules/tasks";
 
-//console.log('Array of Projects:', projectArr);
+//import { taskArr, addTask } from "./modules/tasks";
+import { addProject } from "./modules/events";
 
-addTask();
+addProject();
+
+//addTask();
