@@ -1,7 +1,7 @@
 
 // Module for handling projects
 
-const projectArr = []; 
+export const projectArr = []; 
 class Project {
   constructor(name) {
     this.name = name;                

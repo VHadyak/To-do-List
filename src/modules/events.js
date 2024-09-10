@@ -3,6 +3,7 @@
 
 import { createProject } from "./projects";
 import { createTask } from "./tasks";
+import { selectPath, attachProjectToInput } from "./dom";
 
 // 'Project' interactive elements
 const projectInput = document.querySelector("div.project-dialog input#projectName");
@@ -21,17 +22,22 @@ export function addProject() {
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
     createProject(projectName);
+
+    attachProjectToInput();
   });
 };
 
-// Add task to an array of other tasks
+// Add task with properties to an array of tasks
 export function addTask() {
   btnTask.addEventListener("click", () => {
     const taskName = taskInput.value;
     const description = descriptionText.value;
     const date = inputDate.value;
     const priority = selectPriority.value;
+    const path = selectPath.value;
 
-    createTask(taskName, description, date, priority);
+    createTask(taskName, description, date, priority, path);
   });
 };
+
+
