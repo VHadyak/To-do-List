@@ -1,6 +1,8 @@
 
 // Module for handling tasks
 
+import { checkPath } from "./projects";
+
 const taskArr = [];
 
 class Task {
@@ -11,22 +13,12 @@ class Task {
     this.priority = priority;
     this.path = path;
   };
-
-  /* 
-  checkPath() {
-    if (this.path !== "Inbox") {
-      console.log("Inbox path was NOT selected");
-    } else {
-      console.log("Inbox path was selected");
-    };
-  };
-  */
 };
 
 export function createTask(title, description, date, priority, path) {
-  const task1 = new Task(title, description, date, priority, path);
-  //task1.checkPath();
-  taskArr.push(task1);
+  const task = new Task(title, description, date, priority, path);
+  console.log(task);
+  taskArr.push(task);    // store all the tasks in taskArr
 
-  console.log(taskArr); 
+  checkPath(path, task); // attach a task to the project path array that was selected
 };

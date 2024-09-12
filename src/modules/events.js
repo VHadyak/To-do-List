@@ -19,10 +19,15 @@ const btnTask = document.querySelector("div.task-dialog button");
 
 // Add project to an array of other projects
 export function addProject() {
+  createProject("Inbox"); 
+
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
+    if (projectName.length < 1) {
+      // import some dom to display errors
+      return;
+    }
     createProject(projectName);
-
     attachProjectToInput();
   });
 };
