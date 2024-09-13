@@ -6,30 +6,45 @@
     <title>Todo List</title>
   </head>
   <body>
-    <div class="project-dialog">
+    
+    <button type="button" id="clickProject">Create Project</button>
+    <dialog class="project-dialog">
       <form>
         <label for="projectName">Project:</label>
-          <input type="text" id="projectName" name="projectName" maxlength="8" size="10">
+        <input type="text" id="projectName" name="projectName" maxlength="8" size="10">
       </form>
-      <button type="submit">Create Project</button>
-    </div>
+      <button type="submit" id="createProject">Create Project</button>
+      <button type="button" id="cancelProject" class="cancel">Cancel</button>
+    </dialog>
     
 
-    <div class="task-dialog">
-      <input type="text" id="taskName" name="taskName" placeholder="Task Name">
-      <textarea id="description" name="description" placeholder="Description"></textarea>
-      <input type="date" id="date" name="due-date">
-    
-      <select name="priority" id="priority">
-        <option value="" disabled selected>Priority</option>
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
-      </select>
-      <select name="path" id="path">
-        <option value="Inbox">Inbox</option>
-      </select>
-      <button type="submit">Add Task</button>
+    <button type="button" id="clickTask">Create Task</button> 
+    <dialog class="task-dialog">
+      <form>
+        <input type="text" id="taskName" name="taskName" placeholder="Task Name">
+        <textarea id="description" name="description" placeholder="Description"></textarea>
+        <input type="date" id="date" name="due-date">
+        <select name="priority" id="priority">
+          <option value="" disabled selected>Priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <select name="path" id="path">
+          <option value="Inbox" id="default">Inbox</option>
+        </select>
+      </form>
+      <button type="submit" id="createTask">Add Task</button>
+      <button type="button" id="cancelTask" class="cancel">Cancel</button>
+    </dialog>
+    <!-- <button type="submit" id="deleteTask">Delete Task</button> -->
+
+    <div class="project-container">
+      <h2>Projects</h2>
+    </div>
+
+    <div class="task-container">
+      <h2>Tasks</h2>
     </div>
   </body>
 </html>

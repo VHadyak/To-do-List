@@ -1,11 +1,15 @@
 
 // Module for handling projects
+import { updateSelectOptions } from "./dom";
+
+let idCounter = 0;
 
 export const projectArr = []; 
 class Project {
   constructor(name) {
     this.name = name;                
     this.items = [];      // Create empty array for each project to store each task
+    this.id = idCounter++;
   };
 
   addTask(task) {
@@ -24,11 +28,28 @@ export function createProject(title) {
 export function checkPath(path, task) {
   const project = projectArr.find(p => p.name === path);    
 
-  // If they match, attach the task to corresponding path
+  // If they match, attach the task to corresponding path array
   if (project) {
     project.addTask(task);
-    console.log(project);
+    //console.log(project);
   };
+};
+
+export function deleteProject(btn) {
+  const projectUI = btn.parentElement;
+  const projectId = projectUI.getAttribute("data-id");
+  const index = projectArr.findIndex(i => i.id == projectId);
+  
+  // Ensures item exist in an array before removing it
+  if (index !== -1) {
+    projectArr.splice(index, 1);
+  };
+  projectUI.remove();
+
+  // Update options/paths from select input
+  updateSelectOptions();
+  
+  console.log(projectArr);
 };
 
 

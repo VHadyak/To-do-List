@@ -1,7 +1,18 @@
 import "./styles/styles.css";
 
-import { addProject } from "./modules/events";
-import { addTask } from "./modules/events";
+import { 
+  addProject, 
+  addTask, 
+  removeProject, 
+  showProjectDialog, 
+  showTaskDialog, 
+  cancelDialog } from "./modules/events";
 
+
+showProjectDialog();
+showTaskDialog();
+removeProject();
 addProject();
 addTask();
+cancelDialog();
+
