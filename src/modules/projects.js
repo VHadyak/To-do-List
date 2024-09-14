@@ -1,4 +1,6 @@
 // Module for handling projects
+import { updateProjectDOM } from "./dom";
+
 let idCounter = 0;
 
 export const projectArr = []; 
@@ -39,21 +41,17 @@ export function deleteProject(item) {
     projectArr.splice(index, 1);
   };
   projectUI.remove();
-  
   console.log(projectArr);
 };
 
-export function editProject(title, projectID) {
+export function editProject(title, projectID, btnProject) {
   const index = projectArr.findIndex(project => project.id === Number(projectID));      // Find project with matching id
  
   if (index !== -1) {
     projectArr[index].name = title;
-    const projectElement = document.querySelector(`div.project[data-id="${projectID}"]`);   // Get element from each dynamically created project
-    const projectName = projectElement.querySelector("div.project div.project-title");  
-
-    if (projectName) projectName.textContent = title;
+    updateProjectDOM(title, projectID, btnProject);
   };
-  //console.log(projectArr);
+  console.log(projectArr);
 };
 
 

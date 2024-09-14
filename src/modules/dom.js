@@ -45,6 +45,14 @@ export function displayProject(projectName) {
   projectContainer.appendChild(projectEl);
 };
 
+export function updateProjectDOM(title, projectID, btnProject) {
+  const projectElement = document.querySelector(`div.project[data-id="${projectID}"]`);   // Retrieve unique id from dynamically created project
+  const projectName = projectElement.querySelector("div.project div.project-title");  
+
+  if (projectName) projectName.textContent = title;
+  if (btnProject) btnProject.textContent = "Edit";
+};
+
 // Assign unique id
 function assignId(element, attr) {
   const id = idCounter++;

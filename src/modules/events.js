@@ -2,7 +2,7 @@
 // Module for handling eventListeners 
 import { createProject, deleteProject, editProject } from "./projects";
 import { createTask } from "./tasks";
-import { selectPath, updateSelectOptions, displayProject, projectContainer } from "./dom";
+import { selectPath, updateSelectOptions, displayProject, projectContainer, updateProjectDOM } from "./dom";
 
 // 'Project' interactive elements
 export const projectInput = document.querySelector("dialog.project-dialog input#projectName");
@@ -19,7 +19,7 @@ const btnTask = document.querySelector("dialog.task-dialog button#createTask");
 const clickTaskBtn = document.querySelector("button#clickTask");
 const taskDialog = document.querySelector("dialog.task-dialog");
 
-let isEditMode = false;
+export let isEditMode = false;
 let projectId = null;
 
 // Add project to an array of other projects
@@ -34,7 +34,7 @@ export function addProject() {
     };
 
     if (isEditMode) {
-      editProject(projectName, projectId);
+      editProject(projectName, projectId, btnProject);
     } else {
       createProject(projectName);
       displayProject(projectName);
@@ -65,7 +65,7 @@ export function editProjectEvent() {
         projectId = project.getAttribute("data-id");   // Get unique id of each dynamic project
         showDialog();
         isEditMode = true;
-        btnProject.textContent = "Edit"; // TEMPORARY
+        btnProject.textContent = "Edit";
       };
     };
   });
@@ -94,14 +94,15 @@ export function cancelDialog() {
       projectDialog.close();
       taskDialog.close();
       resetForm();
+      clearInputs();
     });
   });
 };
 
 function resetForm() {
   isEditMode = false;
-  btnProject.textContent = "Create Project";    // TEMPORARY
   projectId = null;
+  btnProject.textContent = "Create Project";
 };
 
 function showDialog() {
