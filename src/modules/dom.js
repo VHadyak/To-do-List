@@ -3,7 +3,7 @@ import { projectArr } from "./projects";
 
 export const selectPath = document.querySelector("dialog.task-dialog select#path");
 export const projectContainer = document.querySelector("div.project-container");
-const taskContainer = document.querySelector("div.task-container");
+export const taskContainer = document.querySelector("div.task-container");
 
 // Update options/paths to select input
 export function updateSelectOptions() {

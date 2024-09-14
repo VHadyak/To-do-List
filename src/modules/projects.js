@@ -35,13 +35,14 @@ export function checkPath(path, task) {
 export function deleteProject(item) {
   const projectUI = item.parentElement;
   const projectId = projectUI.getAttribute("data-id");
-  const index = projectArr.findIndex(i => i.id == projectId);
+  const index = projectArr.findIndex(i => i.id === Number(projectId));
+ 
   // Ensures item exist in an array before removing it
   if (index !== -1) {
     projectArr.splice(index, 1);
   };
   projectUI.remove();
-  console.log(projectArr);
+  //console.log(projectArr);
 };
 
 export function editProject(title, projectID, btnProject) {
@@ -51,7 +52,7 @@ export function editProject(title, projectID, btnProject) {
     projectArr[index].name = title;
     updateProjectDOM(title, projectID, btnProject);
   };
-  console.log(projectArr);
+  //console.log(projectArr);
 };
 
 

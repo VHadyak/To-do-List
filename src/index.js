@@ -1,21 +1,18 @@
 import "./styles/styles.css";
 
 import { 
-  addProject, 
-  removeProjectEvent,
-  editProjectEvent,  
+  handleProjectEvents,
   addTask, 
+  removeTaskEvent,
   showTaskDialog, 
   cancelDialog } from "./modules/events";
 
 
 
-cancelDialog();
-addProject();
-removeProjectEvent();
-editProjectEvent();
+handleProjectEvents();
+
+addTask();
+removeTaskEvent();
 
 showTaskDialog();
-addTask();
-
-
+cancelDialog();

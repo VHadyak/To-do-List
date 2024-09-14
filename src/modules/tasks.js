@@ -3,6 +3,8 @@
 
 import { checkPath } from "./projects";
 
+let idCounter = 0;
+
 const taskArr = [];
 
 class Task {
@@ -12,6 +14,7 @@ class Task {
     this.date = date;
     this.priority = priority;
     this.path = path;
+    this.id = idCounter++;
   };
 };
 
@@ -21,4 +24,21 @@ export function createTask(title, description, date, priority, path) {
   
   checkPath(path, task); // attach a task to the project path array that was selected
   taskArr.push(task);    // store all the tasks in taskArr
+  console.log(taskArr);
+};
+
+export function deleteTask(item) {
+  const taskUI = item.closest(".task");  // Select element with task class
+  const taskID = taskUI.getAttribute("data-id");
+  const index = taskArr.findIndex(i => i.id === Number(taskID));
+
+  if (index !== -1) {
+    taskArr.splice(index, 1);
+  };
+  taskUI.remove();
+  console.log(taskArr);
+};
+
+export function editTask() {
+  console.log("Edit Task");
 };

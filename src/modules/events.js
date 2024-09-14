@@ -1,8 +1,8 @@
 
 // Module for handling eventListeners 
 import { createProject, deleteProject, editProject } from "./projects";
-import { createTask } from "./tasks";
-import { selectPath, updateSelectOptions, displayProject, displayTask, projectContainer } from "./dom";
+import { createTask, deleteTask, editTask } from "./tasks";
+import { selectPath, updateSelectOptions, displayProject, displayTask, projectContainer, taskContainer } from "./dom";
 
 // 'Project' interactive elements
 export const projectInput = document.querySelector("dialog.project-dialog input#projectName");
@@ -23,7 +23,7 @@ export let isEditMode = false;
 let projectId = null;
 
 // Add project to an array of other projects
-export function addProject() {
+function addProject() {
   createProject("Inbox"); 
 
   btnProject.addEventListener("click", () => {
@@ -47,7 +47,7 @@ export function addProject() {
   });
 };
 
-export function removeProjectEvent() {
+function removeProjectEvent() {
   projectContainer.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("deleteProject")) {
       deleteProject(e.target);
@@ -57,7 +57,7 @@ export function removeProjectEvent() {
 };
 
 // Inside task edit
-export function editProjectEvent() {
+function editProjectEvent() {
   projectContainer.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("editProject")) {
       const project = e.target.closest('.project');
@@ -70,6 +70,14 @@ export function editProjectEvent() {
     };
   });
 };
+
+export function handleProjectEvents() {
+  addProject();
+  removeProjectEvent();
+  editProjectEvent();
+};
+
+
 
 // Add task with properties to an array of tasks
 export function addTask() {
@@ -87,6 +95,21 @@ export function addTask() {
     clearInputs();
   });
 };
+
+export function removeTaskEvent() {
+  taskContainer.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("deleteTask")) {
+      deleteTask(e.target);
+    };
+  });
+};
+
+export function editTaskEvent() {
+  editTask();
+};
+
+
+
 
 // Handle modal cancel
 export function cancelDialog() {
