@@ -4,9 +4,8 @@ import { projectArr } from "./projects";
 export const selectPath = document.querySelector("dialog.task-dialog select#path");
 export const projectContainer = document.querySelector("div.project-container");
 
-// Update selected inputs based on projectArr
+// Update options/paths to select input
 export function updateSelectOptions() {
-  
   selectPath.innerHTML = ''; 
   
   projectArr.forEach((project) => {
@@ -30,6 +29,7 @@ export function displayProject(projectName) {
   editProjectBtn.classList.add("editProject");
 
   projectEl.classList.add("project");
+  projectTitle.classList.add("project-title");
 
   // Attach unique id to each newly created project
   assignId(projectEl, "data-id");
@@ -45,6 +45,7 @@ export function displayProject(projectName) {
   projectContainer.appendChild(projectEl);
 };
 
+// Assign unique id
 function assignId(element, attr) {
   const id = idCounter++;
   element.setAttribute(attr, id);

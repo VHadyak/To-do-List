@@ -1,22 +1,23 @@
-.project-dialog {
-  position: absolute;
-  top: 20%;
-  left: 0;
-  width: 300px;
+
+/* PROJECT SECTION */
+.project-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Position the task dialog on the right */
-.task-dialog {
-  position: absolute;
-  top: 30%;
-  right: 0;
-  width: 300px;
+.project {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(214, 214, 228);
+  width: 200px;
+  height: 50px;
+  gap: 20px;
 }
 
-/* Additional styles for better debugging view */
-dialog {
-  padding: 20px;
-  border: 2px solid #000;
+.project div.project-title {
+  font-size: 1.2rem;
 }
 
 .deleteProject {
@@ -29,28 +30,33 @@ dialog {
   height: 25px;
 }
 
+.project-dialog {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 300px;
+}
+
+dialog {
+  padding: 20px;
+  border: 2px solid #000;
+}
+
+/* TASK SECTION */
+
+
+
 #deleteTask {
   position: absolute;
   top: 35%;
   right: 23%;
 }
 
-.project {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(214, 214, 228);
-  width: 200px;
-  height: 50px;
-  gap: 20px;
+.task-dialog {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  width: 300px;
 }
 
-.project div {
-  font-size: 1.2rem;
-}
 
-.project-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
