@@ -2,7 +2,7 @@
 // Module for handling eventListeners 
 import { createProject, deleteProject, editProject } from "./projects";
 import { createTask } from "./tasks";
-import { selectPath, updateSelectOptions, displayProject, projectContainer, updateProjectDOM } from "./dom";
+import { selectPath, updateSelectOptions, displayProject, displayTask, projectContainer } from "./dom";
 
 // 'Project' interactive elements
 export const projectInput = document.querySelector("dialog.project-dialog input#projectName");
@@ -79,8 +79,10 @@ export function addTask() {
     const date = inputDate.value;
     const priority = selectPriority.value;
     const path = selectPath.value;
+    // checkbox for markup
 
     createTask(taskName, description, date, priority, path);
+    displayTask(taskName, date, priority);
     taskDialog.close();
     clearInputs();
   });

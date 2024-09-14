@@ -44,12 +44,46 @@ dialog {
 
 /* TASK SECTION */
 
+.task-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
+.task {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgb(214, 214, 228);
+  width: 500px;
+  height: 90px;
+  gap: 50px;
+}
 
-#deleteTask {
-  position: absolute;
-  top: 35%;
-  right: 23%;
+.wrap-content {
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+input[type="checkbox"] {
+  width: 50px;
+}
+
+.task div.task-title {
+  font-size: 1.2rem;
+}
+
+.deleteTask {
+  width: 25px;
+  height: 25px;
+  margin-left: -60px;
+}
+
+.editTask {
+  width: 45px;
+  height: 25px;
 }
 
 .task-dialog {
