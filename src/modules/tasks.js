@@ -6,7 +6,6 @@ import { checkPath } from "./projects";
 let idCounter = 0;
 
 const taskArr = [];
-
 class Task {
   constructor(title, description, date, priority, path) { 
     this.title = title;

@@ -2,21 +2,23 @@
 // Module for handling eventListeners 
 import { createProject, deleteProject, editProject } from "./projects";
 import { createTask, deleteTask, editTask } from "./tasks";
-import { selectPath, updateSelectOptions, displayProject, displayTask, projectContainer, taskContainer } from "./dom";
+import { selectPath, updateSelectOptions, 
+         displayProject, displayTask, 
+         projectContainer, taskContainer } from "./dom";
 
 // 'Project' interactive elements
-export const projectInput = document.querySelector("dialog.project-dialog input#projectName");
+const clickProjectBtn = document.querySelector("button#clickProject");   // Create project btn variable (no modal)
+const projectInput = document.querySelector("dialog.project-dialog input#projectName");
 const btnProject = document.querySelector("dialog.project-dialog button#createProject");
-const clickProjectBtn = document.querySelector("button#clickProject");
 const projectDialog = document.querySelector("dialog.project-dialog");
 
 // 'Task' interactive elements
+const clickTaskBtn = document.querySelector("button#clickTask");   // Create task btn variable (no modal)
+const btnTask = document.querySelector("dialog.task-dialog button#createTask");
 const taskInput = document.querySelector("dialog.task-dialog input#taskName");
 const descriptionText = document.querySelector("dialog.task-dialog textarea#description");
 const inputDate = document.querySelector("dialog.task-dialog input#date");
 const selectPriority = document.querySelector("dialog.task-dialog select#priority");
-const btnTask = document.querySelector("dialog.task-dialog button#createTask");
-const clickTaskBtn = document.querySelector("button#clickTask");
 const taskDialog = document.querySelector("dialog.task-dialog");
 
 export let isEditMode = false;
@@ -29,10 +31,10 @@ function addProject() {
 
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
-    if (projectName.length < 1) {
+    /* if (projectName.length < 1) {
       // import some dom to display errors
       return;
-    };
+    }; */
 
     if (isEditMode) {
       editProject(projectName, projectId);

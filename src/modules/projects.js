@@ -42,7 +42,7 @@ export function deleteProject(item) {
     projectArr.splice(index, 1);
   };
   projectUI.remove();
-  //console.log(projectArr);
+  console.log(projectArr);
 };
 
 export function editProject(title, projectID) {
@@ -52,7 +52,7 @@ export function editProject(title, projectID) {
     projectArr[index].name = title;
     updateProjectDOM(title, projectID);
   };
-  //console.log(projectArr);
+  console.log(projectArr);
 };
 
 
