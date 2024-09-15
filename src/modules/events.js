@@ -23,7 +23,7 @@ const taskDialog = document.querySelector("dialog.task-dialog");
 
 export let isEditMode = false;
 let projectId = null;
-let taskId = null;
+export let taskId = null;
 
 // Create/Edit project modal btn event
 function addProject() {

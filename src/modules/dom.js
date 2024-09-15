@@ -119,6 +119,15 @@ export function updateTaskDOM(title, date, priority, taskID) {
   priorityText.textContent = priority;
 };
 
+// Highlight the selected project
+export function highlightProject(selectedProject) {
+  const projects = document.querySelectorAll(".project");
+  projects.forEach(project => {
+    project.classList.remove("project-highlight");
+  });
+  selectedProject.classList.add("project-highlight");
+};
+
 // Assign unique id 
 function assignId(element, attr, counter) {
   const id = counter++;

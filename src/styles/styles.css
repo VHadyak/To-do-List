@@ -112,6 +112,10 @@ nav {
   cursor: pointer;
 }
 
+.project-highlight {
+  border: 1px solid blue;
+}
+
 .project div.project-title {
   font-size: 1.2rem;
 }

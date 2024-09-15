@@ -1,5 +1,6 @@
 // Module for handling projects
 import { updateProjectDOM } from "./dom";
+import { taskArr } from "./tasks";
 
 let idCounter = 0;
 
@@ -40,20 +41,20 @@ export function deleteProject(item) {
   // Ensures item exist in an array before removing it
   if (index !== -1) {
     projectArr.splice(index, 1);
+
+    projectUI.remove();
+    console.log(taskArr);
   };
-  projectUI.remove();
   console.log(projectArr);
 };
 
 export function editProject(title, projectID) {
-  const index = projectArr.findIndex(project => project.id === Number(projectID));      // Find project with matching id
- 
+  const index = projectArr.findIndex(project => project.id === Number(projectID));   
+
   if (index !== -1) {
-    projectArr[index].name = title;
-    updateProjectDOM(title, projectID);
+    projectArr[index].name = title; 
+
+    updateProjectDOM(title, projectID);   
   };
   console.log(projectArr);
 };
-
-
-

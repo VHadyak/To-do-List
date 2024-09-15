@@ -5,7 +5,7 @@ import { checkPath } from "./projects";
 
 let idCounter = 0;
 
-const taskArr = [];
+export const taskArr = [];
 class Task {
   constructor(title, description, date, priority, path) { 
     this.title = title;
@@ -28,13 +28,14 @@ export function createTask(title, description, date, priority, path) {
 export function deleteTask(item) {
   const taskUI = item.closest(".task");  // Select element with task class
   const taskID = taskUI.getAttribute("data-id");
-  const index = taskArr.findIndex(i => i.id === Number(taskID));
-
+    
+  const index = taskArr.findIndex(task => task.id === Number(taskID));
+  
   if (index !== -1) {
     taskArr.splice(index, 1);
   };
-  taskUI.remove();
   console.log(taskArr);
+  taskUI.remove();
 };
 
 export function editTask(title, description, date, priority, path, taskID) {
