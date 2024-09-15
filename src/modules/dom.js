@@ -2,8 +2,8 @@
 import { projectArr } from "./projects";
 
 export const selectPath = document.querySelector("dialog.task-dialog select#path");
-export const projectContainer = document.querySelector("div.project-container");
-export const taskContainer = document.querySelector("div.task-container");
+export const projectContainer = document.querySelector("div#project-container");
+export const taskContainer = document.querySelector("div#task-container");
 
 // Update options/paths to select input
 export function updateSelectOptions() {
@@ -24,13 +24,15 @@ let taskCounter = 0;
 export function displayProject(projectName) {
   const projectEl = document.createElement("div");
   const projectTitle = document.createElement("div");
+  const projectBtnWrapper = document.createElement("div");
   const deleteProjectBtn = document.createElement("button");
   const editProjectBtn = document.createElement("button");
 
+  projectBtnWrapper.classList.add("project-btn-wrapper");
   deleteProjectBtn.classList.add("deleteProject");
   editProjectBtn.classList.add("editProject");
 
-  projectEl.classList.add("project");
+  projectEl.classList.add("project");                
   projectTitle.classList.add("project-title");
 
   // Attach unique id to each newly created project
@@ -40,10 +42,12 @@ export function displayProject(projectName) {
   editProjectBtn.textContent = "Edit";  // Temporary
   deleteProjectBtn.textContent = "X";   // Temporary
 
+  projectBtnWrapper.appendChild(editProjectBtn);   
+  projectBtnWrapper.appendChild(deleteProjectBtn);  
+
   projectEl.appendChild(projectTitle);
-  projectEl.appendChild(editProjectBtn);
-  projectEl.appendChild(deleteProjectBtn);
-  
+  projectEl.appendChild(projectBtnWrapper);
+
   projectContainer.appendChild(projectEl);
 };
 
@@ -52,6 +56,7 @@ export function displayTask(taskName, date, priority) {
   const infoWrapper = document.createElement("div");
   const deleteTaskBtn = document.createElement("button");
   const editTaskBtn = document.createElement("button");
+  const taskBtnWrapper = document.createElement("div");
   const checkBox = document.createElement("input");
 
   const taskTitle = document.createElement("div");
@@ -63,6 +68,7 @@ export function displayTask(taskName, date, priority) {
   checkBox.value = taskTitle;
 
   checkBox.classList.add("checkTask");
+  taskBtnWrapper.classList.add("task-btn-wrapper");
   deleteTaskBtn.classList.add("deleteTask");
   editTaskBtn.classList.add("editTask");
 
@@ -81,11 +87,13 @@ export function displayTask(taskName, date, priority) {
   deleteTaskBtn.textContent = "X";    // Temporary
   editTaskBtn.textContent = "Edit";   // Temporary
 
+  taskBtnWrapper.appendChild(editTaskBtn);
+  taskBtnWrapper.appendChild(deleteTaskBtn);
+
   infoWrapper.appendChild(checkBox);
   infoWrapper.appendChild(taskTitle);
   infoWrapper.appendChild(dateText);
-  infoWrapper.appendChild(editTaskBtn);
-  infoWrapper.appendChild(deleteTaskBtn);
+  infoWrapper.appendChild(taskBtnWrapper);
 
   taskEl.appendChild(infoWrapper);
   taskEl.appendChild(priorityText);

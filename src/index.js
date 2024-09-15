@@ -6,8 +6,10 @@ import {
   handleDialogEvent,
   cancelDialog } from "./modules/events";
 
+handleDialogEvent();
+cancelDialog();
+
 handleProjectEvents();
 handleTaskEvents();
 
-handleDialogEvent();
-cancelDialog();
+

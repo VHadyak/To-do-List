@@ -33,7 +33,7 @@ export function checkPath(path, task) {
 };
 
 export function deleteProject(item) {
-  const projectUI = item.parentElement;
+  const projectUI = item.closest(".project");
   const projectId = projectUI.getAttribute("data-id");
   const index = projectArr.findIndex(i => i.id === Number(projectId));
  

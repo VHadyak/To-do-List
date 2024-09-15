@@ -1,23 +1,124 @@
 
-/* PROJECT SECTION */
-.project-container {
-  position: relative;
+:root {
+  --header-bg-color: rgb(191, 243, 243);
+  --sidebar-bg-color: rgb(242, 239, 204);
+  --content-bg-color: rgb(205, 197, 197);
+  --footer-bg-color: transparent;
+  --font-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.grid-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) repeat(2, minmax(280px ,1fr));
+  grid-template-rows: 80px repeat(2, 1fr) 50px;
+
+  grid-template-areas: "logo      header     header"
+                       "sidebar   content    content"
+                       "sidebar   content    content"
+                       "sidebar   footer     footer";
+}
+
+/* HEADER */
+.header {
+  grid-area: header;
+  background-color: var(--header-bg-color);
+}
+
+.header-left {
+  background-color: rgb(179, 184, 230);
+  grid-area: logo;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 50px;
+}
+
+.header-logo {
+  padding-left: 50px;
+}
+
+.header-title {
+  font-size: 2rem;
+}
+
+/* MENU SIDEBAR */
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--sidebar-bg-color);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
+}
+
+nav {
+  background-color: rgb(238, 201, 201);
+}
+
+.sidebar ul#menu {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-left: 40px;
+}
+
+.sidebar ul#menu li {
+  list-style-type: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* PROJECT SECTION SIDEBAR */
+#project-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px
+}
+
+.project-flex {
+  background-color: rgb(161, 178, 178);
+  padding-left: 40px;
+  display: flex;
+  gap: 50px;
+}
+
+#project-container div#project-main-title {
+  font-size: 1.4rem;
+}
+
+#project-container button#clickProject {
+  height: 40px;
 }
 
 .project {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   background-color: rgb(214, 214, 228);
-  width: 200px;
   height: 50px;
   gap: 20px;
+  cursor: pointer;
 }
 
 .project div.project-title {
   font-size: 1.2rem;
+}
+
+.project-btn-wrapper {
+  display: flex;
+  gap: 10px;
 }
 
 .deleteProject {
@@ -37,27 +138,33 @@
   width: 300px;
 }
 
-dialog {
-  padding: 20px;
-  border: 2px solid #000;
+/* MAIN CONTENT / TASK SECTION */
+.content-wrapper {
+  grid-area: content;
+  background-color: var(--content-bg-color);
 }
 
-/* TASK SECTION */
-
-.task-container {
+#task-container {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
+#task-container div#section-title {
+  font-size: 1.4rem;
+}
+
+#task-container button#clickTask {
+  height: 40px;
+}
+
 .task {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   background-color: rgb(214, 214, 228);
-  width: 500px;
-  height: 90px;
+  width: 700px;
   gap: 50px;
 }
 
@@ -65,20 +172,34 @@ dialog {
   display: flex;
   gap: 20px;
   justify-content: space-evenly;
+  /* outline: 1px solid red */
 }
 
 input[type="checkbox"] {
   width: 50px;
 }
 
-.task div.task-title {
+div.task-title {
   font-size: 1.2rem;
+}
+
+div.date {
+  font-size: 1.3rem;
+}
+
+div.priority {
+  font-size: 1.2rem;
+  /* outline: 1px solid rgb(16, 160, 21) */
+}
+
+div.task-btn-wrapper {
+  display: flex;
+  gap: 10px;
 }
 
 .deleteTask {
   width: 25px;
   height: 25px;
-  margin-left: -60px;
 }
 
 .editTask {
@@ -92,5 +213,37 @@ input[type="checkbox"] {
   right: 0;
   width: 300px;
 }
+
+dialog {
+  padding: 20px;
+  border: 2px solid #000;
+}
+
+/* FOOTER */
+.footer {
+  grid-area: footer;
+  background-color: var(--footer-bg-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+.footer a:hover {
+  color: rgb(88, 119, 125);
+}
+
+.footer span {
+  font-size: 1rem;
+}
+
+
+
+
 
 

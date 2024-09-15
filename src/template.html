@@ -6,8 +6,53 @@
     <title>Todo List</title>
   </head>
   <body>
+    <div class="grid-container">
+      <div class="header">
+
+      </div>
+
+      <div class="header-left">
+        <div class="header-logo">
+          <span>Logo</span>
+        </div>
+        <div class="header-title">Todo List</div>
+      </div>
+
+      <div class="sidebar">
+        <nav role="navigation">
+          <ul id="menu">
+            <li>Inbox</li>
+            <li>Today</li>
+            <li>Tomorrow</li>
+            <li>This Week</li>
+            <li>Upcoming</li>
+            <li>Completed</li>
+          </ul>
+        </nav>
+        <div id="project-container">
+          <div class="project-flex">
+            <div id="project-main-title">Projects</div>
+            <button type="button" id="clickProject">Create Project</button>
+          </div>
+        </div>
+      </div>
+      <!-- TASKS-->
+      <div class="content-wrapper">
+        <div id="task-container">
+          <div id="section-title">Tasks</div>
+          <button type="button" id="clickTask">Create Task</button> 
+        </div>    
+      </div>
+
+      <div class="footer">
+        <!-- <a href="https://github.com/VHadyak" target="_blank"> -->
+          <span>VHadyak</span>
+          <!-- <img src=""> -->
+        </a>
+      </div>
+    </div>
     
-    <button type="button" id="clickProject">Create Project</button>
+    <!-- PROJECT MODAL -->
     <dialog class="project-dialog">
       <form>
         <label for="projectName">Project:</label>
@@ -17,8 +62,7 @@
       <button type="button" id="cancelProject" class="cancel">Cancel</button>
     </dialog>
     
-
-    <button type="button" id="clickTask">Create Task</button> 
+    <!-- TASK MODAL -->
     <dialog class="task-dialog">
       <form>
         <input type="text" id="taskName" name="taskName" placeholder="Task Name">
@@ -37,13 +81,5 @@
       <button type="submit" id="createTask">Create Task</button>
       <button type="button" id="cancelTask" class="cancel">Cancel</button>
     </dialog>
-
-    <div class="project-container">
-      <h2>Projects</h2>
-    </div>
-
-    <div class="task-container">
-      <h2>Tasks</h2>
-    </div>
   </body>
 </html>
