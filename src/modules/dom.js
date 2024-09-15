@@ -47,14 +47,23 @@ export function displayProject(projectName) {
   projectContainer.appendChild(projectEl);
 };
 
-export function updateProjectDOM(title, projectID, btnProject) {
+export function updateProjectDOM(title, projectID) {
   const projectElement = document.querySelector(`div.project[data-id="${projectID}"]`);   // Retrieve unique id from dynamically created project
   const projectName = projectElement.querySelector("div.project div.project-title");  
 
-  if (projectName) projectName.textContent = title;
-  if (btnProject) btnProject.textContent = "Edit";
+  projectName.textContent = title;
 };
 
+export function updateTaskDOM(title, date, priority, taskID) {
+  const taskElement = document.querySelector(`div.task[data-id="${taskID}"]`);            // Retrieve unique id from dynamically created task
+  const taskName = taskElement.querySelector("div.task-title");
+  const dateText = taskElement.querySelector("div.date");
+  const priorityText = taskElement.querySelector("div.priority");
+
+  taskName.textContent = title;
+  dateText.textContent = date;
+  priorityText.textContent = priority;
+};
 
 export function displayTask(taskName, date, priority) {
   const taskEl = document.createElement("div");

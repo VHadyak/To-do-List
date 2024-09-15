@@ -21,8 +21,9 @@ const taskDialog = document.querySelector("dialog.task-dialog");
 
 export let isEditMode = false;
 let projectId = null;
+let taskId = null;
 
-// Add project to an array of other projects
+// Create/Edit project modal btn event
 function addProject() {
   createProject("Inbox"); 
 
@@ -34,7 +35,7 @@ function addProject() {
     };
 
     if (isEditMode) {
-      editProject(projectName, projectId, btnProject);
+      editProject(projectName, projectId);
     } else {
       createProject(projectName);
       displayProject(projectName);
@@ -42,7 +43,7 @@ function addProject() {
 
     updateSelectOptions();
     projectDialog.close();
-    resetForm();
+    resetForm("Project");
     clearInputs();
   });
 };
@@ -56,16 +57,62 @@ function removeProjectEvent() {
   });
 };
 
-// Inside task edit
+// // Edit project btn (no modal) 
 function editProjectEvent() {
   projectContainer.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("editProject")) {
       const project = e.target.closest('.project');
       if (project) {
         projectId = project.getAttribute("data-id");   // Get unique id of each dynamic project
-        showDialog();
-        isEditMode = true;
-        btnProject.textContent = "Edit";
+        showDialog("Project");
+        isEditMode = true;                        // !!!
+        btnProject.textContent = "Edit";          // !!!
+      };
+    };
+  });
+};
+
+// Create/Edit task modal btn event
+function addTask() {
+  btnTask.addEventListener("click", () => {
+    const taskName = taskInput.value;
+    const description = descriptionText.value;
+    const date = inputDate.value;
+    const priority = selectPriority.value;
+    const path = selectPath.value;
+    // checkbox for markup
+  
+    if (isEditMode) {
+      editTask(taskName, description, date, priority, path, taskId);
+    } else {
+      createTask(taskName, description, date, priority, path);
+      displayTask(taskName, date, priority);
+    };
+ 
+    taskDialog.close();
+    resetForm("Task");
+    clearInputs();
+  });
+};
+
+function removeTaskEvent() {
+  taskContainer.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("deleteTask")) {
+      deleteTask(e.target);
+    };
+  });
+};
+
+// Edit task btn (no modal) 
+function editTaskEvent() {
+  taskContainer.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("editTask")) {
+      const task = e.target.closest(".task");
+      if (task) {
+        taskId = task.getAttribute("data-id");
+        showDialog("Task"); 
+        isEditMode = true;              // !!!
+        btnTask.textContent = "Edit";   // !!!
       };
     };
   });
@@ -77,39 +124,11 @@ export function handleProjectEvents() {
   editProjectEvent();
 };
 
-
-
-// Add task with properties to an array of tasks
-export function addTask() {
-  btnTask.addEventListener("click", () => {
-    const taskName = taskInput.value;
-    const description = descriptionText.value;
-    const date = inputDate.value;
-    const priority = selectPriority.value;
-    const path = selectPath.value;
-    // checkbox for markup
-
-    createTask(taskName, description, date, priority, path);
-    displayTask(taskName, date, priority);
-    taskDialog.close();
-    clearInputs();
-  });
+export function handleTaskEvents() {
+  addTask();
+  removeTaskEvent();
+  editTaskEvent();
 };
-
-export function removeTaskEvent() {
-  taskContainer.addEventListener("click", (e) => {
-    if (e.target && e.target.classList.contains("deleteTask")) {
-      deleteTask(e.target);
-    };
-  });
-};
-
-export function editTaskEvent() {
-  editTask();
-};
-
-
-
 
 // Handle modal cancel
 export function cancelDialog() {
@@ -124,24 +143,30 @@ export function cancelDialog() {
   });
 };
 
-function resetForm() {
-  isEditMode = false;
-  projectId = null;
-  btnProject.textContent = "Create Project";
+function showDialog(str) {
+  if (str === "Project") {
+    projectDialog.showModal();
+  } else if (str === "Task") {
+    taskDialog.showModal();
+  };
 };
 
-function showDialog() {
-  projectDialog.showModal();
-};
-// Show project dialog when "Add Project" clicked
-clickProjectBtn.addEventListener("click", showDialog);
- 
-// Handle task modal(show) 
-export function showTaskDialog() {
-  clickTaskBtn.addEventListener("click", () => {
-    taskDialog.showModal();
+// Show Modal once starter button is pressed
+export function handleDialogEvent() {
+  clickProjectBtn.addEventListener("click", () => {
+    showDialog("Project");
   });
-}; 
+  clickTaskBtn.addEventListener("click", () => {
+    showDialog("Task");
+  });
+};
+
+function resetForm(str) {
+  isEditMode = false;
+  projectId = null;
+  btnProject.textContent = (str === "Project" || !str) ? "Create Project" : btnProject.textContent;
+  btnTask.textContent = (str === "Task" || !str) ? "Create Task" : btnTask.textContent;
+};
 
 function clearInputs() {
   projectInput.value = "";

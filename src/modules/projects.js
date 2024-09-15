@@ -45,12 +45,12 @@ export function deleteProject(item) {
   //console.log(projectArr);
 };
 
-export function editProject(title, projectID, btnProject) {
+export function editProject(title, projectID) {
   const index = projectArr.findIndex(project => project.id === Number(projectID));      // Find project with matching id
  
   if (index !== -1) {
     projectArr[index].name = title;
-    updateProjectDOM(title, projectID, btnProject);
+    updateProjectDOM(title, projectID);
   };
   //console.log(projectArr);
 };
