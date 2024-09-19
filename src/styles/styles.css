@@ -155,11 +155,11 @@ nav {
   gap: 10px;
 }
 
-#task-container div#section-title {
+.content-wrapper div#section-title {
   font-size: 1.4rem;
 }
 
-#task-container button#clickTask {
+.content-wrapper button#clickTask {
   height: 40px;
 }
 

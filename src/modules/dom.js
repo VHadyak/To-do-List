@@ -1,24 +1,24 @@
 
 import { projectArr } from "./projects";
 
-export const selectPath = document.querySelector("dialog.task-dialog select#path");
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
 
 // Update options/paths to select input
 export function updateSelectOptions() {
+  const selectPath = document.querySelector("dialog.task-dialog select#path");
   selectPath.innerHTML = ""; 
   
   projectArr.forEach((project) => {
     const optionElement = document.createElement("option");
     optionElement.value = project.name;
+    optionElement.id = project.id;
     optionElement.textContent = project.name;
     selectPath.appendChild(optionElement);
   });
 };
 
 let projectCounter = 1;  // !!! Start with 1 to ignore default Inbox path
-let taskCounter = 0;
 
 // Display project UI
 export function displayProject(projectName) {
@@ -51,7 +51,7 @@ export function displayProject(projectName) {
   projectContainer.appendChild(projectEl);
 };
 
-export function displayTask(taskName, date, priority) {
+export function displayTask(taskName, date, priority, id) {
   const taskEl = document.createElement("div");
   const infoWrapper = document.createElement("div");
   const deleteTaskBtn = document.createElement("button");
@@ -78,7 +78,7 @@ export function displayTask(taskName, date, priority) {
   dateText.classList.add("date");
   priorityText.classList.add("priority");
 
-  taskCounter = assignId(taskEl, "data-id", taskCounter);
+  taskEl.dataset.id = id;
 
   taskTitle.textContent = taskName;
   dateText.textContent = date;

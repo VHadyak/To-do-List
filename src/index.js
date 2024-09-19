@@ -1,21 +1,15 @@
 import "./styles/styles.css";
-import { projectContainer } from "./modules/dom";
 import { 
-  handleProjectEvents,
   handleTaskEvents,
   handleDialogEvent,
-  cancelDialog } from "./modules/events";
+  cancelDialog, 
+  handleProjectEvents} from "./modules/events";
 import { currentProject } from "./modules/render";
 
 handleDialogEvent();
 cancelDialog();
+currentProject();
 handleProjectEvents();
 handleTaskEvents();
 
-// Click on the current project
-function clickProject() {
-  projectContainer.addEventListener("click", (e) => {
-    currentProject(e);
-  });
-}
-clickProject();
+

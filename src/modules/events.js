@@ -1,8 +1,8 @@
 
 // Module for handling eventListeners 
-import { createProject, deleteProject, editProject } from "./projects";
-import { createTask, deleteTask, editTask } from "./tasks";
-import { selectPath, updateSelectOptions, 
+import { createProject, deleteProject, editProject, projectArr } from "./projects";
+import { createTask, deleteTask, editTask, taskArr } from "./tasks";
+import { updateSelectOptions, 
          displayProject, displayTask, 
          projectContainer, taskContainer } from "./dom";
 
@@ -18,12 +18,13 @@ const btnTask = document.querySelector("dialog.task-dialog button#createTask");
 const taskInput = document.querySelector("dialog.task-dialog input#taskName");
 const descriptionText = document.querySelector("dialog.task-dialog textarea#description");
 const inputDate = document.querySelector("dialog.task-dialog input#date");
+const selectPath = document.querySelector("select#path");
 const selectPriority = document.querySelector("dialog.task-dialog select#priority");
 const taskDialog = document.querySelector("dialog.task-dialog");
 
 export let isEditMode = false;
 let projectId = null;
-export let taskId = null;
+let editingTaskId = null;
 
 // Create/Edit project modal btn event
 function addProject() {
@@ -65,10 +66,10 @@ function editProjectEvent() {
     if (e.target && e.target.classList.contains("editProject")) {
       const project = e.target.closest('.project');
       if (project) {
-        projectId = project.getAttribute("data-id");   // Get unique id of each dynamic project
         showDialog("Project");
         isEditMode = true;                        // !!!
         btnProject.textContent = "Edit";          // !!!
+        projectId = project.getAttribute("data-id");
       };
     };
   });
@@ -82,13 +83,15 @@ function addTask() {
     const date = inputDate.value;
     const priority = selectPriority.value;
     const path = selectPath.value;
+    const projectID = selectPath.selectedOptions[0].id; 
     // checkbox for markup
-  
-    if (isEditMode) {
-      editTask(taskName, description, date, priority, path, taskId);
+
+    if (isEditMode && editingTaskId !== null) {
+      editTask(taskName, description, date, priority, path, projectID, editingTaskId);
+      console.log(path);
     } else {
-      createTask(taskName, description, date, priority, path);
-      displayTask(taskName, date, priority);
+      const task = createTask(taskName, description, date, priority, path, projectID);
+      displayTask(task.title, task.date, task.priority, task.id);
     };
  
     taskDialog.close();
@@ -111,10 +114,10 @@ function editTaskEvent() {
     if (e.target && e.target.classList.contains("editTask")) {
       const task = e.target.closest(".task");
       if (task) {
-        taskId = task.getAttribute("data-id");
-        showDialog("Task"); 
-        isEditMode = true;              // !!!
-        btnTask.textContent = "Edit";   // !!!
+        editingTaskId = Number(task.dataset.id); // Set the task ID for editing
+        showDialog("Task");
+        isEditMode = true;
+        btnTask.textContent = "Edit";
       };
     };
   });
