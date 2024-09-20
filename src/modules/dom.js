@@ -120,12 +120,10 @@ export function updateTaskDOM(title, date, priority, taskID) {
 };
 
 // Highlight the selected project
-export function highlightProject(selectedProject) {
-  const projects = document.querySelectorAll(".project");
-  projects.forEach(project => {
-    project.classList.remove("project-highlight");
-  });
-  selectedProject.classList.add("project-highlight");
+export function highlightItem(selectedItem) {
+  const items = document.querySelectorAll(".project, li");
+  items.forEach(item => item.classList.remove("item-highlight"));
+  selectedItem.classList.add("item-highlight");
 };
 
 // Assign unique id 

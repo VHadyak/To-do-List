@@ -14,6 +14,7 @@ module.exports = {
   devServer: {
     watchFiles: ["./src/template.html"],
     static: "./dist",
+    allowedHosts: ["all"],
   },
   plugins: [
     new HtmlWebpackPlugin({

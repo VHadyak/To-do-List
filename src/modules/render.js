@@ -1,5 +1,5 @@
 
-import { displayTask, highlightProject } from "./dom";
+import { displayTask, highlightItem } from "./dom";
 import { projectArr } from "./projects";
 import { taskArr } from "./tasks";
 import { projectContainer } from "./dom";
@@ -10,13 +10,13 @@ export function currentProject() {
     const project = e.target.closest(".project");
     // If project exists
     if (project) {
-      highlightProject(project);
+      highlightItem(project);
       renderContent(project);
     };
   });
 };
 
-// Render tasks with the project click
+// Render tasks with the project click (for "Projects" and "Inbox" sections)
 function renderContent(projectItem) {
   const projectID = projectItem.getAttribute("data-id");
 
@@ -36,4 +36,28 @@ function renderContent(projectItem) {
 
   console.log(taskArr);
   console.log(projectArr);
+};
+
+export function renderInboxTasks() {
+  console.log("Inbox");
+};
+
+export function renderTodayTasks() {
+  console.log("Today");
+}
+
+export function renderTomorrowTasks() {
+  console.log("Tomorrow");
+};
+
+export function renderThisWeekTasks() {
+  console.log("This Week");
+};
+
+export function renderUpcomingTasks() {
+  console.log("Upcoming");
+};
+
+export function renderCompletedTasks() {
+  console.log("Completed");
 };
