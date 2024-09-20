@@ -20,14 +20,22 @@ class Project {
 export function createProject(title) {
   const projectObj = new Project(title);
   projectArr.push(projectObj);
+
   console.log(projectArr);
 };
 
-// Make sure project name matches with path selected in task dialog
-export function checkPath(projectID, task) {
+// Add task to project/inbox path
+export function checkProject(projectID, task) {
   const project = projectArr.find(project => project.id === Number(projectID));
+
   if (project) {
     project.addTask(task);
+  } else { 
+    // Add task to "Inbox" path if no project has been created
+    const inbox = projectArr.find(project => project.id === 0);
+    if (inbox) {
+      inbox.addTask(task);
+    };
   };
 };
 
@@ -69,7 +77,7 @@ export function editProject(title, projectID) {
   project.name = title;   // Change project name in projectArr
  
   updateProjectDOM(title, projectID);   
-
+  
   console.log(taskArr);
   console.log(projectArr);
 };

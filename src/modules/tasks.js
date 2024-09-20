@@ -1,28 +1,30 @@
 
 // Module for handling tasks
 import { updateTaskDOM } from "./dom";
-import { checkPath } from "./projects";
+import { checkProject } from "./projects";
 import { projectArr } from "./projects";
 import { getNextId, releaseId } from "./idTaskManager";
 
 export const taskArr = [];
 class Task {
-  constructor(title, description, date, priority, path, projectID) { 
+  constructor(title, description, date, priority, path, projectID = 0) { 
     this.title = title;
     this.description = description;
     this.date = date;
     this.priority = priority;
     this.path = path;
     this.id = getNextId();
-    this.projectID = Number(projectID);    // !!! Use this to match project id with a task that has same project id to resolve project name duplication
+    // Use this for handling identical named projects. If task id NaN, then assign 0
+    this.projectID = isNaN(Number(projectID)) ? 0 : Number(projectID); 
   };
 };
 
 export function createTask(title, description, date, priority, path, projectID) {
   const task = new Task(title, description, date, priority, path, projectID);
   
-  checkPath(projectID, task);     // attach a task to the project path array that was selected
+  checkProject(projectID, task);     // Check if project exists or not while creating a task
   taskArr.push(task);             // store all the tasks in taskArr
+
   console.log(taskArr);
   console.log(projectArr);
 
@@ -46,11 +48,11 @@ export function deleteTask(item) {
     project.items.splice(projectTaskIndex, 1);
   };
 
-  console.log(taskArr);
   taskUI.remove();
-  
   // Release to reuse it later
   releaseId(taskID);
+
+  console.log(taskArr);
   console.log(projectArr);
 };
 
@@ -85,8 +87,8 @@ export function editTask(title, description, date, priority, path, newProjectID,
       };
     };
   };
-
   updateTaskDOM(title, date, priority, taskID);
+
   console.log(taskArr); 
   console.log(projectArr);
 };
