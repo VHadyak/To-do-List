@@ -31,6 +31,9 @@ const sections = {
 
 const lists = document.querySelectorAll("li");
 
+// Render Inbox at the start
+sections["Inbox"]();
+
 // If that section li item is clicked, render that section with tasks
 lists.forEach(list => {
   list.addEventListener("click", (e) => {
