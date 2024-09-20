@@ -8,8 +8,7 @@ import { currentProject } from "./modules/render";
 
 handleDialogEvent();
 cancelDialog();
-currentProject();
+
 handleProjectEvents();
 handleTaskEvents();
-
-
+currentProject();

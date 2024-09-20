@@ -4,8 +4,7 @@ import { projectArr } from "./projects";
 import { taskArr } from "./tasks";
 import { projectContainer } from "./dom";
 
-
-
+// Track the current project click
 export function currentProject() {
   projectContainer.addEventListener("click", (e) => {
     const project = e.target.closest(".project");
@@ -17,13 +16,12 @@ export function currentProject() {
   });
 };
 
-
+// Render tasks with the project click
 function renderContent(projectItem) {
   const projectID = projectItem.getAttribute("data-id");
-  const projectIndex = projectArr.findIndex(project => project.id === Number(projectID));
-  const project = projectArr[projectIndex];
 
-  const filteredTasks = taskArr.filter(task => task.projectID === project.id);      // Find tasks associated with projects
+  // Find tasks associated with projects
+  const filteredTasks = taskArr.filter(task => task.projectID === Number(projectID));     
 
   // Clear each task UI before displaying required tasks
   const tasks = document.querySelectorAll(".task");

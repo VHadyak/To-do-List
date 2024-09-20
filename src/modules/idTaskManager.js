@@ -1,12 +1,14 @@
 
+// Module for tracking tasks with id (without id gap)
+
 let nextId = 1;
-const availableIds = new Set();
+const availableIDs = new Set();
 
 // Get a unique id for a task
 export function getNextId() {
-  if (availableIds.size > 0) {
-    const id = Array.from(availableIds)[0];
-    availableIds.delete(id);
+  if (availableIDs.size > 0) {
+    const id = Array.from(availableIDs)[0];
+    availableIDs.delete(id);
     return id;
   };
   return nextId++;
@@ -14,5 +16,5 @@ export function getNextId() {
 
 // Reuse id for new task after previously deleted task
 export function releaseId(id) {
-  availableIds.add(id);
+  availableIDs.add(id);
 };
