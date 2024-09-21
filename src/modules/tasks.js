@@ -57,6 +57,9 @@ export function deleteTask(item) {
 };
 
 export function editTask(title, description, date, priority, path, newProjectID, taskID) {
+  const projectContainer = document.querySelector("#project-container");
+  const hasProject = projectContainer.querySelector(".project"); 
+
   const index = taskArr.findIndex(task => task.id === Number(taskID));
   const task = taskArr[index];
 
@@ -72,10 +75,11 @@ export function editTask(title, description, date, priority, path, newProjectID,
     const oldProject = projectArr.find(project => project.id === task.projectID);
     
     // Remove task from old project after changing task path
-    if (oldProject) {
+    if (oldProject && hasProject) {
       const taskIndexInOldProject = oldProject.items.findIndex(t => t.id === Number(taskID))
       if (taskIndexInOldProject !== -1) {
         oldProject.items.splice(taskIndexInOldProject, 1);
+        console.log("bug");
       };
     };
 
