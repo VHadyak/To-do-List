@@ -3,6 +3,7 @@ import { displayTask, highlightItem } from "./dom";
 import { projectArr } from "./projects";
 import { taskArr } from "./tasks";
 import { projectContainer } from "./dom";
+import { format } from "date-fns";
 
 // Track the current project click
 export function currentProject() {
@@ -34,8 +35,6 @@ function renderTaskByID(item) {
   });
 };
 
-
-
 // Render tasks with the project click (for "Projects" and "Inbox" sections)
 function renderProjectTasks(projectItem) {
   renderTaskByID(projectItem);
@@ -54,12 +53,30 @@ export function renderInboxTasks() {
 
 
 
-export function renderTodayTasks() {
-  console.log("Today");
+
+function renderTaskByDate(date) {
+  const tasks = document.querySelectorAll(".task");
+  tasks.forEach(task => {
+    task.remove();
+  });
+
+  const filterDate = taskArr.filter(task => task.date === date);
+
+  filterDate.forEach(task => {
+    displayTask(task.title, task.date, task.priority, task.id);
+  })
 }
 
+// Compare today's date with user's date
+export function renderTodayTasks() {
+  const today = format(new Date(), "yyyy-MM-dd");
+  console.log(today);
+  
+  renderTaskByDate(today);
+};
+
 export function renderTomorrowTasks() {
-  console.log("Tomorrow");
+  
 };
 
 export function renderThisWeekTasks() {
