@@ -3,6 +3,10 @@ import { projectArr } from "./projects";
 
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
+const createTaskBtn = document.querySelector("#clickTask");
+const contentWrapper = document.querySelector("div.content-wrapper");
+
+let projectCounter = 1;  // !!! Start with 1 to ignore default Inbox path
 
 // Update options/paths to select input
 export function updateSelectOptions() {
@@ -18,7 +22,48 @@ export function updateSelectOptions() {
   });
 };
 
-let projectCounter = 1;  // !!! Start with 1 to ignore default Inbox path
+// In Completed section, display tasks without Edit, Delete and Create buttons
+export function modifyTaskFeatures() {
+  const buttons = document.querySelectorAll(".deleteTask, .editTask");
+  const checkboxes = document.querySelectorAll(".checkTask");
+  let deleteAllBtn = document.querySelector(".deleteAll");
+ 
+  // Check if delete all button exists
+  if (!deleteAllBtn) {
+    deleteAllBtn = document.createElement("button");
+    deleteAllBtn.classList.add("deleteAll");
+    deleteAllBtn.textContent = "Delete All";
+
+    if (contentWrapper && createTaskBtn) {
+      contentWrapper.insertBefore(deleteAllBtn, createTaskBtn);  // Insert before the 'Create Task' button
+    };
+  } else {
+    deleteAllBtn.style.display = "block"; 
+  };
+
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = true;
+    checkbox.disabled = true;
+  });
+
+  buttons.forEach(btn => {
+    btn.remove();
+  });
+
+  if (createTaskBtn) {
+    createTaskBtn.style.display = "none";
+  };
+};
+
+export function showTaskBtn() {
+  const deleteAllBtn = document.querySelector(".deleteAll");
+  if (createTaskBtn) {
+    createTaskBtn.style.display = "block"; 
+  };
+  if (deleteAllBtn) {
+    deleteAllBtn.style.display = "none";
+  };
+};
 
 // Display project UI
 export function displayProject(projectName) {
@@ -51,6 +96,7 @@ export function displayProject(projectName) {
   projectContainer.appendChild(projectEl);
 };
 
+// Display task UI
 export function displayTask(taskName, date, priority, id) {
   const taskEl = document.createElement("div");
   const infoWrapper = document.createElement("div");
@@ -65,7 +111,6 @@ export function displayTask(taskName, date, priority, id) {
 
   checkBox.type = "checkbox";
   checkBox.name = "task";
-  checkBox.value = taskTitle;
 
   checkBox.classList.add("checkTask");
   taskBtnWrapper.classList.add("task-btn-wrapper");
@@ -101,6 +146,7 @@ export function displayTask(taskName, date, priority, id) {
   taskContainer.appendChild(taskEl);
 };
 
+// Update project and task dom based on editing
 export function updateProjectDOM(title, projectID) {
   const projectElement = document.querySelector(`div.project[data-id="${projectID}"]`);   // Retrieve unique id from dynamically created project
   const projectName = projectElement.querySelector("div.project div.project-title");  

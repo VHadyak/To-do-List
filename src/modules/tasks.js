@@ -6,6 +6,7 @@ import { projectArr } from "./projects";
 import { getNextId, releaseId } from "./idTaskManager";
 
 export const taskArr = [];
+export const completedArr = [];
 class Task {
   constructor(title, description, date, priority, path, projectID = 0) { 
     this.title = title;
@@ -27,7 +28,6 @@ export function createTask(title, description, date, priority, path, projectID) 
 
   console.log(taskArr);
   console.log(projectArr);
-
   return task;
 };
 
@@ -40,17 +40,10 @@ export function deleteTask(item) {
   // Remove task from taskArr
   taskArr.splice(taskIndex, 1);
 
-  // If project has the task, remove that task from projectArr
-  const projectIndex = projectArr.findIndex(p => p.id === task.projectID);
-  if (projectIndex !== -1) {
-    const project = projectArr[projectIndex];
-    const projectTaskIndex = project.items.findIndex(task => task.id === taskID);
-    project.items.splice(projectTaskIndex, 1);
-  };
+  deleteFromProjectArr(task, taskID);
 
   taskUI.remove();
-  // Release to reuse it later
-  releaseId(taskID);
+  releaseId(taskID);    // Release to reuse the same id later
 
   console.log(taskArr);
   console.log(projectArr);
@@ -82,7 +75,6 @@ export function editTask(title, description, date, priority, path, newProjectID,
         console.log("bug");
       };
     };
-
     // Add the edited task to the new project
     if (newProject) {
       if (!newProject.items.some(project => project.id === Number(taskID))) {
@@ -95,4 +87,31 @@ export function editTask(title, description, date, priority, path, newProjectID,
 
   console.log(taskArr); 
   console.log(projectArr);
+};
+
+
+export function markAsCompleteTask(checkbox) {
+  const taskUI = checkbox.closest(".task");
+  const taskID = Number(taskUI.dataset.id);
+  const taskIndex = taskArr.findIndex(task => task.id === Number(taskID));
+  const taskObj = taskArr[taskIndex];
+  
+  if (checkbox.checked) {
+    completedArr.push(taskObj);
+    taskUI.remove();
+  };
+
+  deleteFromProjectArr(taskObj, taskID);
+  taskArr.splice(taskIndex, 1);  // If marked, remove that task from taskArr
+  console.log(projectArr);
+};
+
+// If project/inbox has the task, remove that task from projectArr
+function deleteFromProjectArr(taskObj, taskID) {
+  const projectIndex = projectArr.findIndex(p => p.id === taskObj.projectID);
+  if (projectIndex !== -1) {
+    const project = projectArr[projectIndex];
+    const projectTaskIndex = project.items.findIndex(task => task.id === taskID);
+    project.items.splice(projectTaskIndex, 1);
+  };
 };

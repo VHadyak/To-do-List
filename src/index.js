@@ -3,7 +3,8 @@ import "./styles/styles.css";
 import { handleProjectEvents, handleTaskEvents, handleDialogEvent, cancelDialog } from "./modules/events";
 import { renderInboxTasks, renderProjectTasks } from "./modules/projectRender";
 import { renderTodayTasks, renderTomorrowTasks, renderThisWeekTasks, renderUpcomingTasks } from "./modules/datesRender";
-import { highlightItem, projectContainer } from "./modules/dom";
+import { renderCompletedTasks } from "./modules/completedTasksRender";
+import { highlightItem, projectContainer, showTaskBtn } from "./modules/dom";
 
 const sections = {
   "Inbox": () => renderInboxTasks(),
@@ -11,7 +12,7 @@ const sections = {
   "Tomorrow": () => renderTomorrowTasks(),
   "This Week": () => renderThisWeekTasks(),
   "Upcoming": () => renderUpcomingTasks(),
-  //"Completed": () => renderCompletedTasks(),
+  "Completed": () => renderCompletedTasks(),
 };
 
 function listItemClick() {
@@ -29,6 +30,7 @@ function listItemClick() {
         sections[sectionName]();
         highlightItem(item); 
       };
+      if (sectionName !== "Completed") showTaskBtn();
     });
   });
 };
@@ -40,6 +42,7 @@ function projectClick() {
     if (project) {
       highlightItem(project);
       renderProjectTasks(project);
+      showTaskBtn();
     };
   });
 };

@@ -1,7 +1,7 @@
 
 // Module for handling eventListeners 
 import { createProject, deleteProject, editProject } from "./projects";
-import { createTask, deleteTask, editTask } from "./tasks";
+import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks";
 import { updateSelectOptions, 
          displayProject, displayTask, 
          projectContainer, taskContainer } from "./dom";
@@ -22,7 +22,7 @@ const selectPath = document.querySelector("select#path");
 const selectPriority = document.querySelector("dialog.task-dialog select#priority");
 const taskDialog = document.querySelector("dialog.task-dialog");
 
-export let isEditMode = false;
+let isEditMode = false;
 let projectId = null;
 let editingTaskId = null;
 
@@ -84,7 +84,6 @@ function addTask() {
     const priority = selectPriority.value;
     const path = selectPath.value;
     const projectID = selectPath.selectedOptions[0].id; 
-    // checkbox for markup
 
     if (isEditMode && editingTaskId !== null) {
       editTask(taskName, description, date, priority, path, projectID, editingTaskId);
@@ -122,6 +121,14 @@ function editTaskEvent() {
   });
 };
 
+function markTaskEvent() {
+  taskContainer.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("checkTask")) {
+      markAsCompleteTask(e.target);
+    };
+  });
+};
+
 export function handleProjectEvents() {
   addProject();
   removeProjectEvent();
@@ -132,6 +139,7 @@ export function handleTaskEvents() {
   addTask();
   removeTaskEvent();
   editTaskEvent();
+  markTaskEvent();
 };
 
 // Handle modal cancel

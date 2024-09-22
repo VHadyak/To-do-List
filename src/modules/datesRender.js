@@ -9,9 +9,9 @@ import { format, startOfWeek, endOfWeek, addDays } from "date-fns";
 function renderTaskByDate(dates) {
   const tasks = document.querySelectorAll(".task");
   tasks.forEach(task => task.remove());   
-  
-  const dateArr = Array.isArray(dates) ? dates : [dates];   // Check if it passes date as a string or array
 
+  const dateArr = Array.isArray(dates) ? dates : [dates];   // Check if it passes date as a string or array
+  
   // For each date, check if it matches with user's date selection
   dateArr.forEach(date => {
     const filterDate = taskArr.filter(task => task.date === date);
