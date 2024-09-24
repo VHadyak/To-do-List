@@ -1,10 +1,11 @@
 // Module for handling projects
-import { updateProjectDOM } from "./dom";
+import { displayProject, updateProjectDOM } from "./dom";
 import { taskArr } from "./tasks";
 
-let idCounter = 0;
+export const projectArr = JSON.parse(localStorage.getItem("projects")) || [];
 
-export const projectArr = []; 
+let idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
+
 class Project {
   constructor(name) {
     this.name = name;                
@@ -20,8 +21,10 @@ class Project {
 export function createProject(title) {
   const projectObj = new Project(title);
   projectArr.push(projectObj);
+  localStorage.setItem("projects", JSON.stringify(projectArr));
 
   console.log(projectArr);
+  return projectObj;
 };
 
 // Add task to project/inbox path
@@ -65,19 +68,36 @@ export function deleteProject(item) {
   projectArr.splice(index, 1);
   projectUI.remove();
 
-  console.log(taskArr);
+  localStorage.setItem("projects", JSON.stringify(projectArr));
+  idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
+
+  //console.log(taskArr);
   console.log(projectArr);
 };
-
 
 export function editProject(title, projectID) {
   const index = projectArr.findIndex(project => project.id === Number(projectID));   
   const project = projectArr[index];
-
-  project.name = title;   // Change project name in projectArr
- 
-  updateProjectDOM(title, projectID);   
+  project.name = title;   
   
-  console.log(taskArr);
+  updateProjectDOM(title, projectID);   
+  localStorage.setItem("projects", JSON.stringify(projectArr));
   console.log(projectArr);
+};
+
+// Load all projects that have been created, after browser refresh
+export function loadProjects() {
+  const inbox = projectArr.find(project => project.id === 0);
+
+  // Load default "Inbox" (only in storage) only once after browser refresh
+  if (!inbox) {  
+    createProject("Inbox");
+  };
+
+  projectArr.forEach(project => {
+    // Ignore default "Inbox"
+    if (project.id !== 0) {
+      displayProject(project);
+    };
+  });
 };

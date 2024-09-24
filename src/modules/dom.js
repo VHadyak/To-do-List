@@ -6,8 +6,6 @@ export const taskContainer = document.querySelector("div#task-container");
 const createTaskBtn = document.querySelector("#clickTask");
 const contentWrapper = document.querySelector("div.content-wrapper");
 
-let projectCounter = 1;  // !!! Start with 1 to ignore default Inbox path
-
 // Update options/paths to select input
 export function updateSelectOptions() {
   const selectPath = document.querySelector("dialog.task-dialog select#path");
@@ -66,7 +64,7 @@ export function showTaskBtn() {
 };
 
 // Display project UI
-export function displayProject(projectName) {
+export function displayProject(project) {
   const projectEl = document.createElement("div");
   const projectTitle = document.createElement("div");
   const projectBtnWrapper = document.createElement("div");
@@ -80,10 +78,9 @@ export function displayProject(projectName) {
   projectEl.classList.add("project");                
   projectTitle.classList.add("project-title");
 
-  // Attach unique id to each newly created project
-  projectCounter = assignId(projectEl, "data-id", projectCounter);
+  projectEl.setAttribute("data-id", project.id);
  
-  projectTitle.textContent = projectName;
+  projectTitle.textContent = project.name;
   editProjectBtn.textContent = "Edit";  // Temporary
   deleteProjectBtn.textContent = "X";   // Temporary
 
@@ -172,9 +169,3 @@ export function highlightItem(selectedItem) {
   selectedItem.classList.add("item-highlight");
 };
 
-// Assign unique id 
-function assignId(element, attr, counter) {
-  const id = counter++;
-  element.setAttribute(attr, id);
-  return counter;
-};

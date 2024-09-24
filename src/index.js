@@ -5,6 +5,7 @@ import { renderInboxTasks, renderProjectTasks } from "./modules/projectRender";
 import { renderTodayTasks, renderTomorrowTasks, renderThisWeekTasks, renderUpcomingTasks } from "./modules/datesRender";
 import { renderCompletedTasks } from "./modules/completedTasksRender";
 import { highlightItem, projectContainer, showTaskBtn } from "./modules/dom";
+import { loadProjects } from "./modules/projects";
 
 const sections = {
   "Inbox": () => renderInboxTasks(),
@@ -47,6 +48,7 @@ function projectClick() {
   });
 };
 
+loadProjects();
 handleDialogEvent();
 cancelDialog();
 handleProjectEvents();

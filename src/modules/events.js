@@ -1,6 +1,6 @@
 
 // Module for handling eventListeners 
-import { createProject, deleteProject, editProject } from "./projects";
+import { createProject, deleteProject, editProject, projectArr } from "./projects";
 import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks";
 import { updateSelectOptions, 
          displayProject, displayTask, 
@@ -28,20 +28,17 @@ let editingTaskId = null;
 
 // Create/Edit project modal btn event
 function addProject() {
-  createProject("Inbox"); 
-
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
     /* if (projectName.length < 1) {
       // import some dom to display errors
       return;
     }; */
-
     if (isEditMode) {
       editProject(projectName, projectId);
     } else {
-      createProject(projectName);
-      displayProject(projectName);
+      const newProject = createProject(projectName);
+      displayProject(newProject);
     };
 
     updateSelectOptions();
