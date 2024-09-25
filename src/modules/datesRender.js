@@ -1,5 +1,5 @@
 
-// Render the filtered tasks by date
+// Module for rendering the filtered tasks by date
 
 import { displayTask } from "./dom";
 import { taskArr } from "./tasks";
@@ -10,7 +10,8 @@ function renderTaskByDate(dates) {
   const tasks = document.querySelectorAll(".task");
   tasks.forEach(task => task.remove());   
 
-  const dateArr = Array.isArray(dates) ? dates : [dates];   // Check if it passes date as a string or array
+  // Check if it passes date as a string or array
+  const dateArr = Array.isArray(dates) ? dates : [dates];   
   
   // For each date, check if it matches with user's date selection
   dateArr.forEach(date => {

@@ -37,6 +37,7 @@ function listItemClick() {
   });
 };
 
+// Render the tasks on the selected project
 function projectClick() {
   projectContainer.addEventListener("click", (e) => {
     const project = e.target.closest(".project");
@@ -51,6 +52,7 @@ function projectClick() {
 
 loadTasks();
 loadProjects();
+
 handleDialogEvent();
 cancelDialog();
 handleProjectEvents();

@@ -1,5 +1,5 @@
 
-// Render the filtered tasks by project selection
+// Module for rendering the filtered tasks by project selection
 
 import { displayTask } from "./dom";
 import { taskArr } from "./tasks";
@@ -26,6 +26,6 @@ export function renderProjectTasks(projectItem) {
 
 export function renderInboxTasks() {
   const inboxItem = document.querySelector("li.inbox");
-  inboxItem.dataset.id = 0;   
+  inboxItem.dataset.id = 0;  // Set "Inbox" list item to id = 0
   renderTaskByID(inboxItem);
 };

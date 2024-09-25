@@ -1,4 +1,6 @@
 
+// Module for manipulating DOM
+
 import { projectArr } from "./projects";
 
 export const projectContainer = document.querySelector("div#project-container");
@@ -53,6 +55,7 @@ export function modifyTaskFeatures() {
   };
 };
 
+// Hide "delete", show "create" btn when switched off from "Completed section"
 export function showTaskBtn() {
   const deleteAllBtn = document.querySelector(".deleteAll");
   if (createTaskBtn) {
@@ -162,7 +165,7 @@ export function updateTaskDOM(title, date, priority, taskID) {
   priorityText.textContent = priority;
 };
 
-// Highlight the selected project
+// Highlight the selected project/sidebar section (Temporary)
 export function highlightItem(selectedItem) {
   const items = document.querySelectorAll(".project, li");
   items.forEach(item => item.classList.remove("item-highlight"));

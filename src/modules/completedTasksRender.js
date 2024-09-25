@@ -1,5 +1,5 @@
 
-// Render all the tasks that have been checked/marked complete
+// Module for rendering all the tasks that have been checked/marked as complete
 
 import { completedArr } from "./tasks";
 import { displayTask, modifyTaskFeatures, taskContainer} from "./dom";
@@ -12,10 +12,10 @@ export function renderCompletedTasks() {
   tasks.forEach(task => task.remove());
 
   completedArr.forEach(task => {
-    displayTask(task.title, task.date, task.priority, task.id);
+    displayTask(task);
   });
   
-  // Check if completed section has a task and delete all button
+  // Check if completed section has a task and 'delete all' button
   contentWrapper.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("deleteAll")) {
       if (taskContainer.querySelector(".task")) {
@@ -23,7 +23,9 @@ export function renderCompletedTasks() {
         tasks.forEach(task => task.remove());
         completedArr.length = 0;
       };
-    };;
+    // Remove all completed tasks from the its storage, if 'delete all' is clicked
+    localStorage.setItem("completed", JSON.stringify(completedArr));
+    };
   });
   // Modify task features if in 'Completed' section
   modifyTaskFeatures();

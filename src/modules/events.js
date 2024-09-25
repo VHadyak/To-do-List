@@ -1,19 +1,20 @@
 
 // Module for handling eventListeners 
-import { createProject, deleteProject, editProject, projectArr } from "./projects";
-import { createTask, deleteTask, editTask, markAsCompleteTask, taskArr } from "./tasks";
+
+import { createProject, deleteProject, editProject } from "./projects";
+import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks";
 import { updateSelectOptions, 
          displayProject, displayTask, 
          projectContainer, taskContainer } from "./dom";
 
 // 'Project' interactive elements
-const clickProjectBtn = document.querySelector("button#clickProject");   // Create project btn variable (no modal)
+const clickProjectBtn = document.querySelector("button#clickProject"); // Create project btn variable (no modal)
 const projectInput = document.querySelector("dialog.project-dialog input#projectName");
 const btnProject = document.querySelector("dialog.project-dialog button#createProject");
 const projectDialog = document.querySelector("dialog.project-dialog");
 
 // 'Task' interactive elements
-const clickTaskBtn = document.querySelector("button#clickTask");   // Create task btn variable (no modal)
+const clickTaskBtn = document.querySelector("button#clickTask"); // Create task btn variable (no modal)
 const btnTask = document.querySelector("dialog.task-dialog button#createTask");
 const taskInput = document.querySelector("dialog.task-dialog input#taskName");
 const descriptionText = document.querySelector("dialog.task-dialog textarea#description");
@@ -30,10 +31,7 @@ let editingTaskId = null;
 function addProject() {
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
-    /* if (projectName.length < 1) {
-      // import some dom to display errors
-      return;
-    }; */
+  
     if (isEditMode) {
       editProject(projectName, projectId);
     } else {
@@ -118,6 +116,7 @@ function editTaskEvent() {
   });
 };
 
+// Handle checkbox event
 function markTaskEvent() {
   taskContainer.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("checkTask")) {

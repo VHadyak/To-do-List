@@ -1,16 +1,20 @@
+
 // Module for handling projects
 import { displayProject, updateProjectDOM, updateSelectOptions } from "./dom";
 import { taskArr } from "./tasks";
 
 export const projectArr = JSON.parse(localStorage.getItem("projects")) || [];
 
-let idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
+// Track project ID from local storage
+function getID() {
+  return projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
+};
 
 class Project {
   constructor(name) {
     this.name = name;                
-    this.items = [];        // Create empty array for each project to store each task
-    this.id = idCounter++;
+    this.items = [];        // Create empty array for a project to store each associated task
+    this.id = getID();
   };
 
   addTask(task) {
@@ -61,17 +65,14 @@ export function deleteProject(item) {
     if (taskElement) {
       taskElement.remove();  
     };
-    taskArr.splice(taskIndex, 1);  // Remove task from taskArr
+    taskArr.splice(taskIndex, 1);
   });
 
-  // Remove project from projectArr
   projectArr.splice(index, 1);
   projectUI.remove();
 
   localStorage.setItem("projects", JSON.stringify(projectArr));
   localStorage.setItem("tasks", JSON.stringify(taskArr));
-
-  idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
 };
 
 export function editProject(title, projectID) {
@@ -123,8 +124,4 @@ export function loadProjects() {
 
   // On refresh, update path input options
   updateSelectOptions();
-  // Update id counter
-  idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
 };
-
-// Project id error happening and pushing the whole task into id

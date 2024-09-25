@@ -1,5 +1,5 @@
 
-// Module for tracking tasks with id (without id gap)
+// Module for tracking tasks with id 
 
 let nextId = 1;
 const availableIDs = new Set();
