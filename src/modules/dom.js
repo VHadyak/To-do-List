@@ -94,7 +94,7 @@ export function displayProject(project) {
 };
 
 // Display task UI
-export function displayTask(taskName, date, priority, id) {
+export function displayTask(task) {
   const taskEl = document.createElement("div");
   const infoWrapper = document.createElement("div");
   const deleteTaskBtn = document.createElement("button");
@@ -120,11 +120,11 @@ export function displayTask(taskName, date, priority, id) {
   dateText.classList.add("date");
   priorityText.classList.add("priority");
 
-  taskEl.dataset.id = id;
-
-  taskTitle.textContent = taskName;
-  dateText.textContent = date;
-  priorityText.textContent = priority;
+  taskEl.setAttribute("data-id", task.id);
+  
+  taskTitle.textContent = task.title;
+  dateText.textContent = task.date;
+  priorityText.textContent = task.priority;
 
   deleteTaskBtn.textContent = "X";    // Temporary
   editTaskBtn.textContent = "Edit";   // Temporary

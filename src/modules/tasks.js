@@ -1,12 +1,12 @@
 
 // Module for handling tasks
-import { updateTaskDOM } from "./dom";
+import { displayTask, updateTaskDOM } from "./dom";
 import { checkProject } from "./projects";
 import { projectArr } from "./projects";
 import { getNextId, releaseId } from "./idTaskManager";
 
-export const taskArr = [];
-export const completedArr = [];
+export const taskArr = JSON.parse(localStorage.getItem("tasks")) || [];
+export const completedArr = JSON.parse(localStorage.getItem("completed")) || [];
 class Task {
   constructor(title, description, date, priority, path, projectID = 0) { 
     this.title = title;
@@ -24,10 +24,8 @@ export function createTask(title, description, date, priority, path, projectID) 
   const task = new Task(title, description, date, priority, path, projectID);
   
   checkProject(projectID, task);     // Check if project exists or not while creating a task
-  taskArr.push(task);             // store all the tasks in taskArr
-
-  console.log(taskArr);
-  console.log(projectArr);
+  taskArr.push(task);                // store all the tasks in taskArr
+  localStorage.setItem("tasks", JSON.stringify(taskArr));
   return task;
 };
 
@@ -43,7 +41,7 @@ export function deleteTask(item) {
   deleteFromProjectArr(task, taskID);
 
   taskUI.remove();
-  releaseId(taskID);    // Release to reuse the same id later
+  localStorage.setItem("tasks", JSON.stringify(taskArr));
 
   console.log(taskArr);
   console.log(projectArr);
@@ -72,7 +70,6 @@ export function editTask(title, description, date, priority, path, newProjectID,
       const taskIndexInOldProject = oldProject.items.findIndex(t => t.id === Number(taskID))
       if (taskIndexInOldProject !== -1) {
         oldProject.items.splice(taskIndexInOldProject, 1);
-        console.log("bug");
       };
     };
     // Add the edited task to the new project
@@ -84,9 +81,9 @@ export function editTask(title, description, date, priority, path, newProjectID,
     };
   };
   updateTaskDOM(title, date, priority, taskID);
-
-  console.log(taskArr); 
-  console.log(projectArr);
+  releaseId(task);
+  localStorage.setItem("tasks", JSON.stringify(taskArr));
+  localStorage.setItem("projects", JSON.stringify(projectArr));
 };
 
 
@@ -103,6 +100,9 @@ export function markAsCompleteTask(checkbox) {
 
   deleteFromProjectArr(taskObj, taskID);
   taskArr.splice(taskIndex, 1);  // If marked, remove that task from taskArr
+  
+  //localStorage.setItem("tasks", JSON.stringify(taskArr));
+  //localStorage.setItem("completed", JSON.stringify(completedArr));
   console.log(projectArr);
 };
 
@@ -114,4 +114,18 @@ function deleteFromProjectArr(taskObj, taskID) {
     const projectTaskIndex = project.items.findIndex(task => task.id === taskID);
     project.items.splice(projectTaskIndex, 1);
   };
+  localStorage.setItem("projects", JSON.stringify(projectArr));
+};
+
+export function loadTasks() {
+  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  taskArr.length = 0;
+  
+  storedTasks.forEach(taskData => {
+    const task = Object.assign(new Task(taskData.title, taskData.description, taskData.date, taskData.priority, taskData.path), taskData);
+    task.id = taskData.id;
+    taskArr.push(task);
+    displayTask(task); 
+  });
 };

@@ -17,7 +17,7 @@ function renderTaskByDate(dates) {
     const filterDate = taskArr.filter(task => task.date === date);
 
     filterDate.forEach(task => {
-      displayTask(task.title, task.date, task.priority, task.id);
+      displayTask(task);
     });
   });
 };

@@ -15,7 +15,7 @@ function renderTaskByID(item) {
  
   // Show tasks associated with the project/Inbox
   filteredTasks.forEach(task => {
-    displayTask(task.title, task.date, task.priority, task.id);
+    displayTask(task);
   });
 };
 

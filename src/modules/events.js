@@ -1,7 +1,7 @@
 
 // Module for handling eventListeners 
 import { createProject, deleteProject, editProject, projectArr } from "./projects";
-import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks";
+import { createTask, deleteTask, editTask, markAsCompleteTask, taskArr } from "./tasks";
 import { updateSelectOptions, 
          displayProject, displayTask, 
          projectContainer, taskContainer } from "./dom";
@@ -85,8 +85,8 @@ function addTask() {
     if (isEditMode && editingTaskId !== null) {
       editTask(taskName, description, date, priority, path, projectID, editingTaskId);
     } else {
-      const task = createTask(taskName, description, date, priority, path, projectID);
-      displayTask(task.title, task.date, task.priority, task.id);
+      const newTask = createTask(taskName, description, date, priority, path, projectID);
+      displayTask(newTask); 
     };
  
     taskDialog.close();

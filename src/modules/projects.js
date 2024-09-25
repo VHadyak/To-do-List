@@ -1,5 +1,5 @@
 // Module for handling projects
-import { displayProject, updateProjectDOM } from "./dom";
+import { displayProject, updateProjectDOM, updateSelectOptions } from "./dom";
 import { taskArr } from "./tasks";
 
 export const projectArr = JSON.parse(localStorage.getItem("projects")) || [];
@@ -23,7 +23,6 @@ export function createProject(title) {
   projectArr.push(projectObj);
   localStorage.setItem("projects", JSON.stringify(projectArr));
 
-  console.log(projectArr);
   return projectObj;
 };
 
@@ -40,6 +39,7 @@ export function checkProject(projectID, task) {
       inbox.addTask(task);
     };
   };
+  localStorage.setItem("projects", JSON.stringify(projectArr));
 };
 
 export function deleteProject(item) {
@@ -69,35 +69,62 @@ export function deleteProject(item) {
   projectUI.remove();
 
   localStorage.setItem("projects", JSON.stringify(projectArr));
-  idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
+  localStorage.setItem("tasks", JSON.stringify(taskArr));
 
-  //console.log(taskArr);
-  console.log(projectArr);
+  idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
 };
 
 export function editProject(title, projectID) {
   const index = projectArr.findIndex(project => project.id === Number(projectID));   
   const project = projectArr[index];
-  project.name = title;   
+
+  project.name = title; 
+
+  // Update path of task within project storage
+  project.items.forEach(task => {
+    if (task.projectID === project.id) {
+      task.path = title;
+    };
+  });
+
+  // Update path of task within task storage
+  taskArr.forEach(task => {
+    if (task.projectID === project.id) {
+      task.path = title;
+    };
+  });
   
-  updateProjectDOM(title, projectID);   
   localStorage.setItem("projects", JSON.stringify(projectArr));
-  console.log(projectArr);
+  localStorage.setItem("tasks", JSON.stringify(taskArr));
+  updateProjectDOM(title, projectID);   
 };
 
 // Load all projects that have been created, after browser refresh
 export function loadProjects() {
-  const inbox = projectArr.find(project => project.id === 0);
+  const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+
+  projectArr.length = 0;  // Prevent duplication
 
   // Load default "Inbox" (only in storage) only once after browser refresh
-  if (!inbox) {  
+  if (!storedProjects.some(project => project.id === 0)) {
     createProject("Inbox");
   };
 
-  projectArr.forEach(project => {
-    // Ignore default "Inbox"
-    if (project.id !== 0) {
-      displayProject(project);
+  // Recreate project in order to use properties/methods after refresh
+  storedProjects.forEach(projectData => {
+    const project = Object.assign(new Project(projectData.name), projectData);
+    projectArr.push(project);
+  
+    // Ignore the display of default "Inbox"
+    if (projectData.id !== 0) {
+      displayProject(project); 
     };
   });
+
+  // On refresh, update path input options
+  updateSelectOptions();
+  // Update id counter
+  idCounter = projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
 };
+
+// Project id error happening and pushing the whole task into id
