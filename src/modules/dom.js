@@ -1,7 +1,7 @@
 
 // Module for manipulating DOM
 
-import { projectArr } from "./projects";
+import { projectArr } from "./projects.js";
 
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");

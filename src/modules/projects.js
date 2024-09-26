@@ -1,7 +1,7 @@
 
 // Module for handling projects
-import { displayProject, updateProjectDOM, updateSelectOptions } from "./dom";
-import { taskArr } from "./tasks";
+import { displayProject, updateProjectDOM, updateSelectOptions } from "./dom.js";
+import { taskArr } from "./tasks.js";
 
 export const projectArr = JSON.parse(localStorage.getItem("projects")) || [];
 
@@ -26,8 +26,8 @@ export function createProject(title) {
   const projectObj = new Project(title);
   projectArr.push(projectObj);
   localStorage.setItem("projects", JSON.stringify(projectArr));
-
-  return projectObj;
+  console.log(projectArr);
+  return projectObj; 
 };
 
 // Add task to project/inbox path
@@ -111,9 +111,9 @@ export function loadProjects() {
     createProject("Inbox");
   };
 
-  // Recreate project in order to use properties/methods after refresh
+  // Recreate project instances in order to use properties/methods after refresh
   storedProjects.forEach(projectData => {
-    const project = Object.assign(new Project(projectData.name), projectData);
+    const project = Object.assign(new Project(), projectData);
     projectArr.push(project);
   
     // Ignore the display of default "Inbox"

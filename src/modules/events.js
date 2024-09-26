@@ -1,11 +1,11 @@
 
 // Module for handling eventListeners 
 
-import { createProject, deleteProject, editProject } from "./projects";
-import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks";
+import { createProject, deleteProject, editProject } from "./projects.js";
+import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks.js";
 import { updateSelectOptions, 
          displayProject, displayTask, 
-         projectContainer, taskContainer } from "./dom";
+         projectContainer, taskContainer } from "./dom.js";
 
 // 'Project' interactive elements
 const clickProjectBtn = document.querySelector("button#clickProject"); // Create project btn variable (no modal)
@@ -31,7 +31,7 @@ let editingTaskId = null;
 function addProject() {
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
-  
+
     if (isEditMode) {
       editProject(projectName, projectId);
     } else {

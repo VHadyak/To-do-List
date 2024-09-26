@@ -1,8 +1,8 @@
 
 // Module for rendering the filtered tasks by project selection
 
-import { displayTask } from "./dom";
-import { taskArr } from "./tasks";
+import { displayTask } from "./dom.js";
+import { taskArr } from "./tasks.js";
 
 // Handle filtered tasks associated with project/inbox
 function renderTaskByID(item) {

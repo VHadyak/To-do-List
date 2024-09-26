@@ -1,8 +1,8 @@
 
 // Module for rendering the filtered tasks by date
 
-import { displayTask } from "./dom";
-import { taskArr } from "./tasks";
+import { displayTask } from "./dom.js";
+import { taskArr } from "./tasks.js";
 import { format, startOfWeek, endOfWeek, addDays } from "date-fns";
 
 // Display tasks that match selected date input

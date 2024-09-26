@@ -1,12 +1,12 @@
 import "./styles/styles.css";
 
-import { handleProjectEvents, handleTaskEvents, handleDialogEvent, cancelDialog } from "./modules/events";
-import { renderInboxTasks, renderProjectTasks } from "./modules/projectRender";
-import { renderTodayTasks, renderTomorrowTasks, renderThisWeekTasks, renderUpcomingTasks } from "./modules/datesRender";
-import { renderCompletedTasks } from "./modules/completedTasksRender";
-import { highlightItem, projectContainer, showTaskBtn } from "./modules/dom";
-import { loadProjects } from "./modules/projects";
-import { loadTasks } from "./modules/tasks";
+import { handleProjectEvents, handleTaskEvents, handleDialogEvent, cancelDialog } from "./modules/events.js";
+import { renderInboxTasks, renderProjectTasks } from "./modules/projectRender.js";
+import { renderTodayTasks, renderTomorrowTasks, renderThisWeekTasks, renderUpcomingTasks } from "./modules/datesRender.js";
+import { renderCompletedTasks } from "./modules/completedTasksRender.js";
+import { highlightItem, projectContainer, showTaskBtn } from "./modules/dom.js";
+import { loadProjects } from "./modules/projects.js";
+import { loadTasks } from "./modules/tasks.js";
 
 const sections = {
   "Inbox": () => renderInboxTasks(),

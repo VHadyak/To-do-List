@@ -1,8 +1,8 @@
 
 // Module for rendering all the tasks that have been checked/marked as complete
 
-import { completedArr } from "./tasks";
-import { displayTask, modifyTaskFeatures, taskContainer} from "./dom";
+import { completedArr } from "./tasks.js";
+import { displayTask, modifyTaskFeatures, taskContainer} from "./dom.js";
 
 export function renderCompletedTasks() {
   const contentWrapper = document.querySelector(".content-wrapper");

@@ -1,9 +1,9 @@
 
 // Module for handling tasks
-import { displayTask, updateTaskDOM } from "./dom";
-import { checkProject } from "./projects";
-import { projectArr } from "./projects";
-import { getNextId, releaseId } from "./idTaskManager";
+import { displayTask, updateTaskDOM } from "./dom.js";
+import { checkProject } from "./projects.js";
+import { projectArr } from "./projects.js";
+import { getNextId, releaseId } from "./idTaskManager.js";
 
 export const taskArr = JSON.parse(localStorage.getItem("tasks")) || [];
 export const completedArr = JSON.parse(localStorage.getItem("completed")) || [];  // Array for storing completed tasks
@@ -119,7 +119,7 @@ export function loadTasks() {
   taskArr.length = 0;
   
   storedTasks.forEach(taskData => {
-    const task = Object.assign(new Task(taskData.title, taskData.description, taskData.date, taskData.priority, taskData.path), taskData);
+    const task = Object.assign(new Task(), taskData);
     task.id = taskData.id;
     taskArr.push(task);
     displayTask(task); 
