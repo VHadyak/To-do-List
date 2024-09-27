@@ -2,6 +2,7 @@
 // Module for manipulating DOM
 
 import { projectArr } from "./projects.js";
+import { taskArr } from "./tasks.js";
 
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
@@ -94,6 +95,21 @@ export function displayProject(project) {
   projectEl.appendChild(projectBtnWrapper);
 
   projectContainer.appendChild(projectEl);
+};
+
+export function getProjectValue(projectId) {
+  const project = projectArr.find(p => p.id === Number(projectId));
+  const name = project.name;
+  return name;
+};
+
+export function getTaskValues(taskId) {
+  const task = taskArr.find(task => task.id === Number(taskId));
+  const { title, description, date, priority, path } = task;
+
+  return {
+    title, description, date, priority, path
+  };
 };
 
 // Display task UI

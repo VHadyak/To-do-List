@@ -22,7 +22,6 @@ class Task {
 
 export function createTask(title, description, date, priority, path, projectID) {
   const task = new Task(title, description, date, priority, path, projectID);
-  
   checkProject(projectID, task);     // Check if project exists or not while creating a task
   taskArr.push(task);           
   localStorage.setItem("tasks", JSON.stringify(taskArr));
@@ -36,7 +35,6 @@ export function deleteTask(item) {
   const task = taskArr[taskIndex];
 
   taskArr.splice(taskIndex, 1);
-
   deleteFromProjectArr(task, taskID);
 
   taskUI.remove();
@@ -76,8 +74,8 @@ export function editTask(title, description, date, priority, path, newProjectID,
       };
     };
   };
-  updateTaskDOM(title, date, priority, taskID);
   releaseId(task); // Reuse ids
+  updateTaskDOM(title, date, priority, taskID);
   localStorage.setItem("tasks", JSON.stringify(taskArr));
   localStorage.setItem("projects", JSON.stringify(projectArr));
 };
@@ -120,7 +118,6 @@ export function loadTasks() {
   
   storedTasks.forEach(taskData => {
     const task = Object.assign(new Task(), taskData);
-    task.id = taskData.id;
     taskArr.push(task);
     displayTask(task); 
   });

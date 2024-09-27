@@ -26,7 +26,6 @@ export function createProject(title) {
   const projectObj = new Project(title);
   projectArr.push(projectObj);
   localStorage.setItem("projects", JSON.stringify(projectArr));
-  console.log(projectArr);
   return projectObj; 
 };
 
@@ -97,7 +96,7 @@ export function editProject(title, projectID) {
   
   localStorage.setItem("projects", JSON.stringify(projectArr));
   localStorage.setItem("tasks", JSON.stringify(taskArr));
-  updateProjectDOM(title, projectID);   
+  updateProjectDOM(title, projectID);  
 };
 
 // Load all projects that have been created, after browser refresh

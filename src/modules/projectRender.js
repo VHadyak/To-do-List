@@ -5,7 +5,7 @@ import { displayTask } from "./dom.js";
 import { taskArr } from "./tasks.js";
 
 // Handle filtered tasks associated with project/inbox
-function renderTaskByID(item) {
+export function renderTaskByID(item) {
   const itemID = item.getAttribute("data-id");
   const filteredTasks = taskArr.filter(task => task.projectID === Number(itemID));     
 

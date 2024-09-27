@@ -50,6 +50,7 @@ function projectClick() {
   });
 };
 
+
 loadTasks();
 loadProjects();
 
