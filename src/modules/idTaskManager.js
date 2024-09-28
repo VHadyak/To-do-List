@@ -1,20 +1,16 @@
 
 // Module for tracking tasks with id 
 
-let nextId = 1;
-const availableIDs = new Set();
-
 // Get a unique id for a task
 export function getNextId() {
-  if (availableIDs.size > 0) {
-    const id = Array.from(availableIDs)[0];
-    availableIDs.delete(id);
-    return id;
-  };
-  return nextId++;
-};
+  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const existingIds = storedTasks.map(task => task.id);
 
-// Reuse id for new task after previously deleted task
-export function releaseId(id) {
-  availableIDs.add(id);
+  // Check if there duplicate ids
+  let newId;
+  do {
+    newId = Math.floor(Math.random() * 10000); 
+  } while (existingIds.includes(newId));
+
+  return newId; 
 };

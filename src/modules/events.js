@@ -4,7 +4,7 @@
 import { createProject, deleteProject, editProject } from "./projects.js";
 import { createTask, deleteTask, editTask, markAsCompleteTask, taskArr } from "./tasks.js";
 import { updateSelectOptions, 
-         displayProject, displayTask, 
+         displayProject,
          projectContainer, taskContainer, getProjectValue, 
          getTaskValues } from "./dom.js";
 import { renderTaskByID } from "./projectRender.js";
@@ -87,22 +87,11 @@ function addTask() {
 
     if (isEditMode && editingTaskId !== null) {
       editTask(taskName, description, date, priority, path, projectID, editingTaskId);
-      
-      // if path change on task, remove task ui from project/index that is currently selected
-
     } else {
       createTask(taskName, description, date, priority, path, projectID);
       
-      // Needs refactoring
       // Assign task's UI to certain path on click
-      if (Number(projectID) === 0) {
-        const currentProject = document.querySelector(`[data-id="${projectID}"]`);
-        if (currentProject && currentProject.classList.contains("item-highlight")) {
-          renderTaskByID(currentProject);
-        };
-      };
-
-      if (Number(projectID) !== 0) {
+      if (projectID) {
         const currentProject = document.querySelector(`[data-id="${projectID}"]`);
         if (currentProject && currentProject.classList.contains("item-highlight")) {
           renderTaskByID(currentProject);
@@ -138,11 +127,13 @@ function editTaskEvent() {
         // Fetch the task values
         const taskValues = getTaskValues(editingTaskId);
 
-        taskInput.value = taskValues.title;
-        descriptionText.value = taskValues.description;
-        inputDate.value = taskValues.date;
-        selectPriority.value = taskValues.priority;
-        selectPath.value = taskValues.path;     
+        if (taskValues) {
+          taskInput.value = taskValues.title;
+          descriptionText.value = taskValues.description;
+          inputDate.value = taskValues.date;
+          selectPriority.value = taskValues.priority;
+          selectPath.value = taskValues.path;  
+        }; 
       };
     };
   });

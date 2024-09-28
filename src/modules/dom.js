@@ -104,9 +104,9 @@ export function getProjectValue(projectId) {
 };
 
 export function getTaskValues(taskId) {
-  const task = taskArr.find(task => task.id === Number(taskId));
+  const task = taskArr.find(task => task.id === taskId);
   const { title, description, date, priority, path } = task;
-
+  
   return {
     title, description, date, priority, path
   };
@@ -179,6 +179,8 @@ export function updateTaskDOM(title, date, priority, taskID) {
   taskName.textContent = title;
   dateText.textContent = date;
   priorityText.textContent = priority;
+
+  taskContainer.appendChild(taskElement);
 };
 
 // Highlight the selected project/sidebar section (Temporary)

@@ -3,7 +3,7 @@
 import { displayTask, updateTaskDOM } from "./dom.js";
 import { checkProject } from "./projects.js";
 import { projectArr } from "./projects.js";
-import { getNextId, releaseId } from "./idTaskManager.js";
+import { getNextId} from "./idTaskManager.js";
 
 export const taskArr = JSON.parse(localStorage.getItem("tasks")) || [];
 export const completedArr = JSON.parse(localStorage.getItem("completed")) || [];  // Array for storing completed tasks
@@ -36,7 +36,7 @@ export function deleteTask(item) {
 
   taskArr.splice(taskIndex, 1);
   deleteFromProjectArr(task, taskID);
-
+  
   taskUI.remove();
   localStorage.setItem("tasks", JSON.stringify(taskArr));
 };
@@ -58,14 +58,24 @@ export function editTask(title, description, date, priority, path, newProjectID,
   if (task.projectID !== newProjectID) {
     const newProject = projectArr.find(project => project.id === Number(newProjectID));
     const oldProject = projectArr.find(project => project.id === task.projectID);
+
+    // If task's path has changed, remove the task UI from the currently selected path
+    if (oldProject.name !== task.path) {
+      const taskElement = document.querySelector(`.task[data-id='${taskID}']`);
+      if (taskElement) {
+        taskElement.remove();
+      };
+    };
     
     // Remove task from old project after changing task path
     if (oldProject && hasProject) {
-      const taskIndexInOldProject = oldProject.items.findIndex(t => t.id === Number(taskID))
+      const taskIndexInOldProject = oldProject.items.findIndex(t => t.id === Number(taskID));
+
       if (taskIndexInOldProject !== -1) {
         oldProject.items.splice(taskIndexInOldProject, 1);
       };
     };
+
     // Add the edited task to the new project
     if (newProject) {
       if (!newProject.items.some(project => project.id === Number(taskID))) {
@@ -74,8 +84,13 @@ export function editTask(title, description, date, priority, path, newProjectID,
       };
     };
   };
-  releaseId(task); // Reuse ids
-  updateTaskDOM(title, date, priority, taskID);
+
+  // If task UI exists, allow editing
+  const taskUI = document.querySelector(`.task[data-id="${taskID}"]`);
+  if (taskUI) {
+    updateTaskDOM(title, date, priority, taskID);
+  };
+  
   localStorage.setItem("tasks", JSON.stringify(taskArr));
   localStorage.setItem("projects", JSON.stringify(projectArr));
 };
