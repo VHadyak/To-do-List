@@ -106,9 +106,11 @@ export function getProjectValue(projectId) {
 export function getTaskValues(taskId) {
   const task = taskArr.find(task => task.id === taskId);
   const { title, description, date, priority, path } = task;
+
+  const project = projectArr.find(project => project.name === task.path);
   
   return {
-    title, description, date, priority, path
+    title, description, date, priority, path, projectID: project ? project.id : null
   };
 };
 

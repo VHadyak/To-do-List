@@ -9,7 +9,6 @@ export const projectArr = JSON.parse(localStorage.getItem("projects")) || [];
 function getID() {
   return projectArr.length > 0 ? Math.max(...projectArr.map(p => p.id)) + 1 : 0;
 };
-
 class Project {
   constructor(name) {
     this.name = name;                

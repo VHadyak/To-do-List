@@ -2,12 +2,12 @@
 // Module for handling eventListeners 
 
 import { createProject, deleteProject, editProject } from "./projects.js";
-import { createTask, deleteTask, editTask, markAsCompleteTask, taskArr } from "./tasks.js";
-import { updateSelectOptions, 
-         displayProject,
-         projectContainer, taskContainer, getProjectValue, 
-         getTaskValues } from "./dom.js";
+import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks.js";
+import { updateSelectOptions, displayProject, projectContainer, 
+         taskContainer, getProjectValue, getTaskValues } from "./dom.js";
 import { renderTaskByID } from "./projectRender.js";
+import { renderThisWeekTasks, renderTodayTasks, renderTomorrowTasks, renderUpcomingTasks } from "./datesRender.js";
+import { format } from "date-fns";
 
 // 'Project' interactive elements
 const clickProjectBtn = document.querySelector("button#clickProject"); // Create project btn variable (no modal)
@@ -97,11 +97,36 @@ function addTask() {
           renderTaskByID(currentProject);
         };
       };
+      // Assign task's UI to certain date section on click
+      assignDatedTasks();
     };  
   
     taskDialog.close();
     resetForm("Task");
     clearInputs();
+  });
+};
+
+// Fetch dated tasks from date sections
+function assignDatedTasks() {
+  const sectionList = document.querySelectorAll("li:not(:first-child):not(:last-child)");
+  sectionList.forEach(li => {
+    if (li.classList.contains("item-highlight")) {
+      switch (li.textContent) {
+        case "Today":
+          renderTodayTasks();
+          break;
+        case "Tomorrow":
+          renderTomorrowTasks();
+          break;
+        case "This Week":
+          renderThisWeekTasks();
+          break;
+        case "Upcoming":
+          renderUpcomingTasks();
+          break;
+      };
+    };
   });
 };
 
@@ -132,7 +157,7 @@ function editTaskEvent() {
           descriptionText.value = taskValues.description;
           inputDate.value = taskValues.date;
           selectPriority.value = taskValues.priority;
-          selectPath.value = taskValues.path;  
+          defaultPath();
         }; 
       };
     };
@@ -189,11 +214,41 @@ export function handleDialogEvent() {
   });
   clickTaskBtn.addEventListener("click", () => {
     showDialog("Task");
-    // Assign path in select input based on currently selected project
-    const currentProject = document.querySelector(".project.item-highlight");
-    if (currentProject) {
-      const name = currentProject.querySelector(".project-title").textContent;
-      selectPath.value = name;
+    defaultPath();  // Assign path in select input based on currently selected project
+    defaultDate();  // Assign date in input based on "Today"/"Tomorrow" sections
+  });
+};
+
+function defaultPath() {
+  const currentProject = document.querySelector(".item-highlight");
+  if (currentProject) {
+    const projectID = currentProject.getAttribute("data-id");
+    const selectPath = document.querySelector("dialog.task-dialog select#path");
+    // Handle project duplicate names
+    const optionToSelect = Array.from(selectPath.options).find(option => 
+      option.id === projectID
+    );
+    if (optionToSelect) {
+      selectPath.value = optionToSelect.value; 
+      selectPath.selectedIndex = optionToSelect.index;
+    };
+  };
+};
+
+function defaultDate() {
+  const sectionList = document.querySelectorAll("li:not(:first-child):not(:last-child)");
+  const dateSection = Array.from(sectionList).filter(item => item.classList.contains("item-highlight"));
+
+  dateSection.forEach(item => {
+    switch (item.textContent) {
+      case "Today":
+        inputDate.value = format(new Date(), "yyyy-MM-dd");
+        break;
+      case "Tomorrow":
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        inputDate.value = format(tomorrow, "yyyy-MM-dd");
+        break;
     };
   });
 };

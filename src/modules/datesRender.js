@@ -6,7 +6,7 @@ import { taskArr } from "./tasks.js";
 import { format, startOfWeek, endOfWeek, addDays } from "date-fns";
 
 // Display tasks that match selected date input
-function renderTaskByDate(dates) {
+export function renderTaskByDate(dates) {
   const tasks = document.querySelectorAll(".task");
   tasks.forEach(task => task.remove());   
 
