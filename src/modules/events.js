@@ -189,6 +189,12 @@ export function handleDialogEvent() {
   });
   clickTaskBtn.addEventListener("click", () => {
     showDialog("Task");
+    // Assign path in select input based on currently selected project
+    const currentProject = document.querySelector(".project.item-highlight");
+    if (currentProject) {
+      const name = currentProject.querySelector(".project-title").textContent;
+      selectPath.value = name;
+    };
   });
 };
 
