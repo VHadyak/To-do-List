@@ -85,16 +85,16 @@ export function displayProject(project) {
   projectEl.setAttribute("data-id", project.id);
  
   projectTitle.textContent = project.name;
-  editProjectBtn.textContent = "Edit";  // Temporary
+  editProjectBtn.textContent = "Edit";
   deleteProjectBtn.textContent = "X";   // Temporary
+
+  jumpToProject(projectEl, projectTitle.textContent);
 
   projectBtnWrapper.appendChild(editProjectBtn);   
   projectBtnWrapper.appendChild(deleteProjectBtn);  
 
   projectEl.appendChild(projectTitle);
   projectEl.appendChild(projectBtnWrapper);
-
-  jumpToProject(projectEl, projectTitle.textContent); // Jump to the newly displayed project
 
   projectContainer.appendChild(projectEl);
 };
@@ -148,7 +148,7 @@ export function displayTask(task) {
   priorityText.textContent = task.priority;
 
   deleteTaskBtn.textContent = "X";    // Temporary
-  editTaskBtn.textContent = "Edit";   // Temporary
+  editTaskBtn.textContent = "Edit"; 
 
   taskBtnWrapper.appendChild(editTaskBtn);
   taskBtnWrapper.appendChild(deleteTaskBtn);
@@ -198,10 +198,9 @@ export function getSectionTitle(title) {
 };
 
 // Render the project that was recently created
-function jumpToProject(project, projectName) {
+export function jumpToProject(project, projectName) {
   highlightItem(project);
   getSectionTitle(projectName);
   renderProjectTasks(project);
   showTaskBtn();
-  localStorage.setItem("selectedSection", projectName);
 };

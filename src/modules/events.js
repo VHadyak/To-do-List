@@ -40,6 +40,7 @@ function addProject() {
       displayProject(newProject);
     };
 
+    localStorage.setItem("selectedProject", projectName);
     updateSelectOptions();
     projectDialog.close();
     resetForm("Project");
