@@ -1,3 +1,4 @@
+// Module for initializing the app 
 
 import { handleProjectEvents, handleTaskEvents, handleDialogEvent, cancelDialog } from "./events.js";
 import { loadProjects } from "./projects.js";

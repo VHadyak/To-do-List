@@ -1,8 +1,8 @@
-
 // Module for manipulating DOM
 
 import { projectArr } from "./projects.js";
 import { taskArr } from "./tasks.js";
+import { renderProjectTasks } from "./projectRender.js";
 
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
@@ -94,6 +94,8 @@ export function displayProject(project) {
   projectEl.appendChild(projectTitle);
   projectEl.appendChild(projectBtnWrapper);
 
+  jumpToProject(projectEl, projectTitle.textContent); // Jump to the newly displayed project
+
   projectContainer.appendChild(projectEl);
 };
 
@@ -106,11 +108,9 @@ export function getProjectValue(projectId) {
 export function getTaskValues(taskId) {
   const task = taskArr.find(task => task.id === taskId);
   const { title, description, date, priority, path } = task;
-
-  const project = projectArr.find(project => project.name === task.path);
   
   return {
-    title, description, date, priority, path, projectID: project ? project.id : null
+    title, description, date, priority, path
   };
 };
 
@@ -192,3 +192,16 @@ export function highlightItem(selectedItem) {
   selectedItem.classList.add("item-highlight");
 };
 
+export function getSectionTitle(title) {
+  const sectionTitle = document.querySelector("div#section-title");
+  sectionTitle.textContent = title;
+};
+
+// Render the project that was recently created
+function jumpToProject(project, projectName) {
+  highlightItem(project);
+  getSectionTitle(projectName);
+  renderProjectTasks(project);
+  showTaskBtn();
+  localStorage.setItem("selectedSection", projectName);
+};

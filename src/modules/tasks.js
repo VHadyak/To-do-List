@@ -1,8 +1,7 @@
-
 // Module for handling tasks
+
 import { displayTask, updateTaskDOM } from "./dom.js";
-import { checkProject } from "./projects.js";
-import { projectArr } from "./projects.js";
+import { checkProject, projectArr } from "./projects.js";
 import { getNextId } from "./idTaskManager.js";
 
 export const taskArr = JSON.parse(localStorage.getItem("tasks")) || [];

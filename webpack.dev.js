@@ -9,5 +9,6 @@ module.exports = merge(common, {
     watchFiles: ["./src/template.html"],
     static: "./dist",
     open: true,
+    hot: true,
   },
 });

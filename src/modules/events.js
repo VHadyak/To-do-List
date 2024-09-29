@@ -1,4 +1,3 @@
-
 // Module for handling eventListeners 
 
 import { createProject, deleteProject, editProject } from "./projects.js";
@@ -6,7 +5,7 @@ import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks.js
 import { updateSelectOptions, displayProject, projectContainer, 
          taskContainer, getProjectValue, getTaskValues } from "./dom.js";
 import { renderTaskByID } from "./projectRender.js";
-import { renderThisWeekTasks, renderTodayTasks, renderTomorrowTasks, renderUpcomingTasks } from "./datesRender.js";
+import { assignDatedTasks } from "./datesRender.js";
 import { format } from "date-fns";
 
 // 'Project' interactive elements
@@ -64,10 +63,9 @@ function editProjectEvent() {
       const project = e.target.closest('.project');
       if (project) {
         showDialog("Project");
-        isEditMode = true;                        // !!!
-        btnProject.textContent = "Edit";          // !!!
+        isEditMode = editMode(btnProject, isEditMode);
         projectId = project.getAttribute("data-id");
-    
+        
         // Fetch the name of the project in input field
         projectInput.value = getProjectValue(projectId);
       };
@@ -107,29 +105,6 @@ function addTask() {
   });
 };
 
-// Fetch dated tasks from date sections
-function assignDatedTasks() {
-  const sectionList = document.querySelectorAll("li:not(:first-child):not(:last-child)");
-  sectionList.forEach(li => {
-    if (li.classList.contains("item-highlight")) {
-      switch (li.textContent) {
-        case "Today":
-          renderTodayTasks();
-          break;
-        case "Tomorrow":
-          renderTomorrowTasks();
-          break;
-        case "This Week":
-          renderThisWeekTasks();
-          break;
-        case "Upcoming":
-          renderUpcomingTasks();
-          break;
-      };
-    };
-  });
-};
-
 function removeTaskEvent() {
   taskContainer.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("deleteTask")) {
@@ -146,8 +121,7 @@ function editTaskEvent() {
       if (task) {
         editingTaskId = Number(task.dataset.id); // Set the task ID for editing
         showDialog("Task");
-        isEditMode = true;
-        btnTask.textContent = "Edit";
+        isEditMode = editMode(btnTask, isEditMode);
 
         // Fetch the task values
         const taskValues = getTaskValues(editingTaskId);
@@ -267,4 +241,12 @@ function clearInputs() {
   inputDate.value = "";
   selectPriority.value = "";
   selectPath.value = "Inbox";
+};
+
+function editMode(btn, mode) {
+  if (btn) {
+    btn.textContent = "Edit";
+    return true;
+  };
+  return mode;
 };

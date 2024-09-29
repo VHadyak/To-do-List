@@ -1,6 +1,6 @@
-
 // Module for handling projects
-import { displayProject, updateProjectDOM, updateSelectOptions } from "./dom.js";
+
+import { displayProject, updateProjectDOM, updateSelectOptions, getSectionTitle } from "./dom.js";
 import { taskArr } from "./tasks.js";
 
 export const projectArr = JSON.parse(localStorage.getItem("projects")) || [];
@@ -78,6 +78,7 @@ export function editProject(title, projectID) {
   const project = projectArr[index];
 
   project.name = title; 
+  getSectionTitle(title);
 
   // Update path of task within project storage
   project.items.forEach(task => {

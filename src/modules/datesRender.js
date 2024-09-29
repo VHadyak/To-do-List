@@ -1,4 +1,3 @@
-
 // Module for rendering the filtered tasks by date
 
 import { displayTask } from "./dom.js";
@@ -56,7 +55,8 @@ export function renderThisWeekTasks() {
 // Get tasks that have due date longer than the current week
 export function renderUpcomingTasks() {
   const upcomingArr = [];
-  const { endWeek } = renderThisWeekTasks();
+  const currentDate = new Date();
+  const endWeek = endOfWeek(currentDate, { weekStartsOn: 1 }); 
 
   taskArr.forEach(task => {
     if (task.date > format(endWeek, "yyyy-MM-dd")) {
@@ -65,3 +65,36 @@ export function renderUpcomingTasks() {
   });
   renderTaskByDate(upcomingArr);
 };
+
+// Fetch dated tasks from date sections
+export function assignDatedTasks() {
+  const sectionList = document.querySelectorAll("li:not(:first-child):not(:last-child)");
+  sectionList.forEach(li => {
+    if (li.classList.contains("item-highlight")) {
+      switch (li.textContent) {
+        case "Today":
+          renderTodayTasks();
+          break;
+        case "Tomorrow":
+          renderTomorrowTasks();
+          break;
+        case "This Week":
+          renderThisWeekTasks();
+          break;
+        case "Upcoming":
+          renderUpcomingTasks();
+          break;
+      };
+    };
+  });
+};
+
+// Assign today's date as min attribute for date picker
+export function setMinDate() {
+  const inputDate = document.querySelector("dialog.task-dialog input#date");
+
+  const currentDate = format(new Date(), "yyyy-MM-dd");
+  inputDate.setAttribute("min", currentDate);
+};
+
+document.addEventListener("DOMContentLoaded", setMinDate);

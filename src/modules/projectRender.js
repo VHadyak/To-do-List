@@ -1,4 +1,3 @@
-
 // Module for rendering the filtered tasks by project selection
 
 import { displayTask } from "./dom.js";

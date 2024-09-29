@@ -1,4 +1,3 @@
-
 // Module for rendering all the tasks that have been checked/marked as complete
 
 import { completedArr } from "./tasks.js";
@@ -23,7 +22,7 @@ export function renderCompletedTasks() {
         tasks.forEach(task => task.remove());
         completedArr.length = 0;
       };
-    // Remove all completed tasks from the its storage, if 'delete all' is clicked
+    // Remove all completed tasks from its storage, if 'delete all' is clicked
     localStorage.setItem("completed", JSON.stringify(completedArr));
     };
   });
