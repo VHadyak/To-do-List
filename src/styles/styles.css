@@ -1,13 +1,32 @@
 
-:root {
-  --header-bg-color: rgb(191, 243, 243);
-  --sidebar-bg-color: rgb(242, 239, 204);
-  --content-bg-color: rgb(205, 197, 197);
-  --footer-bg-color: transparent;
-  --font-color: black;
+/* Use for general content */
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
 
-* {
+/* Use for section lists, header */
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --header-bg-color: rgb(20, 33, 61);
+  --sidebar-bg-color: rgb(0, 0, 0);
+  --content-bg-color: rgb(229, 229, 229);
+  --footer-bg-color: rgb(0, 0, 0);
+  --accent-color: rgb(252, 163, 17);
+  --font-color: rgb(255, 255, 255);
+  --font-color-content: rgb(0, 0, 0);
+  --font-family: "Roboto", sans-serif;
+}
+
+*, ::before, ::after {
   box-sizing: border-box;
 }
 
@@ -15,12 +34,13 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  font-family: var(--font-family);
 }
 
 .grid-container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(180px, 280px) repeat(2, minmax(280px ,1fr));
+  grid-template-columns: minmax(180px, 300px) repeat(2, minmax(280px ,1fr));
   grid-template-rows: 80px repeat(2, 1fr) 50px;
 
   grid-template-areas: "logo      header     header"
@@ -36,21 +56,31 @@ body {
 }
 
 .header-left {
-  background-color: rgb(179, 184, 230);
+  background-color: var(--header-bg-color);
   grid-area: logo;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  /* gap: 50px; */
+  padding-left: 40px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+
+/*
+.header-logo input {
+  outline: 1px solid black;
 }
 
 .header-logo {
   padding-left: 50px;
-}
+} */
 
 .header-title {
   font-size: 2rem;
+  color: var(--font-color);
 }
 
 /* MENU SIDEBAR */
@@ -59,80 +89,224 @@ body {
   background-color: var(--sidebar-bg-color);
   display: flex;
   flex-direction: column;
-  gap: 30px;
-}
-
-nav {
-  background-color: rgb(238, 201, 201);
+  gap: 40px;
+  padding-top: 25px;
 }
 
 .sidebar ul#menu {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding-left: 40px;
+  gap: 22px;
+  padding-left: 30px;
 }
 
 .sidebar ul#menu li {
   list-style-type: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
+  color: var(--font-color);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: clamp(140px, 20vw, 230px);
+  padding-left: 10px;
+  height: 40px;
+}
+
+.sidebar ul#menu li:hover,
+.project:hover:not(:has(.drop-up-menu:hover)) {
+  background-color: rgba(255, 166, 0, 0.213);
+  border-radius: 10px;
+}
+
+#menu li img {
+  height: 30px;
 }
 
 /* PROJECT SECTION SIDEBAR */
 #project-container {
+  background-color: var(--sidebar-bg-color);
   display: flex;
   flex-direction: column;
-  gap: 15px
+  gap: 10px;
 }
 
 .project-flex {
-  background-color: rgb(161, 178, 178);
   padding-left: 40px;
+  height: 50px;
   display: flex;
-  gap: 50px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #project-container div#project-main-title {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+  color: var(--font-color);
+  font-weight: 500;
 }
 
 #project-container button#clickProject {
+  width: clamp(20px, 5vw, 45px);
   height: 40px;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  appearance: none;
+  cursor: pointer;
+  margin-right: 30px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+#project-container button#clickProject:hover {
+  background-color: rgba(202, 159, 4, 0.78);
+  transform: scale(1.1);
+}
+
+button#clickProject img {
+  height: 37px;
+  align-self: center;
 }
 
 .project {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  background-color: rgb(214, 214, 228);
-  height: 50px;
-  gap: 20px;
+  height: 40px;
+  width: clamp(200px, 40vw, 250px);
+  margin-left: 28px;
+  gap: 50px;
   cursor: pointer;
+  padding: 0;
+  padding-left: 17px;
 }
 
 .item-highlight {
-  border: 1px solid blue;
+  border: 0.5px solid var(--accent-color);
+  border-radius: 10px;
+  height: 40px;
 }
 
 .project div.project-title {
   font-size: 1.2rem;
+  color: var(--font-color);
 }
 
-.project-btn-wrapper {
+.project div.project-title::before {
+  content: "#";
+  padding-right: 3px;
+  color: var(--accent-color);
+}
+
+/* Drop Up Menu popup */
+div.drop-up-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-right: 15px;
+}
+
+button.btn-drop-up-toggle {
   display: flex;
+  justify-content: center;
+  width: clamp(20px, 10vw, 30px);
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+button.btn-drop-up-toggle:hover {
+  transform: scale(1.2);
+}
+
+img.action-img {
+  height: 20px;
+  align-self: center;
+}
+
+/* Prevent image drag */
+button img {
+  pointer-events: none; 
+}
+
+button {
+  -webkit-user-select: none;  
+  -moz-user-select: none;     
+  -ms-user-select: none;      
+  user-select: none;         
+}
+
+/* Drop up menu */
+div.drop-up-menu {
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
   gap: 10px;
+  padding: 10px;
+  position: absolute;
+  bottom: -25px;
+  left: 70px;
+  background-color: #2f2d2d;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  cursor:auto;
+  padding: 12px 0 12px 10px;
 }
 
-.deleteProject {
-  width: 25px;
-  height: 25px;
+div.drop-up-menu button {
+  display: flex;
+  align-items: center;
 }
 
-.editProject {
-  width: 45px;
+button.editProject,
+button.deleteProject {
+  width: 50%;
   height: 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  margin-left: 25px;
+  color: var(--font-color);
+  background-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+button.editProject:hover,
+button.deleteProject:hover {
+  transform: scale(1.08);
+}
+
+button.editProject::before {
+  content: "";
+  position: absolute; 
+  top: 50%; 
+  left: -20px; 
+  width: 20px; 
+  height: 20px; 
+  background: url(../assets/images/edit.svg);
+  background-size: cover;
+  transform: translateY(-50%);
+}
+
+button.deleteProject::before {
+  content: ""; 
+  position: absolute;
+  top: 50%; 
+  left: -20px; 
+  width: 20px; 
+  height: 20px; 
+  background: url(../assets/images/delete.svg);
+  background-size: cover;
+  transform: translateY(-50%);
 }
 
 .project-dialog {
@@ -179,6 +353,7 @@ nav {
   /* outline: 1px solid red */
 }
 
+/* DOM Task elements */
 input[type="checkbox"] {
   width: 50px;
 }
@@ -193,7 +368,6 @@ div.date {
 
 div.priority {
   font-size: 1.2rem;
-  /* outline: 1px solid rgb(16, 160, 21) */
 }
 
 div.task-btn-wrapper {
@@ -221,6 +395,10 @@ div.task-btn-wrapper {
 dialog {
   padding: 20px;
   border: 2px solid #000;
+}
+
+textarea {
+  resize: none;
 }
 
 /* FOOTER */

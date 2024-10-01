@@ -3,36 +3,38 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>ToDoIt</title>
   </head>
+  
   <body>
     <div class="grid-container">
-      <div class="header">
-
-      </div>
+      <div class="header"></div>
 
       <div class="header-left">
-        <div class="header-logo">
-          <span>Logo</span>
-        </div>
-        <div class="header-title">Todo List</div>
+       <!-- <div class="header-logo">
+          
+        </div> -->
+        <div class="header-title">ToDoIt</div>
       </div>
 
-      <div class="sidebar">
+      <div class="sidebar" id="sidebar">
         <nav role="navigation">
           <ul id="menu">
-            <li class="inbox">Inbox</li>
-            <li>Today</li>
-            <li>Tomorrow</li>
-            <li>This Week</li>
-            <li>Upcoming</li>
-            <li>Completed</li>
+            <li class="inbox"><img src="./assets/images/inbox.svg" alt="Inbox Section">Inbox</li>
+            <li><img src="./assets/images/today.svg" alt="Today Section">Today</li>
+            <li><img src="./assets/images/tomorrow.svg" alt="Tomorrow Section">Tomorrow</li>
+            <li><img src="./assets/images/week.svg" alt="This Week Section">This Week</li>
+            <li><img src="./assets/images/upcoming.svg" alt="Upcoming Section">Upcoming</li>
+            <li><img src="./assets/images/completed.svg" alt="Completed Tasks">Completed</li>
           </ul>
         </nav>
+        <!-- PROJECTS -->
         <div id="project-container">
           <div class="project-flex">
-            <div id="project-main-title">Projects</div>
-            <button type="button" id="clickProject">Create Project</button>
+            <div id="project-main-title">My Projects</div>
+            <button type="button" id="clickProject">
+              <img src="./assets/images/add.svg" alt="Add">
+            </button>
           </div>
         </div>
       </div>
@@ -40,15 +42,12 @@
       <div class="content-wrapper">
         <div id="section-title">Inbox</div>
         <button type="button" id="clickTask">Create Task</button> 
-        <div id="task-container">
-          
-        </div>    
+        <div id="task-container"></div>    
       </div>
 
       <div class="footer">
-        <!-- <a href="https://github.com/VHadyak" target="_blank"> -->
+        <a href="https://github.com/VHadyak" target="_blank"> 
           <span>VHadyak</span>
-          <!-- <img src=""> -->
         </a>
       </div>
     </div>
@@ -69,16 +68,19 @@
         <input type="text" id="taskName" name="taskName" placeholder="Task Name">
         <textarea id="description" name="description" placeholder="Description"></textarea>
         <input type="date" id="date" name="due-date">
+
         <select name="priority" id="priority">
           <option value="" disabled selected>Priority</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
+        
         <select name="path" id="path">
           <option value="Inbox" id="default">Inbox</option>
         </select>
       </form>
+      
       <button type="submit" id="createTask">Create Task</button>
       <button type="button" id="cancelTask" class="cancel">Cancel</button>
     </dialog>

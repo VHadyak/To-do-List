@@ -9,7 +9,7 @@ import { listItemClick, projectClick } from "./navigation.js";
 export function init() {
   loadTasks();
   loadProjects();
-  
+
   handleDialogEvent();
   cancelDialog();
   

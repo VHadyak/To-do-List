@@ -4,6 +4,8 @@ import { projectArr } from "./projects.js";
 import { taskArr } from "./tasks.js";
 import { renderProjectTasks } from "./projectRender.js";
 
+import actionImg from "../assets/images/actions.svg";
+
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
 const createTaskBtn = document.querySelector("#clickTask");
@@ -71,32 +73,30 @@ export function showTaskBtn() {
 export function displayProject(project) {
   const projectEl = document.createElement("div");
   const projectTitle = document.createElement("div");
-  const projectBtnWrapper = document.createElement("div");
-  const deleteProjectBtn = document.createElement("button");
-  const editProjectBtn = document.createElement("button");
-
-  projectBtnWrapper.classList.add("project-btn-wrapper");
-  deleteProjectBtn.classList.add("deleteProject");
-  editProjectBtn.classList.add("editProject");
 
   projectEl.classList.add("project");                
   projectTitle.classList.add("project-title");
-
   projectEl.setAttribute("data-id", project.id);
- 
   projectTitle.textContent = project.name;
+
+  const { wrapper, menu } = dropUpDOM();
+
+  const deleteProjectBtn = document.createElement("button");
+  const editProjectBtn = document.createElement("button");
+  deleteProjectBtn.classList.add("deleteProject");
+  editProjectBtn.classList.add("editProject");
   editProjectBtn.textContent = "Edit";
-  deleteProjectBtn.textContent = "X";   // Temporary
+  deleteProjectBtn.textContent = "Delete"; 
 
-  jumpToProject(projectEl, projectTitle.textContent);
-
-  projectBtnWrapper.appendChild(editProjectBtn);   
-  projectBtnWrapper.appendChild(deleteProjectBtn);  
+  menu.appendChild(editProjectBtn);
+  menu.appendChild(deleteProjectBtn);
 
   projectEl.appendChild(projectTitle);
-  projectEl.appendChild(projectBtnWrapper);
+  projectEl.appendChild(wrapper);
 
   projectContainer.appendChild(projectEl);
+
+  jumpToProject(projectEl, projectTitle.textContent);
 };
 
 export function getProjectValue(projectId) {
@@ -203,4 +203,83 @@ export function jumpToProject(project, projectName) {
   getSectionTitle(projectName);
   renderProjectTasks(project);
   showTaskBtn();
+};
+
+function dropUpDOM() {
+  const imgAction = document.createElement("img");
+  imgAction.src = actionImg;
+  imgAction.classList.add("action-img");
+
+  const dropUpWrapper = document.createElement("div");
+  const toggleBtn = document.createElement("button");
+  const dropUpMenu = document.createElement("div");
+
+  dropUpWrapper.classList.add("drop-up-wrapper");
+  toggleBtn.classList.add("btn-drop-up-toggle");
+  toggleBtn.id = "drop-up-menu-btn";
+  dropUpMenu.classList.add("drop-up-menu");
+
+  toggleBtn.setAttribute("type", "button");
+  toggleBtn.setAttribute("data-toggle", "dropdown");
+  toggleBtn.setAttribute("aria-expanded", "false");
+
+  toggleBtn.appendChild(imgAction);
+  dropUpWrapper.appendChild(toggleBtn);
+  dropUpWrapper.appendChild(dropUpMenu);
+
+  return { wrapper: dropUpWrapper, menu: dropUpMenu };
+};
+
+// Drop Up Menu 
+export function dropUpMenuHandler() {
+  projectContainer.addEventListener("click", (e) => {
+    const toggleBtn = e.target.closest(".btn-drop-up-toggle");
+
+    if (toggleBtn) {
+      const project = toggleBtn.closest(".project");
+
+      if (project) {
+        const dropUpMenu = project.querySelector(".drop-up-menu");
+        const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+
+        // Avoid menu overlaps
+        const allDropUpMenus = projectContainer.querySelectorAll(".drop-up-menu");
+        allDropUpMenus.forEach(menu => {
+          if (menu !== dropUpMenu) {
+            menu.style.display = "none";
+            const otherToggleBtn = menu.previousElementSibling;
+            if (otherToggleBtn) {
+              otherToggleBtn.setAttribute("aria-expanded", "false"); 
+            };
+          };
+        });
+        
+        // Toggle the visibility of the drop-up menu
+        toggleBtn.setAttribute("aria-expanded", !isExpanded);
+        dropUpMenu.style.display = isExpanded ? "none" : "flex";
+        e.stopPropagation();
+      };
+    } else {
+      // Close menu if edit btn is clicked
+      hideMenu();
+    };  
+  });
+
+  // Close menu if document element outside menu is clicked
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".btn-drop-up-toggle") && !e.target.closest(".drop-up-menu")) {
+      hideMenu();
+    };
+  });
+};
+
+function hideMenu() {
+  const openMenus = projectContainer.querySelectorAll(".drop-up-menu");
+  openMenus.forEach(menu => {
+    menu.style.display = "none";
+    const associatedToggleBtn = menu.previousElementSibling;
+    if (associatedToggleBtn) {
+      associatedToggleBtn.setAttribute("aria-expanded", "false");
+    };
+  });
 };

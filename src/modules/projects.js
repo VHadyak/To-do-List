@@ -46,6 +46,7 @@ export function checkProject(projectID, task) {
 
 export function deleteProject(item) {
   const projectUI = item.closest(".project");
+  console.log(projectUI);
   const projectId = projectUI.getAttribute("data-id");
   const index = projectArr.findIndex(i => i.id === Number(projectId));
 

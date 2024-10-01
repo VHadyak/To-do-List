@@ -52,9 +52,9 @@ export function listItemClick() {
   // If the section li item is clicked, render that section with tasks
   lists.forEach(list => {
     list.addEventListener("click", (e) => {
-      const sectionName = e.target.textContent;
-      const item = e.target;
-
+      const sectionName = e.currentTarget.textContent;
+      const item = e.currentTarget;
+  
       renderSection(sectionName, item);
       if (sectionName !== "Completed") showTaskBtn();
 
@@ -67,8 +67,9 @@ export function listItemClick() {
 // Render the tasks on the selected project
 export function projectClick() {
   projectContainer.addEventListener("click", (e) => {
-    // Select that project if project element or edit button is clicked
-    if (e.target && (e.target.classList.contains("project") || e.target.classList.contains("editProject"))) {
+    // Select that project if project element or action btn is clicked
+    if (e.target && (e.target.classList.contains("project") || e.target.closest(".btn-drop-up-toggle") 
+                                                            || e.target.classList.contains("project-title"))) {
       const project = e.target.closest(".project");
       const projectName = project.querySelector(".project-title").textContent;
       if (project) {

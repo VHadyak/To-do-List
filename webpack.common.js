@@ -21,6 +21,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      {
         test: /\.css$/i,
         use: [
           process.env.NODE_ENV === "production"
@@ -28,6 +32,14 @@ module.exports = {
             : "style-loader", 
           "css-loader",
         ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i, 
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
       },
     ],
   },

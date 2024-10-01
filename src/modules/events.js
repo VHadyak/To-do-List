@@ -3,7 +3,8 @@
 import { createProject, deleteProject, editProject } from "./projects.js";
 import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks.js";
 import { updateSelectOptions, displayProject, projectContainer, 
-         taskContainer, getProjectValue, getTaskValues } from "./dom.js";
+         taskContainer, getProjectValue, getTaskValues, 
+         dropUpMenuHandler } from "./dom.js";
 import { renderTaskByID } from "./projectRender.js";
 import { assignDatedTasks } from "./datesRender.js";
 import { format } from "date-fns";
@@ -150,6 +151,7 @@ function markTaskEvent() {
 
 export function handleProjectEvents() {
   addProject();
+  dropUpMenuHandler();
   removeProjectEvent();
   editProjectEvent();
 };
