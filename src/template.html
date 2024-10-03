@@ -48,6 +48,7 @@
       <div class="footer">
         <a href="https://github.com/VHadyak" target="_blank"> 
           <span>VHadyak</span>
+          <img src="./assets/images/github-logo.svg" alt="Github logo">
         </a>
       </div>
     </div>
@@ -56,20 +57,22 @@
     <dialog class="project-dialog">
       <form>
         <label for="projectName">Project:</label>
-        <input type="text" id="projectName" name="projectName" maxlength="8" size="10">
+        <input type="text" id="projectName" name="projectName" minlength="1" maxlength="20" required>
+        <div class="project-btn-modal">
+          <button type="submit" id="createProject">Create Project</button>
+          <button type="button" id="cancelProject" class="cancel">Cancel</button>
+        </div>
       </form>
-      <button type="submit" id="createProject">Create Project</button>
-      <button type="button" id="cancelProject" class="cancel">Cancel</button>
     </dialog>
     
     <!-- TASK MODAL -->
     <dialog class="task-dialog">
       <form>
-        <input type="text" id="taskName" name="taskName" placeholder="Task Name">
-        <textarea id="description" name="description" placeholder="Description"></textarea>
-        <input type="date" id="date" name="due-date">
+        <input type="text" id="taskName" name="taskName" placeholder="Task Name" minlength="1" maxlength="20" required>
+        <textarea id="description" name="description" placeholder="Description" minlength="1" maxlength="100" required></textarea>
+        <input type="date" id="date" name="due-date" required>
 
-        <select name="priority" id="priority">
+        <select name="priority" id="priority" required>
           <option value="" disabled selected>Priority</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -79,10 +82,11 @@
         <select name="path" id="path">
           <option value="Inbox" id="default">Inbox</option>
         </select>
+        <div class="task-btn-modal">
+          <button type="submit" id="createTask">Create Task</button>
+          <button type="button" id="cancelTask" class="cancel">Cancel</button>
+        </div>
       </form>
-      
-      <button type="submit" id="createTask">Create Task</button>
-      <button type="button" id="cancelTask" class="cancel">Cancel</button>
     </dialog>
   </body>
 </html>

@@ -34,6 +34,8 @@ function addProject() {
   btnProject.addEventListener("click", () => {
     const projectName = projectInput.value;
 
+    if (projectName.length === 0) return;
+    
     if (isEditMode) {
       editProject(projectName, projectId);
     } else {
@@ -43,7 +45,7 @@ function addProject() {
 
     localStorage.setItem("selectedProject", projectName);
     updateSelectOptions();
-    projectDialog.close();
+    closeDialog(projectDialog);
     resetForm("Project");
     clearInputs();
   });
@@ -85,6 +87,8 @@ function addTask() {
     const path = selectPath.value;
     const projectID = selectPath.selectedOptions[0].id; 
 
+    if (!taskName || !description || !date || !priority) return;
+
     if (isEditMode && editingTaskId !== null) {
       editTask(taskName, description, date, priority, path, projectID, editingTaskId);
     } else {
@@ -102,7 +106,7 @@ function addTask() {
       assignDatedTasks();
     };  
 
-    taskDialog.close();
+    closeDialog(taskDialog);
     resetForm("Task");
     clearInputs();
   });
@@ -173,13 +177,18 @@ export function handleTaskEvents() {
   markTaskEvent();
 };
 
+function closeDialog(element) {
+  element.close();
+  element.style.display = "none";
+};
+
 // Handle modal cancel
 export function cancelDialog() {
   const cancelBtn = document.querySelectorAll("button.cancel");
   cancelBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
-      projectDialog.close();
-      taskDialog.close();
+      closeDialog(projectDialog);
+      closeDialog(taskDialog);
       resetForm();
       clearInputs();
     });
@@ -188,8 +197,10 @@ export function cancelDialog() {
 
 function showDialog(str) {
   if (str === "Project") {
+    projectDialog.style.display = "flex";
     projectDialog.showModal();
   } else if (str === "Task") {
+    taskDialog.style.display = "flex";
     taskDialog.showModal();
   };
 };
@@ -211,6 +222,7 @@ function defaultPath() {
   if (currentProject) {
     const projectID = currentProject.getAttribute("data-id");
     const selectPath = document.querySelector("dialog.task-dialog select#path");
+
     // Handle project duplicate names
     const optionToSelect = Array.from(selectPath.options).find(option => 
       option.id === projectID
@@ -225,6 +237,7 @@ function defaultPath() {
 function defaultDate() {
   const sectionList = document.querySelectorAll("li:not(:first-child):not(:last-child)");
   const dateSection = Array.from(sectionList).filter(item => item.classList.contains("item-highlight"));
+  const inboxSection = document.querySelector("li.inbox");
 
   dateSection.forEach(item => {
     switch (item.textContent) {
@@ -238,6 +251,9 @@ function defaultDate() {
         break;
     };
   });
+  if (inboxSection.classList.contains("item-highlight")) {
+    inputDate.value = format(new Date(), "yyyy-MM-dd");
+  };
 };
 
 function resetForm(str) {

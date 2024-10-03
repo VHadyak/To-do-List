@@ -185,6 +185,16 @@ export function displayTask(task) {
 
   taskContainer.appendChild(taskEl);
   stylePriority(priorityText, taskEl);
+  showLatestTask(taskEl);
+};
+
+// Scroll into latest task and task button, if the task container if overfilled
+function showLatestTask(taskElement) {
+  taskContainer.appendChild(taskElement);
+
+  taskElement.scrollIntoView({behavior: "smooth", block: "end"});
+  const clickTask = document.querySelector("#clickTask");
+  clickTask.scrollIntoView({behavior: "smooth", block: "end"});
 };
 
 // Style priority based on selection
