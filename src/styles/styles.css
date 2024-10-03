@@ -18,7 +18,8 @@
 :root {
   --header-bg-color: rgb(20, 33, 61);
   --sidebar-bg-color: rgb(0, 0, 0);
-  --content-bg-color: rgb(229, 229, 229);
+  --content-bg-color: background-color: #f9fcff;
+                      background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
   --footer-bg-color: rgb(0, 0, 0);
   --accent-color: rgb(252, 163, 17);
   --font-color: rgb(255, 255, 255);
@@ -222,6 +223,7 @@ button.btn-drop-up-toggle {
   transition: transform 0.4s ease;
 }
 
+
 button.btn-drop-up-toggle:hover {
   transform: scale(1.2);
 }
@@ -230,6 +232,11 @@ img.action-img {
   height: 20px;
   align-self: center;
 }
+
+.wrap-content img.action-img {
+  height: 22px;
+}
+
 
 /* Prevent image drag */
 button img {
@@ -319,43 +326,153 @@ button.deleteProject::before {
 /* MAIN CONTENT / TASK SECTION */
 .content-wrapper {
   grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   background-color: var(--content-bg-color);
+  color: var(--font-color-content);
 }
 
 #task-container {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 20px;
 }
 
 .content-wrapper div#section-title {
-  font-size: 1.4rem;
+  margin-top: 50px;
+  font-size: 1.9rem;
+  align-self: center;
+  width: 45%;
+  font-weight: 500;
 }
 
 .content-wrapper button#clickTask {
+  position: relative;
   height: 40px;
+  width: 10%;
+  align-self: center;
+  margin-right: calc(45% - 10%); 
+  text-align: start;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding-left: 30px;
+  font-size: 1.2rem;
+  transition: transform 0.4s ease;
+}
+
+.content-wrapper button#clickTask:hover {
+  transform: scale(1.1); 
+}
+
+.content-wrapper button#clickTask::before {
+  content: ""; 
+  position: absolute;
+  top: 50%; 
+  left: -5px; 
+  width: 30px; 
+  height: 30px; 
+  background: url(../assets/images/add-dark.svg);
+  background-size: cover;
+  transform: translateY(-50%);
 }
 
 .task {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgb(214, 214, 228);
-  width: 700px;
+  background-color: rgb(255, 255, 255);
+  border: 0.5px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  width: 45%;
+  height: 50px;
   gap: 50px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.task:last-of-type {
+  margin-bottom: 5px;
+}
+
+.task:first-of-type {
+  margin-top: 5px;
 }
 
 .wrap-content {
+  position: relative;
   display: flex;
+  width: 100%;
   gap: 20px;
-  justify-content: space-evenly;
-  /* outline: 1px solid red */
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
 }
 
 /* DOM Task elements */
+.left-task {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  width: 20%;
+}
+
+.right-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 20%;
+}
+
 input[type="checkbox"] {
-  width: 50px;
+  display: none;
+}
+
+.custom-checkbox {
+  display: flex;
+  width: 25px;  
+  height: 25px; 
+  background-color: var(--);
+  border: 0.05rem solid black;
+  border-radius: 5px;
+  margin-left: 20px;
+  cursor: pointer;
+  position: relative;
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer;
+}
+
+.custom-checkbox:hover {
+  background-color: rgb(240, 239, 239);
+}
+
+.checkbox-disabled {
+  background-color: #e0e0e0;
+  border-color: #aaa;
+  pointer-events: none; 
+  opacity: 0.5;
+}
+
+.custom-checkbox::after {
+  content: "";
+  background: url(../assets/images/checkMark.svg);
+  background-size: cover;
+  width: 20px;
+  height: 20px; 
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+  opacity: 1;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  display: none;
 }
 
 div.task-title {
@@ -363,11 +480,17 @@ div.task-title {
 }
 
 div.date {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  width: 60%;
+  text-align: end;
+  padding-right: 50px;
 }
 
 div.priority {
   font-size: 1.2rem;
+  text-align: left;
+  padding: 5px 8px;
+  border-radius: 10px;
 }
 
 div.task-btn-wrapper {
@@ -383,6 +506,72 @@ div.task-btn-wrapper {
 .editTask {
   width: 45px;
   height: 25px;
+}
+
+div.drop-up-menu {
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 10px;
+  padding: 10px;
+  position: absolute;
+  bottom: -25px;
+  left: 70px;
+  background-color: #2f2d2d;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  cursor:auto;
+  padding: 12px 0 12px 10px;
+}
+
+div.drop-up-menu button {
+  display: flex;
+  align-items: center;
+}
+
+.task .drop-up-wrapper {
+  margin-right: 10px;
+}
+
+button.editTask,
+button.deleteTask {
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: 25px;
+  color: var(--font-color);
+  background-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+button.editTask:hover,
+button.deleteTask:hover {
+  transform: scale(1.08);
+}
+
+button.editTask::before {
+  content: "";
+  position: absolute; 
+  top: 50%; 
+  left: -20px; 
+  width: 20px; 
+  height: 20px; 
+  background: url(../assets/images/edit.svg);
+  background-size: cover;
+  transform: translateY(-50%);
+}
+
+button.deleteTask::before {
+  content: ""; 
+  position: absolute;
+  top: 50%; 
+  left: -20px; 
+  width: 20px; 
+  height: 20px; 
+  background: url(../assets/images/delete.svg);
+  background-size: cover;
+  transform: translateY(-50%);
 }
 
 .task-dialog {

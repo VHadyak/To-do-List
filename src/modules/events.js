@@ -4,7 +4,7 @@ import { createProject, deleteProject, editProject } from "./projects.js";
 import { createTask, deleteTask, editTask, markAsCompleteTask } from "./tasks.js";
 import { updateSelectOptions, displayProject, projectContainer, 
          taskContainer, getProjectValue, getTaskValues, 
-         dropUpMenuHandler } from "./dom.js";
+         handleProjectDropUp, handleTaskDropUp } from "./dom.js";
 import { renderTaskByID } from "./projectRender.js";
 import { assignDatedTasks } from "./datesRender.js";
 import { format } from "date-fns";
@@ -97,10 +97,11 @@ function addTask() {
           renderTaskByID(currentProject);
         };
       };
+
       // Assign task's UI to certain date section on click
       assignDatedTasks();
     };  
-  
+
     taskDialog.close();
     resetForm("Task");
     clearInputs();
@@ -143,21 +144,30 @@ function editTaskEvent() {
 // Handle checkbox event
 function markTaskEvent() {
   taskContainer.addEventListener("click", (e) => {
-    if (e.target && e.target.classList.contains("checkTask")) {
-      markAsCompleteTask(e.target);
+    const customCheckbox = e.target.closest(".custom-checkbox");
+    // If custom checkbox clicked
+    if (customCheckbox) {
+      // Look for native checkbox
+      const checkbox = customCheckbox.parentNode.querySelector(".checkTask");
+
+      if (checkbox) {
+        checkbox.checked = !checkbox.checked; // Toggle the checkbox
+        markAsCompleteTask(checkbox); 
+      };
     };
   });
 };
 
 export function handleProjectEvents() {
   addProject();
-  dropUpMenuHandler();
+  handleProjectDropUp();
   removeProjectEvent();
   editProjectEvent();
 };
 
 export function handleTaskEvents() {
   addTask();
+  handleTaskDropUp();
   removeTaskEvent();
   editTaskEvent();
   markTaskEvent();

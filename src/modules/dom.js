@@ -5,6 +5,7 @@ import { taskArr } from "./tasks.js";
 import { renderProjectTasks } from "./projectRender.js";
 
 import actionImg from "../assets/images/actions.svg";
+import actionImgDark from "../assets/images/actions-dark.svg"
 
 export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
@@ -27,7 +28,7 @@ export function updateSelectOptions() {
 
 // In Completed section, display tasks without Edit, Delete and Create buttons
 export function modifyTaskFeatures() {
-  const buttons = document.querySelectorAll(".deleteTask, .editTask");
+  const buttons = document.querySelectorAll(".task .drop-up-wrapper");
   const checkboxes = document.querySelectorAll(".checkTask");
   let deleteAllBtn = document.querySelector(".deleteAll");
  
@@ -44,9 +45,18 @@ export function modifyTaskFeatures() {
     deleteAllBtn.style.display = "block"; 
   };
 
+  // Disable custom checkbox
   checkboxes.forEach(checkbox => {
-    checkbox.checked = true;
-    checkbox.disabled = true;
+    if (checkbox && checkbox.classList.contains("checkTask")) {
+      const customCheckbox = checkbox.nextElementSibling; 
+      
+      if (customCheckbox) {
+        checkbox.checked = true;  
+        checkbox.disabled = true; 
+        // Disable the custom checkbox
+        customCheckbox.classList.add("checkbox-disabled");
+      };
+    };
   });
 
   buttons.forEach(btn => {
@@ -79,7 +89,7 @@ export function displayProject(project) {
   projectEl.setAttribute("data-id", project.id);
   projectTitle.textContent = project.name;
 
-  const { wrapper, menu } = dropUpDOM();
+  const { wrapper, menu } = dropUpDOM(actionImg);
 
   const deleteProjectBtn = document.createElement("button");
   const editProjectBtn = document.createElement("button");
@@ -120,8 +130,10 @@ export function displayTask(task) {
   const infoWrapper = document.createElement("div");
   const deleteTaskBtn = document.createElement("button");
   const editTaskBtn = document.createElement("button");
-  const taskBtnWrapper = document.createElement("div");
   const checkBox = document.createElement("input");
+  const span = document.createElement("span");
+  const leftSideTask = document.createElement("div");
+  const rightSideTask = document.createElement("div");
 
   const taskTitle = document.createElement("div");
   const dateText = document.createElement("div");
@@ -131,9 +143,12 @@ export function displayTask(task) {
   checkBox.name = "task";
 
   checkBox.classList.add("checkTask");
-  taskBtnWrapper.classList.add("task-btn-wrapper");
   deleteTaskBtn.classList.add("deleteTask");
   editTaskBtn.classList.add("editTask");
+  span.classList.add("custom-checkbox");
+
+  leftSideTask.classList.add("left-task");
+  rightSideTask.classList.add("right-task");
 
   infoWrapper.classList.add("wrap-content");
   taskEl.classList.add("task");
@@ -147,21 +162,46 @@ export function displayTask(task) {
   dateText.textContent = task.date;
   priorityText.textContent = task.priority;
 
-  deleteTaskBtn.textContent = "X";    // Temporary
+  const { wrapper, menu } = dropUpDOM(actionImgDark);
+
+  deleteTaskBtn.textContent = "Delete";    // Temporary
   editTaskBtn.textContent = "Edit"; 
 
-  taskBtnWrapper.appendChild(editTaskBtn);
-  taskBtnWrapper.appendChild(deleteTaskBtn);
+  menu.appendChild(editTaskBtn);
+  menu.appendChild(deleteTaskBtn);
 
-  infoWrapper.appendChild(checkBox);
-  infoWrapper.appendChild(taskTitle);
+  leftSideTask.appendChild(checkBox);
+  leftSideTask.appendChild(span);
+  leftSideTask.appendChild(taskTitle);
+
+  rightSideTask.appendChild(priorityText);
+  rightSideTask.appendChild(wrapper);
+
+  infoWrapper.appendChild(leftSideTask);
   infoWrapper.appendChild(dateText);
-  infoWrapper.appendChild(taskBtnWrapper);
+  infoWrapper.appendChild(rightSideTask);
 
   taskEl.appendChild(infoWrapper);
-  taskEl.appendChild(priorityText);
 
   taskContainer.appendChild(taskEl);
+  stylePriority(priorityText, taskEl);
+};
+
+// Style priority based on selection
+function stylePriority(priorityText, taskEl) {
+  if (taskEl) {
+    switch (priorityText.textContent) {
+      case("High"):
+        priorityText.style.backgroundColor = "rgba(251, 2, 2, 0.388)";
+        break;
+      case("Medium"):
+        priorityText.style.backgroundColor = "rgba(255, 153, 0, 0.388)";
+        break;
+      case("Low"):
+        priorityText.style.backgroundColor = "rgba(98, 255, 0, 0.388)";
+        break;
+    };
+  };
 };
 
 // Update project and task dom based on editing
@@ -177,12 +217,11 @@ export function updateTaskDOM(title, date, priority, taskID) {
   const taskName = taskElement.querySelector("div.task-title");
   const dateText = taskElement.querySelector("div.date");
   const priorityText = taskElement.querySelector("div.priority");
-
   taskName.textContent = title;
   dateText.textContent = date;
   priorityText.textContent = priority;
 
-  taskContainer.appendChild(taskElement);
+  stylePriority(priorityText, taskElement);
 };
 
 // Highlight the selected project/sidebar section (Temporary)
@@ -205,9 +244,9 @@ export function jumpToProject(project, projectName) {
   showTaskBtn();
 };
 
-function dropUpDOM() {
+function dropUpDOM(img) {
   const imgAction = document.createElement("img");
-  imgAction.src = actionImg;
+  imgAction.src = img;
   imgAction.classList.add("action-img");
 
   const dropUpWrapper = document.createElement("div");
@@ -231,50 +270,67 @@ function dropUpDOM() {
 };
 
 // Drop Up Menu 
-export function dropUpMenuHandler() {
-  projectContainer.addEventListener("click", (e) => {
-    const toggleBtn = e.target.closest(".btn-drop-up-toggle");
+export function dropUpMenuHandler(container, e) {
+  const toggleBtn = e.target.closest(".btn-drop-up-toggle");
 
-    if (toggleBtn) {
-      const project = toggleBtn.closest(".project");
+  if (toggleBtn) {
+    const item = toggleBtn.closest(".project, .task"); // Works for both project and task
 
-      if (project) {
-        const dropUpMenu = project.querySelector(".drop-up-menu");
-        const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+    if (item) {
+      const dropUpMenu = item.querySelector(".drop-up-menu");
+      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
 
-        // Avoid menu overlaps
-        const allDropUpMenus = projectContainer.querySelectorAll(".drop-up-menu");
-        allDropUpMenus.forEach(menu => {
-          if (menu !== dropUpMenu) {
-            menu.style.display = "none";
-            const otherToggleBtn = menu.previousElementSibling;
-            if (otherToggleBtn) {
-              otherToggleBtn.setAttribute("aria-expanded", "false"); 
-            };
+      // Avoid menu overlaps by closing others
+      const allDropUpMenus = container.querySelectorAll(".drop-up-menu");
+      allDropUpMenus.forEach(menu => {
+        if (menu !== dropUpMenu) {
+          menu.style.display = "none";
+          const otherToggleBtn = menu.previousElementSibling;
+          if (otherToggleBtn) {
+            otherToggleBtn.setAttribute("aria-expanded", "false");
           };
-        });
-        
-        // Toggle the visibility of the drop-up menu
-        toggleBtn.setAttribute("aria-expanded", !isExpanded);
-        dropUpMenu.style.display = isExpanded ? "none" : "flex";
-        e.stopPropagation();
-      };
-    } else {
-      // Close menu if edit btn is clicked
-      hideMenu();
-    };  
+        };
+      });
+
+      // Toggle the visibility of the current drop-up menu
+      toggleBtn.setAttribute("aria-expanded", !isExpanded);
+      dropUpMenu.style.display = isExpanded ? "none" : "flex";
+      e.stopPropagation();
+    };
+  } else {
+    // Close all menus if clicking outside of the toggle button
+    hideMenu(container);
+  };
+};
+
+export function handleProjectDropUp() {
+  projectContainer.addEventListener("click", (e) => {
+    dropUpMenuHandler(projectContainer, e);
   });
 
-  // Close menu if document element outside menu is clicked
+  // Close menus when clicking outside of the project menu
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".btn-drop-up-toggle") && !e.target.closest(".drop-up-menu")) {
-      hideMenu();
+      hideMenu(projectContainer);
     };
   });
 };
 
-function hideMenu() {
-  const openMenus = projectContainer.querySelectorAll(".drop-up-menu");
+export function handleTaskDropUp() {
+  taskContainer.addEventListener("click", (e) => {
+    dropUpMenuHandler(taskContainer, e);
+  });
+
+  // Close menus when clicking outside of the project menu
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".btn-drop-up-toggle") && !e.target.closest(".drop-up-menu")) {
+      hideMenu(taskContainer);
+    };
+  });
+};
+
+function hideMenu(container) {
+  const openMenus = container.querySelectorAll(".drop-up-menu");
   openMenus.forEach(menu => {
     menu.style.display = "none";
     const associatedToggleBtn = menu.previousElementSibling;
