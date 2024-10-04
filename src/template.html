@@ -55,11 +55,11 @@
     
     <!-- PROJECT MODAL -->
     <dialog class="project-dialog">
-      <form>
-        <label for="projectName">Project:</label>
+      <form class="project-form">
+        <label for="projectName">Name</label>
         <input type="text" id="projectName" name="projectName" minlength="1" maxlength="20" required>
         <div class="project-btn-modal">
-          <button type="submit" id="createProject">Create Project</button>
+          <button type="submit" id="createProject">Create</button>
           <button type="button" id="cancelProject" class="cancel">Cancel</button>
         </div>
       </form>
@@ -67,21 +67,28 @@
     
     <!-- TASK MODAL -->
     <dialog class="task-dialog">
-      <form>
+      <form class="task-form">
+        <label for="taskName">Name</label>
         <input type="text" id="taskName" name="taskName" placeholder="Task Name" minlength="1" maxlength="20" required>
-        <textarea id="description" name="description" placeholder="Description" minlength="1" maxlength="100" required></textarea>
-        <input type="date" id="date" name="due-date" required>
 
-        <select name="priority" id="priority" required>
-          <option value="" disabled selected>Priority</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        
-        <select name="path" id="path">
-          <option value="Inbox" id="default">Inbox</option>
-        </select>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="Description" minlength="1" maxlength="200" required></textarea>
+
+        <div class="flex">
+          <input type="date" id="date" name="due-date" required>
+  
+          <select name="priority" id="priority" required>
+            <option value="" disabled>Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          
+          <select name="path" id="path">
+            <option value="Inbox" id="default">Inbox</option>
+          </select>
+        </div>
+
         <div class="task-btn-modal">
           <button type="submit" id="createTask">Create Task</button>
           <button type="button" id="cancelTask" class="cancel">Cancel</button>

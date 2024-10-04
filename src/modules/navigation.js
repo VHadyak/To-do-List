@@ -29,20 +29,23 @@ export function listItemClick() {
   // First load = render 'Inbox' section. With subsequent loads, render the last clicked section
   window.addEventListener("DOMContentLoaded", () => {
     const savedSection = localStorage.getItem("selectedSection") || "Inbox"; // Store clicked section in the storage
-    const savedProject = localStorage.getItem("selectedProject");
+    const savedProjectName = localStorage.getItem("selectedProject");
+    const savedProjectID = localStorage.getItem("selectedProjectID");
 
     const sectionToRender = Array.from(lists).find(list => list.textContent === savedSection) || lists[0];
     if (sectionToRender) {
       renderSection(savedSection, sectionToRender);
     };
 
-    // Highlight the project that was clicked previously
-    if (savedProject) {
-      const projectElement = Array.from(document.querySelectorAll(".project"))
-                                  .find(el => el.querySelector(".project-title").textContent === savedProject);
+    // Highlight the project that was clicked previously 
+    // Use projectID storage to associate with projects with same names after page reload (selects the right project ... 
+    // .. even when project names are the same)
+    if (savedProjectID) {
+      const projectElement = document.querySelector(`.project[data-id="${savedProjectID}"]`);
+
       if (projectElement) {
         highlightItem(projectElement);
-        getSectionTitle(savedProject);
+        getSectionTitle(savedProjectName);
         renderProjectTasks(projectElement); 
         showTaskBtn();
       };
@@ -59,6 +62,7 @@ export function listItemClick() {
       if (sectionName !== "Completed") showTaskBtn();
 
       localStorage.setItem("selectedSection", sectionName);
+      localStorage.removeItem("selectedProjectID");
       localStorage.removeItem("selectedProject"); 
     });
   });
@@ -71,10 +75,13 @@ export function projectClick() {
     if (e.target && (e.target.classList.contains("project") || e.target.closest(".btn-drop-up-toggle") 
                                                             || e.target.classList.contains("project-title"))) {
       const project = e.target.closest(".project");
+      const projectID = project.getAttribute("data-id");
       const projectName = project.querySelector(".project-title").textContent;
+      
       if (project) {
         jumpToProject(project, projectName);
         localStorage.setItem("selectedProject", projectName);
+        localStorage.setItem("selectedProjectID", projectID);
         localStorage.removeItem("selectedSection");
       };
     // Jump to Inbox section if the selected project is deleted

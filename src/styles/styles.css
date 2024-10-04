@@ -16,7 +16,7 @@
 }
 
 :root {
-  --header-bg-color: rgb(6, 47, 54);
+  --header-bg-color: rgb(20, 33, 61);
   --sidebar-bg-color: rgb(0, 0, 0);
   --content-bg-color: background-color: #f9fcff;
                       background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
@@ -322,15 +322,63 @@ button.deleteProject::before {
 }
 
 .project-dialog {
-  position: absolute;
-  display: none; /* Set to flex when project btn is clicked in JS, so it doesn't look for hidden input in the first place */
-  top: 20%;
-  left: 0;
-  width: 300px;
+  display: none;  /* Set to flex when project btn is clicked in JS, so it doesn't look for hidden input in the first place */
+  width: clamp(100px, 30vw, 250px);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border: 1px solid black;
+}
+
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+label[for="projectName"] {
+  font-size: 1.2rem;
+}
+
+.project-form input[type="text"] {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  font-size: 1rem;
+}
+
+.project-btn-modal {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#createProject,
+#cancelProject {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color-content);
+  border-radius: 8px;
+  padding: 5px;
+  width: clamp(30px, 40vw, 80px);
+  border: 1px solid black;
+}
+
+#createProject:hover,
+#cancelProject:hover,
+#createTask:hover,
+#cancelTask:hover {
+  background-color: rgb(238, 236, 236);
 }
 
 /* MAIN CONTENT / TASK SECTION */
 .content-wrapper {
+  position: relative;
   max-height: 90vh;
   overflow-y: auto;
   grid-area: content;
@@ -582,14 +630,123 @@ button.deleteTask::before {
   transform: translateY(-50%);
 }
 
-/* Delete all button */
+button.deleteAll {
+  width: 8%;
+  margin-right: calc(var(--task-width) - 8%);
+  border-radius: 10px;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.494);
+  height: 40px;
+  align-self: center;
+  cursor: pointer;
+  background-color: rgb(215, 223, 239);
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+button.deleteAll:hover {
+  background-color: rgb(196, 211, 239);
+}
+
+::placeholder {
+  color: rgba(123, 122, 122, 0.701);
+}
 
 .task-dialog {
-  position: absolute;
+  width: clamp(100px, 30vw, 550px);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border: 1px solid black;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  width: 80%;
+  padding: 10px 0 10px 0;
+}
+
+.task-form .flex {
+  display: flex;
+  gap: 15px;
+}
+
+.task-form input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+}
+
+.task-form #taskName {
+  width: 50%;
+}
+
+.task-form textarea {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  width: 100%;
+  height: 100px;
+  resize: none;
+}
+
+.task-form select {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  cursor: pointer;
+  padding-bottom: 3px;
+}
+
+#priority:focus option:first-of-type {
   display: none;
-  top: 30%;
+}
+
+.task-form #date {
+  position: relative;
+  padding-bottom: 3px;
+}
+
+/* Make whole calendar input clickable */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
   right: 0;
-  width: 300px;
+  top: 0;
+  width: auto;
+}
+
+label[for="taskName"],
+label[for="description"] {
+  font-size: 1.2rem;
+  margin-bottom: -10px;
+}
+
+.task-btn-modal {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+#createTask, 
+#cancelTask {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color-content);
+  border-radius: 8px;
+  padding: 5px;
+  width: clamp(30px, 40vw, 100px);
+  border: 1px solid black;
 }
 
 dialog {
@@ -597,9 +754,6 @@ dialog {
   border: 2px solid #000;
 }
 
-textarea {
-  resize: none;
-}
 
 /* FOOTER */
 .footer {

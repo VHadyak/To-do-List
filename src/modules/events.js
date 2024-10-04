@@ -41,6 +41,7 @@ function addProject() {
     } else {
       const newProject = createProject(projectName);
       displayProject(newProject);
+      localStorage.setItem("selectedProjectID", newProject.id);
     };
 
     localStorage.setItem("selectedProject", projectName);

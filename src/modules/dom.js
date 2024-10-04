@@ -42,8 +42,9 @@ export function modifyTaskFeatures() {
       contentWrapper.insertBefore(deleteAllBtn, createTaskBtn);  // Insert before the 'Create Task' button
     };
   } else {
-    deleteAllBtn.style.display = "block"; 
+    deleteAllBtn.style.display = "block";
   };
+
 
   // Disable custom checkbox
   checkboxes.forEach(checkbox => {
@@ -75,7 +76,7 @@ export function showTaskBtn() {
     createTaskBtn.style.display = "block"; 
   };
   if (deleteAllBtn) {
-    deleteAllBtn.style.display = "none";
+    deleteAllBtn.remove();
   };
 };
 
@@ -349,3 +350,4 @@ function hideMenu(container) {
     };
   });
 };
+
