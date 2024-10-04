@@ -12,10 +12,9 @@ export function renderTaskByDate(dates) {
   // Check if it passes date as a string or array
   const dateArr = Array.isArray(dates) ? dates : [dates]; 
   
-  // For each date, check if it matches with user's date selection
+  // For each date, check if it matches with user's date selection (exclude Past Due tasks)
   dateArr.forEach(date => {
-    const filterDate = taskArr.filter(task => task.date === date);
-
+    const filterDate = taskArr.filter(task => task.date === date && task.date !== "Past Due");
     filterDate.forEach(task => {
       displayTask(task);
     });
@@ -100,10 +99,9 @@ document.addEventListener("DOMContentLoaded", setMinDate);
 
 // Check if the task is past due 
 export function checkIfPastDue() {
-  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const currentDate = format(new Date(), "yyyy-MM-dd");
 
-  storedTasks.forEach(task => {
+  taskArr.forEach(task => {
     if (!task.hasOwnProperty("isOverdue")) {
       task.isOverdue = false; // Set default property to false
     };
@@ -114,16 +112,17 @@ export function checkIfPastDue() {
 
       task.isOverdue = true; 
       task.date = "Past Due"; // Updates after page is refreshed 
+      
       // Updates real time
       if (taskElement) {
         const name = taskElement.querySelector("div.date");
         name.textContent = "Past Due";
+        name.classList.add("stylePastDue");
       };
-    } else {
-      task.isOverdue = false; // Set to false if not overdue
     };
   });
-  localStorage.setItem("tasks", JSON.stringify(storedTasks));  
+
+  localStorage.setItem("tasks", JSON.stringify(taskArr));
 };
 
 // Check for past due dates every 1 minute

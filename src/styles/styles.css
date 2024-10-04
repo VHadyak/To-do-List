@@ -538,9 +538,14 @@ div.task-title {
 
 div.date {
   font-size: 1.2rem;
-  text-align: end;
-  padding-right: 10px;
-  width: clamp(50px, 40vw, 150px);
+  text-align: start;
+  padding-right: 5px;
+  padding-left: 50px;
+  width: clamp(50px, 40vw, 170px);
+}
+
+.stylePastDue {
+  color: rgb(166, 37, 37);
 }
 
 div.priority {

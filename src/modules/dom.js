@@ -3,7 +3,6 @@
 import { projectArr } from "./projects.js";
 import { taskArr } from "./tasks.js";
 import { renderProjectTasks } from "./projectRender.js";
-import { checkIfPastDue } from "./datesRender.js";
 
 import actionImg from "../assets/images/actions.svg";
 import actionImgDark from "../assets/images/actions-dark.svg"
@@ -159,9 +158,9 @@ export function displayTask(task) {
   priorityText.classList.add("priority");
 
   taskEl.setAttribute("data-id", task.id);
-  
-  taskTitle.textContent = task.title;
+
   dateText.textContent = task.date;
+  taskTitle.textContent = task.title;
   priorityText.textContent = task.priority;
 
   const { wrapper, menu } = dropUpDOM(actionImgDark);
@@ -185,8 +184,7 @@ export function displayTask(task) {
 
   taskEl.appendChild(infoWrapper);
   taskContainer.appendChild(taskEl);
-
-
+  stylePastDueDate(dateText, taskEl);
   stylePriority(priorityText, taskEl);
   showLatestTask(taskEl);
 };
@@ -198,6 +196,16 @@ function showLatestTask(taskElement) {
   taskElement.scrollIntoView({behavior: "smooth", block: "end"});
   const clickTask = document.querySelector("#clickTask");
   clickTask.scrollIntoView({behavior: "smooth", block: "end"});
+};
+
+function stylePastDueDate(dateText, taskElement) {
+  if (taskElement) {
+    if (dateText.textContent === "Past Due") {
+      dateText.classList.add("stylePastDue");
+    } else {
+      dateText.classList.remove("stylePastDue");
+    };
+  };
 };
 
 // Style priority based on selection
@@ -234,6 +242,7 @@ export function updateTaskDOM(title, date, priority, taskID) {
   dateText.textContent = date;
   priorityText.textContent = priority;
 
+  stylePastDueDate(dateText, taskElement);
   stylePriority(priorityText, taskElement);
 };
 
