@@ -41,6 +41,7 @@ function addProject() {
     } else {
       const newProject = createProject(projectName);
       displayProject(newProject);
+
       localStorage.setItem("selectedProjectID", newProject.id);
     };
 
@@ -102,7 +103,6 @@ function addTask() {
           renderTaskByID(currentProject);
         };
       };
-
       // Assign task's UI to certain date section on click
       assignDatedTasks();
     };  

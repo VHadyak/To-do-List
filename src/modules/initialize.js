@@ -4,9 +4,11 @@ import { handleProjectEvents, handleTaskEvents, handleDialogEvent, cancelDialog 
 import { loadProjects } from "./projects.js";
 import { loadTasks } from "./tasks.js";
 import { listItemClick, projectClick } from "./navigation.js";
+import { checkIfPastDue } from "./datesRender.js";
 
 // Initialize
 export function init() {
+  checkIfPastDue();
   loadTasks();
   loadProjects();
 

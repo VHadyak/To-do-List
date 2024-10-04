@@ -3,6 +3,7 @@
 import { projectArr } from "./projects.js";
 import { taskArr } from "./tasks.js";
 import { renderProjectTasks } from "./projectRender.js";
+import { checkIfPastDue } from "./datesRender.js";
 
 import actionImg from "../assets/images/actions.svg";
 import actionImgDark from "../assets/images/actions-dark.svg"
@@ -183,8 +184,9 @@ export function displayTask(task) {
   infoWrapper.appendChild(rightSideTask);
 
   taskEl.appendChild(infoWrapper);
-
   taskContainer.appendChild(taskEl);
+
+
   stylePriority(priorityText, taskEl);
   showLatestTask(taskEl);
 };
