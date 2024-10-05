@@ -48,7 +48,6 @@ export function renderThisWeekTasks() {
     thisWeekArr.push(format(i, "yyyy-MM-dd"));
   };
   renderTaskByDate(thisWeekArr);
-  return { endWeek };
 };
 
 // Get tasks that have due date longer than the current week
@@ -118,6 +117,12 @@ export function checkIfPastDue() {
         const name = taskElement.querySelector("div.date");
         name.textContent = "Past Due";
         name.classList.add("stylePastDue");
+
+        const currentSection = document.querySelector(".item-highlight");
+        // Remove task UI in real time from currently selected section (except "Inbox") if task's date is past due
+        if (currentSection) {
+          taskElement.remove();
+        };
       };
     };
   });

@@ -5,9 +5,11 @@ import { loadProjects } from "./projects.js";
 import { loadTasks } from "./tasks.js";
 import { listItemClick, projectClick } from "./navigation.js";
 import { checkIfPastDue } from "./datesRender.js";
+import { sidebarCollapse } from "./dom.js";
 
 // Initialize
 export function init() {
+  sidebarCollapse();
   checkIfPastDue();
   loadTasks();
   loadProjects();

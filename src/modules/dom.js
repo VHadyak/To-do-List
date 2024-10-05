@@ -11,6 +11,7 @@ export const projectContainer = document.querySelector("div#project-container");
 export const taskContainer = document.querySelector("div#task-container");
 const createTaskBtn = document.querySelector("#clickTask");
 const contentWrapper = document.querySelector("div.content-wrapper");
+const flexTaskContainer = document.querySelector("div.flex-task");
 
 // Update options/paths to select input
 export function updateSelectOptions() {
@@ -39,12 +40,11 @@ export function modifyTaskFeatures() {
     deleteAllBtn.textContent = "Delete All";
 
     if (contentWrapper && createTaskBtn) {
-      contentWrapper.insertBefore(deleteAllBtn, createTaskBtn);  // Insert before the 'Create Task' button
+      flexTaskContainer.insertBefore(deleteAllBtn, createTaskBtn);  // Insert before the 'Create Task' button
     };
   } else {
     deleteAllBtn.style.display = "block";
   };
-
 
   // Disable custom checkbox
   checkboxes.forEach(checkbox => {
@@ -358,6 +358,22 @@ function hideMenu(container) {
     const associatedToggleBtn = menu.previousElementSibling;
     if (associatedToggleBtn) {
       associatedToggleBtn.setAttribute("aria-expanded", "false");
+    };
+  });
+};
+
+export function sidebarCollapse() {
+  const toggleCheckbox = document.getElementById("toggleSidebar");
+  const sidebar = document.getElementById("sidebar");
+  const gridContainer = document.querySelector(".grid-container");
+
+  toggleCheckbox.addEventListener("change", () => {
+    if (toggleCheckbox.checked) {
+      sidebar.classList.add("collapsed");
+      gridContainer.style.gridTemplateColumns = "110px repeat(2, minmax(280px, 1fr))";
+    } else {
+      sidebar.classList.remove("collapsed");
+      gridContainer.style.gridTemplateColumns = "var(--sidebar-width) repeat(2, minmax(280px, 1fr))";
     };
   });
 };

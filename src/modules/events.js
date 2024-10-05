@@ -31,25 +31,27 @@ let editingTaskId = null;
 
 // Create/Edit project modal btn event
 function addProject() {
-  btnProject.addEventListener("click", () => {
-    const projectName = projectInput.value;
-
-    if (projectName.length === 0) return;
+  btnProject.addEventListener("click", (e) => {
+    const projectForm = document.querySelector("form.project-form");
     
+    if (!projectForm.checkValidity()) return; // Early exit if form is not valid
+    e.preventDefault();
+
+    const projectName = projectInput.value; 
+
     if (isEditMode) {
       editProject(projectName, projectId);
     } else {
       const newProject = createProject(projectName);
       displayProject(newProject);
-
+      
       localStorage.setItem("selectedProjectID", newProject.id);
     };
 
     localStorage.setItem("selectedProject", projectName);
-    updateSelectOptions();
     closeDialog(projectDialog);
     resetForm("Project");
-    clearInputs();
+    updateSelectOptions();
   });
 };
 
@@ -81,15 +83,18 @@ function editProjectEvent() {
 
 // Create/Edit task modal btn event
 function addTask() {
-  btnTask.addEventListener("click", () => {
+  btnTask.addEventListener("click", (e) => {
+    const taskForm = document.querySelector("form.task-form");
+
+    if (!taskForm.checkValidity()) return;
+    e.preventDefault();
+
     const taskName = taskInput.value;
     const description = descriptionText.value;
     const date = inputDate.value;
     const priority = selectPriority.value;
     const path = selectPath.value;
-    const projectID = selectPath.selectedOptions[0].id; 
-
-    if (!taskName || !description || !date || !priority) return;
+    const projectID = selectPath.selectedOptions[0].id;
 
     if (isEditMode && editingTaskId !== null) {
       editTask(taskName, description, date, priority, path, projectID, editingTaskId);
@@ -97,19 +102,19 @@ function addTask() {
       createTask(taskName, description, date, priority, path, projectID);
       
       // Assign task's UI to certain path on click
+      const currentProject = document.querySelector(`[data-id="${projectID}"]`);
+
       if (projectID) {
-        const currentProject = document.querySelector(`[data-id="${projectID}"]`);
         if (currentProject && currentProject.classList.contains("item-highlight")) {
           renderTaskByID(currentProject);
         };
       };
       // Assign task's UI to certain date section on click
       assignDatedTasks();
-    };  
+    };
 
     closeDialog(taskDialog);
-    resetForm("Task");
-    clearInputs();
+    resetForm("Task");  
   });
 };
 
@@ -180,7 +185,6 @@ export function handleTaskEvents() {
 
 function closeDialog(element) {
   element.close();
-  element.style.display = "none";
 };
 
 // Handle modal cancel
@@ -198,10 +202,8 @@ export function cancelDialog() {
 
 function showDialog(str) {
   if (str === "Project") {
-    projectDialog.style.display = "flex";
     projectDialog.showModal();
   } else if (str === "Task") {
-    taskDialog.style.display = "flex";
     taskDialog.showModal();
   };
 };
@@ -209,9 +211,11 @@ function showDialog(str) {
 // Show Modal once starter button is pressed
 export function handleDialogEvent() {
   clickProjectBtn.addEventListener("click", () => {
+    clearInputs();
     showDialog("Project");
   });
   clickTaskBtn.addEventListener("click", () => {
+    clearInputs();
     showDialog("Task");
     defaultPath();  // Assign path in select input based on currently selected project
     defaultDate();  // Assign date in input based on "Today"/"Tomorrow" sections
