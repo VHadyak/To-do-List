@@ -443,11 +443,15 @@ label[for="projectName"] {
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
-.project-form input[type="text"] {
+.project-form input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.313);
   outline: none;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+#projectName {
+  width: 100%;
 }
 
 .project-btn-modal {
