@@ -1,0 +1,1540 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+
+/* Use for general content */
+@font-face {
+  font-family: "Roboto";
+  src: url(27f62b53b93858475a7f.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Use for section lists, header */
+@font-face {
+  font-family: "Roboto";
+  src: url(e73e917f7bfa48666e00.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --header-bg-color: rgb(20, 33, 61);
+  --sidebar-bg-color: rgb(0, 0, 0);
+  --content-bg-color: background-color: #f9fcff;
+                      background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+  --footer-bg-color: transparent;
+  --accent-color: rgb(252, 163, 17);
+  --font-color: rgb(255, 255, 255);
+  --font-color-content: rgb(0, 0, 0);
+  --font-family: "Roboto", sans-serif;
+  --task-width: clamp(200px, 50vw, 800px);
+  --sidebar-width: 300px;
+  --sidebar-collapsed-width: 115px;
+}
+
+html {
+  overflow: hidden;
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--font-family);
+}
+
+.grid-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(110px, var(--sidebar-width)) repeat(2, minmax(280px ,1fr));
+  grid-template-rows: 80px repeat(2, 1fr) 40px;
+
+  grid-template-areas: "logo      header     header"
+                       "sidebar   content    content"
+                       "sidebar   content    content"
+                       "sidebar   footer     footer";
+}
+
+
+/* HAMBURGER/LEFT ARROW MENU DISPLAY */
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: clamp(45px, 6vw, 60px);
+}
+
+.sidebar-label-checkbox:hover {
+  transform: scale(1.1);
+}
+
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #ffffff;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+
+.ham5 .top {
+  stroke-dasharray: 40 82;
+}
+.ham5 .bottom {
+  stroke-dasharray: 40 82;
+}
+.ham5.active .top {
+  stroke-dasharray: 14 82;
+  stroke-dashoffset: -72px;
+}
+.ham5.active .bottom {
+  stroke-dasharray: 14 82;
+  stroke-dashoffset: -72px;
+}
+
+/* SIDEBAR COLLAPSE */
+.header-left input[type="checkbox"] {
+  display: none;
+} 
+
+.sidebar-label-checkbox {
+  display: flex;
+  min-width: 60px;  
+  height: 55px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  position: relative;
+  align-items: center; 
+  justify-content: center; 
+  user-select: none;
+  transition: transform 0.3s ease;
+} 
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+/* Adjust content position when sidebar is collapsed */
+.sidebar.collapsed + .content-wrapper .flex-task,
+.sidebar.collapsed ~ .footer a { 
+  margin-right: calc(var(--sidebar-width) - var(--sidebar-collapsed-width)); /* Use this for Sidebar collapse with transition 'margin-right' */
+  margin-left: calc(var(--sidebar-width) - var(--sidebar-collapsed-width));  /* Use this to recenter content when content has expanded */
+} 
+
+.sidebar.collapsed #menu li img {
+  margin-right: 40px;
+}
+
+/* Prevent list images from being dragged */
+.sidebar.collapsed #menu img,
+#menu img {
+  pointer-events: auto;
+  -webkit-user-drag: none; 
+  -moz-user-drag: none; 
+  -o-user-drag: none; 
+}
+
+.sidebar #menu li {
+  display: flex; 
+  align-items: center; 
+}
+
+.sidebar.collapsed #menu li {
+  width: 50px;
+  pointer-events: none;
+  color: transparent;
+}
+
+.sidebar.collapsed .project {
+  width: clamp(30px, 20vw, 55px);
+  padding-left: 17px;
+}
+
+.sidebar.collapsed button#clickProject {
+  margin-left: -7px;
+}
+
+.sidebar.collapsed #menu li span,
+.sidebar.collapsed #project-main-title,
+.sidebar.collapsed .project-title {
+  display: none;
+}
+
+.sidebar.collapsed button.btn-drop-up-toggle {
+  margin-left: -13px;
+  height: 35px;
+  width: clamp(20px, 3vw, 55px);
+}
+
+.sidebar.collapsed .drop-up-wrapper {
+  width: 32px;
+}
+
+
+/* HEADER */
+.header {
+  grid-area: header;
+  background-color: var(--header-bg-color);
+}
+
+.header-left {
+  background-color: var(--header-bg-color);
+  grid-area: logo;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.header-title {
+  font-size: 2rem;
+  color: var(--font-color);
+}
+
+/* MENU SIDEBAR */
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--sidebar-bg-color);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 25px;
+  width: var(--sidebar-width);
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.sidebar ul#menu {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-left: 30px;
+}
+
+.sidebar ul#menu li {
+  list-style-type: none;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  cursor: pointer;
+  color: var(--font-color);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: clamp(170px, 20vw, 230px);
+  padding-left: 10px;
+  height: clamp(32px, 6vw, 40px);
+}
+
+.sidebar ul#menu li:hover,
+.project:hover:not(:has(.drop-up-menu:hover)) {
+  background-color: rgba(255, 166, 0, 0.213);
+  border-radius: 10px;
+}
+
+#menu li img {
+  height: clamp(25px, 3vw, 30px);
+}
+
+/* PROJECT SECTION SIDEBAR */
+#project-container {
+  background-color: var(--sidebar-bg-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  max-height: 50vh;
+}
+
+.project-flex {
+  padding-left: 40px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+#project-container div#project-main-title {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--font-color);
+  font-weight: 500;
+  min-width: 120px;
+}
+
+#project-container button#clickProject {
+  width: 45px;
+  height: clamp(30px, 5vw, 40px);
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  appearance: none;
+  cursor: pointer;
+  margin-right: 30px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+#project-container button#clickProject:hover {
+  background-color: rgba(202, 159, 4, 0.78);
+  transform: scale(1.1);
+}
+
+button#clickProject img {
+  height: clamp(32px, 6vw, 37px);
+  align-self: center;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  width: clamp(180px, 40vw, 250px);
+  margin-left: 28px;
+  gap: 50px;
+  cursor: pointer;
+  padding: 0;
+  padding-left: 13px;
+  transition: width 0.3s ease;
+}
+
+.item-highlight {
+  border: 0.5px solid var(--accent-color);
+  transition: width 0.3s ease;
+  border-radius: 10px;
+  height: 40px;
+}
+
+.project div.project-title {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--font-color);
+}
+
+.project div.project-title::before {
+  content: "#";
+  padding-right: 3px;
+  color: var(--accent-color);
+}
+
+/* Drop Up Menu popup */
+div.drop-up-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-right: 15px;
+}
+
+button.btn-drop-up-toggle {
+  display: flex;
+  justify-content: center;
+  width: clamp(20px, 10vw, 30px);
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+
+button.btn-drop-up-toggle:hover {
+  transform: scale(1.2);
+}
+
+img.action-img {
+  height: 20px;
+  align-self: center;
+}
+
+.wrap-content img.action-img {
+  height: 22px;
+}
+
+
+/* Prevent image drag */
+button img {
+  pointer-events: none; 
+}
+
+button {
+  -webkit-user-select: none;  
+  -moz-user-select: none;     
+  -ms-user-select: none;      
+  user-select: none;         
+  outline: none;
+}
+
+/* Drop up menu */
+div.drop-up-menu {
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 10px;
+  padding: 10px;
+  position: absolute;
+  bottom: -25px;
+  left: 70px;
+  background-color: #2f2d2d;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 10;
+  cursor:auto;
+  padding: 12px 0 12px 10px;
+}
+
+div.drop-up-menu button {
+  display: flex;
+  align-items: center;
+}
+
+button.editProject,
+button.deleteProject {
+  width: 50%;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  margin-left: 25px;
+  color: var(--font-color);
+  background-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+/* PROJECT FORM/MODAL */
+.project-dialog {
+  width: clamp(230px, 30vw, 350px);
+  border-radius: 10px;
+  border: none;
+  border: 1px solid black;
+}
+
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 15px;
+}
+
+label[for="projectName"] {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.project-form input[type="text"] {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.project-btn-modal {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#createProject,
+#cancelProject {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color-content);
+  border-radius: 8px;
+  padding: 5px;
+  width: clamp(120px, 20vw, 150px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  border: 1px solid black;
+}
+
+#createProject:hover,
+#cancelProject:hover,
+#createTask:hover,
+#cancelTask:hover {
+  background-color: rgb(238, 236, 236);
+}
+
+/* MAIN CONTENT / TASK SECTION */
+.content-wrapper {
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--content-bg-color);
+  color: var(--font-color-content);
+}
+
+.flex-task {
+  transition: margin-right 0.3s ease; 
+  width: var(--task-width);
+}
+
+#task-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.content-wrapper div#section-title {
+  margin-top: 50px;
+  font-size: clamp(1.6rem, 4vw, 1.9rem);
+  align-self: center;
+  font-weight: 500;
+}
+
+.content-wrapper button#clickTask {
+  position: relative;
+  height: 40px;
+  align-self: center;
+  text-align: start;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding-left: 30px;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  transition: transform 0.4s ease;
+  margin-top: 5px;
+}
+
+.content-wrapper button#clickTask:hover {
+  transform: scale(1.1); 
+}
+
+.content-wrapper button#clickTask::before {
+  content: ""; 
+  position: absolute;
+  top: 50%; 
+  left: -5px; 
+  width: 30px; 
+  height: 30px; 
+  background: url(addf8fde9b41adfbe09e.svg);
+  background-size: cover;
+  transform: translateY(-50%);
+}
+
+.task {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  border: 0.5px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  width: var(--task-width);
+  height: 50px;
+  gap: 50px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.task:hover {
+  outline: 1.2px solid black;
+  cursor: pointer;
+}
+
+.task:last-of-type {
+  margin-bottom: 2px;
+}
+
+.task:first-of-type {
+  margin-top: 10px;
+}
+
+.wrap-content {
+  position: relative;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+}
+
+/* DOM Task elements */
+.left-task {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+  gap: 20px;
+}
+
+.right-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: clamp(100px, 40vw, 180px);
+}
+
+.left-task input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  display: flex;
+  width: clamp(20px, 4vw, 25px);  
+  height: clamp(20px, 4vw, 25px); 
+  border: 0.05rem solid black;
+  border-radius: 5px;
+  margin-left: 20px;
+  cursor: pointer;
+  position: relative;
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer;
+}
+
+.custom-checkbox:hover {
+  background-color: rgb(240, 239, 239);
+}
+
+.checkbox-disabled {
+  background-color: #e0e0e0;
+  border-color: #aaa;
+  pointer-events: none; 
+  opacity: 0.5;
+}
+
+.custom-checkbox::after {
+  content: "";
+  background: url(9e16fb1082aa094e944f.svg);
+  background-size: cover;
+  width: 20px;
+  height: 20px; 
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+  opacity: 1;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  display: none;
+}
+
+div.task-title {
+  font-size: clamp(1rem, 4vw, 1.2rem);
+}
+
+div.date {
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  text-align: start;
+  padding-right: 5px;
+  padding-left: 50px;
+  width: clamp(50px, 40vw, 170px);
+}
+
+.stylePastDue {
+  color: rgb(166, 37, 37);
+}
+
+div.priority {
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+div.task-btn-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.deleteTask {
+  width: 25px;
+  height: 25px;
+}
+
+.editTask {
+  width: 45px;
+  height: 25px;
+}
+
+div.drop-up-menu {
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 10px;
+  padding: 10px;
+  position: absolute;
+  bottom: -25px;
+  left: 70px;
+  background-color: #2f2d2d;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  cursor:auto;
+  padding: 12px 0 12px 10px;
+}
+
+div.drop-up-menu button {
+  display: flex;
+  align-items: center;
+}
+
+.task .drop-up-wrapper {
+  margin-right: 10px;
+}
+
+button.editTask,
+button.deleteTask {
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: 25px;
+  color: var(--font-color);
+  background-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+button.editTask:hover,
+button.deleteTask:hover,
+button.editProject:hover,
+button.deleteProject:hover {
+  transform: scale(1.08);
+}
+
+button.editTask::before,
+button.editProject::before {
+  background: url(65930e58e098621bef58.svg);
+  background-size: cover;
+  transform: translateY(-50%);
+}
+
+button.deleteTask::before,
+button.deleteProject::before {
+  background: url(03dd58f58b7ff20236ab.svg);
+  background-size: cover;
+  transform: translateY(-50%);
+}
+
+button.deleteTask::before,
+button.editTask::before,
+button.deleteProject::before,
+button.editProject::before {
+  content: ""; 
+  position: absolute;
+  top: 50%; 
+  left: -20px; 
+  width: 20px; 
+  height: 20px; 
+}
+
+button.deleteAll {
+  border-radius: 10px;
+  border: none;
+  width: clamp(50px, 40vw, 120px);
+  height: clamp(30px, 4vw, 35px);
+  align-self: center;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  margin-top: 10px;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.flex-task:has(.deleteAll) {
+  .task:last-of-type {
+    margin-bottom: 8px;
+  }  
+}
+
+button.deleteAll:hover {
+  background-color: rgb(242, 242, 242);
+}
+
+button.deleteAll:active {
+  transform: scale(1.1);
+}
+
+/* TASK FORM/MODAL */
+::placeholder {
+  color: rgba(123, 122, 122, 0.701);
+}
+
+.task-dialog {
+  width: clamp(100px, 30vw, 550px);
+  border-radius: 10px;
+  border: none;
+  border: 1px solid black;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  width: 90%;
+  padding: 10px 15px;
+}
+
+.task-form .flex-inputs {
+  display: flex;
+  gap: 25px;
+}
+
+.task-form input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.task-form #taskName {
+  width: 50%;
+}
+
+.task-form textarea {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  width: 100%;
+  height: 100px;
+  resize: none;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.task-form select {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.313);
+  outline: none;
+  cursor: pointer;
+  padding-bottom: 2px;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+#priority:focus option:first-of-type {
+  display: none;
+}
+
+.task-form #date {
+  position: relative;
+  padding-bottom: 2px;
+  width: 100px;
+}
+
+/* Make whole calendar input clickable */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+label[for="taskName"],
+label[for="description"] {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: -10px;
+}
+
+.task-btn-modal {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+#createTask, 
+#cancelTask {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color-content);
+  border-radius: 8px;
+  padding: 5px;
+  border: 1px solid black;
+  width: clamp(120px, 20vw, 150px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+dialog {
+  padding: 20px;
+  border: 2px solid #000;
+}
+
+/* FOOTER */
+.footer {
+  grid-area: footer;
+  background-color: var(--footer-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer img {
+  height: clamp(15px, 4vw, 20px);
+  width: clamp(15px, 4vw, 20px);
+  transition: transform 0.4s ease;
+}
+
+.footer span {
+  color: var(--font-color-content);
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.footer a {
+  text-decoration: none;
+  color: var(--font-color);
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  transition: margin-right 0.3s ease; 
+}
+
+.footer img:hover {
+  transform: scale(1.1);
+} 
+
+.footer span:hover {
+  border-bottom: 1px solid black;
+}
+
+.footer a:visited {
+  color: var(--font-color-content);
+  text-decoration: none;
+}
+
+/* MOBILE/RESPONSIVE */
+@media (max-width: 768px) {
+  .grid-container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 70px repeat(2, 1fr) 40px;
+  
+    grid-template-areas: "logo      content"
+                         "sidebar   content"
+                         "sidebar   content"
+                         "sidebar   footer";
+  }
+
+  .content-wrapper {
+    grid-area: content;
+    justify-content: start;
+  }
+
+  .content-wrapper .task:hover {
+    filter: blur(0);
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    width: 200px;
+  }
+
+  .sidebar.collapsed-mobile {
+    width: 70px;
+  }
+
+  .header-left {
+    grid-area: logo;
+    background-color: black;
+    width: 200px; 
+    transition: width 0.3s ease;
+    border-bottom: 1px solid var(--accent-color);
+  }
+
+  .header-left.collapsed-mobile {
+    width: 70px;
+  }
+
+  /* Make project names disappear */
+  .sidebar.collapsed-mobile #menu li span,
+  .sidebar.collapsed-mobile #project-main-title,
+  .sidebar.collapsed-mobile .project-title {
+    display: none;
+  }
+
+  .sidebar.collapsed #menu li img {
+    margin-right: 40px;
+  }
+  
+  /* Prevent list images from being dragged */
+  .sidebar.collapsed #menu img,
+  #menu img {
+    pointer-events: auto;
+    -webkit-user-drag: none; 
+    -moz-user-drag: none; 
+    -o-user-drag: none; 
+  }
+  
+  .sidebar.collapsed-mobile #menu li {
+    width: 46px;
+    pointer-events: none;
+    color: transparent;
+  }
+  
+  .sidebar.collapsed-mobile .project {
+    width: clamp(30px, 20vw, 55px);
+  }
+
+  .sidebar.collapsed-mobile #clickProject {
+    margin-left: -13px;
+  }
+  
+  .sidebar.collapsed-mobile .project-flex {
+    justify-content: center;
+  }
+  
+  .sidebar.collapsed-mobile button.btn-drop-up-toggle {
+    margin-left: -28px;
+  }
+  
+  .sidebar.collapsed-mobile .drop-up-wrapper {
+    width: 32px;
+    padding-left: 38px;
+    margin-left: -11px;
+  }
+
+  .sidebar.collapsed-mobile .project {
+    padding-left: 12px; 
+  }
+
+  .collapsed-mobile + .content-wrapper .task {
+    width: 300px;
+  }
+
+  .collapsed-mobile + .content-wrapper #section-title {
+    align-self: start;
+    margin-left: -42px;
+    margin-top: 22px;
+    padding: 0;
+  }
+
+  .collapsed-mobile + .content-wrapper #clickTask,
+  .collapsed-mobile + .content-wrapper .deleteAll {
+    align-self: start;
+    margin-left: -42px;
+  }
+
+  .sidebar ul#menu {
+    gap: 30px;
+  }
+
+  .sidebar #menu li {
+    margin-left: -19px;
+    margin-top: -15px;
+  }
+
+  .header,
+  .header-title {
+    display: none;
+  }
+
+  #project-container #project-main-title {
+    margin-left: -19px;
+  }
+
+  .sidebar-label-checkbox {
+    margin-left: -36px;
+  }
+
+  .project-flex {
+    margin-bottom: -8px;
+  }
+
+  .project {
+    margin-left: 7px;
+    height: 32px;
+  }
+
+  #createProject,
+  #cancelProject,
+  #createTask,
+  #cancelTask {
+    padding: 5px 2px;
+  }
+
+  .project-dialog {
+    left: 65px;
+    width: 290px;
+  }
+  
+  .project-form {
+    width: 100%;
+    margin-bottom: -5px;
+  }
+
+  .task-dialog {
+    left: 65px;
+    width: 290px;
+  }
+  
+  .flex-inputs {
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .task-form #date {
+    position: relative;
+    width: 100%;
+  }
+
+  .task-form {
+    width: 100%;
+    margin-bottom: -5px;
+  }
+
+  .flex-task {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-wrapper div#section-title {
+    align-self: start;
+    margin: 0;
+    width: 100%;
+    margin-top: 22px;
+    padding-left: 8px;
+  }
+
+  .content-wrapper button#clickTask {
+    align-self: start;
+    margin-left: 8px;
+  }
+
+  .content-wrapper .deleteAll {
+    align-self: start;
+    margin-left: 8px;
+  }
+
+  .task {
+    height: 200px;
+    width: 200px;
+  }
+
+  .task:first-child {
+    margin-top: 18px;
+  }
+
+  .task:last-child {
+    margin-bottom: 5px;
+  }
+
+  .left-task {
+    width: 100%;
+    padding-left: 20px;
+    gap: 10px;
+  }
+
+  .right-task {
+    display: initial;
+  }
+
+  .custom-checkbox {
+    margin: 0;
+  }
+
+  div.date {
+    margin-left: -50px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  div.priority {
+    padding: 3.5px 7px;
+    width: 50%;
+    margin-left: 20px;
+    text-align: center;
+  }
+
+  .right-task .drop-up-wrapper {
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .wrap-content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .footer span {
+    padding-top: 2px;
+  }
+}
+
+
+
+
+/*# sourceMappingURL=styles.css.map*/
