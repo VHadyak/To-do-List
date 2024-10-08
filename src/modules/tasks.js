@@ -143,7 +143,7 @@ export function markAsCompleteTask(checkbox) {
   
   if (checkbox.checked) {
     completedArr.push(taskObj);
-
+    checkbox.disabled = true; 
     setTimeout(() => {
       taskUI.remove();
     }, 300);

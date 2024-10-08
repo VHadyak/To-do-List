@@ -38,13 +38,13 @@ function addProject() {
     e.preventDefault();
 
     const projectName = projectInput.value; 
-
+ 
     if (isEditMode) {
       editProject(projectName, projectId);
     } else {
       const newProject = createProject(projectName);
       displayProject(newProject);
-      
+
       localStorage.setItem("selectedProjectID", newProject.id);
     };
 

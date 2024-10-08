@@ -108,6 +108,7 @@ export function displayProject(project) {
   projectContainer.appendChild(projectEl);
 
   jumpToProject(projectEl, projectTitle.textContent);
+  showLatestProject(projectEl);
 };
 
 export function getProjectValue(projectId) {
@@ -196,6 +197,12 @@ function showLatestTask(taskElement) {
   taskElement.scrollIntoView({behavior: "smooth", block: "end"});
   const clickTask = document.querySelector("#clickTask");
   clickTask.scrollIntoView({behavior: "smooth", block: "end"});
+};
+
+function showLatestProject(projectElement) {
+  projectContainer.appendChild(projectElement);
+
+  projectElement.scrollIntoView({behavior: "smooth", block: "end"});
 };
 
 function stylePastDueDate(dateText, taskElement) {
@@ -365,16 +372,46 @@ function hideMenu(container) {
 export function sidebarCollapse() {
   const toggleCheckbox = document.getElementById("toggleSidebar");
   const sidebar = document.getElementById("sidebar");
+  const header = document.querySelector(".header-left");
   const gridContainer = document.querySelector(".grid-container");
+  const svg = document.querySelector(".ham");
 
-  toggleCheckbox.addEventListener("change", () => {
-    if (toggleCheckbox.checked) {
-      sidebar.classList.add("collapsed");
-      gridContainer.style.gridTemplateColumns = "110px repeat(2, minmax(280px, 1fr))";
-    } else {
+  const updateSidebar = () => {
+    const isWidthLessThan768 = window.innerWidth <= 768;
+    const isCheckboxChecked = toggleCheckbox.checked;
+
+    if (isWidthLessThan768) {
+      if (isCheckboxChecked) {
+        header.classList.remove("collapsed-mobile");
+        sidebar.classList.remove("collapsed-mobile");
+        svg.classList.add("active");   
+      } else {
+        // Mobile collapse
+        header.classList.add("collapsed-mobile");
+        sidebar.classList.add("collapsed-mobile");
+        svg.classList.remove("active");
+      };
       sidebar.classList.remove("collapsed");
-      gridContainer.style.gridTemplateColumns = "var(--sidebar-width) repeat(2, minmax(280px, 1fr))";
+      gridContainer.style.removeProperty("grid-template-columns");
+    } else {
+      // If greater than 768px
+      if (isCheckboxChecked) {
+        sidebar.classList.add("collapsed");
+        gridContainer.style.gridTemplateColumns = "110px repeat(2, minmax(280px, 1fr))";
+        svg.classList.remove("active");
+      } else {
+        sidebar.classList.remove("collapsed");
+        gridContainer.style.gridTemplateColumns = "var(--sidebar-width) repeat(2, minmax(280px, 1fr))";
+        svg.classList.add("active");
+      };
+      header.classList.remove("collapsed-mobile");
+      sidebar.classList.remove("collapsed-mobile");
     };
-  });
-};
+  };
 
+  toggleCheckbox.addEventListener("change", updateSidebar);
+  // Set up event listeners
+  window.addEventListener("resize", updateSidebar);
+  // Initial check to set the correct state based on the checkbox's default state
+  updateSidebar();
+};

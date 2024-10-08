@@ -4,7 +4,9 @@ import "./styles/styles.css";
 import { init } from "./modules/initialize.js";
 
 // Initialize the application 
-init();
+document.addEventListener("DOMContentLoaded", () => {
+  init();
+});
 
 
 

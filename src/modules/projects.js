@@ -25,6 +25,7 @@ export function createProject(title) {
   const projectObj = new Project(title);
   projectArr.push(projectObj);
   localStorage.setItem("projects", JSON.stringify(projectArr));
+  
   return projectObj; 
 };
 

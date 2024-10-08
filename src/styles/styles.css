@@ -27,7 +27,7 @@
   --font-family: "Roboto", sans-serif;
   --task-width: clamp(200px, 50vw, 800px);
   --sidebar-width: 300px;
-  --sidebar-collapsed-width: 110px;
+  --sidebar-collapsed-width: 115px;
 }
 
 html {
@@ -42,11 +42,13 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  min-height: 100svh;
   font-family: var(--font-family);
 }
 
 .grid-container {
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   grid-template-columns: minmax(110px, var(--sidebar-width)) repeat(2, minmax(280px ,1fr));
   grid-template-rows: 80px repeat(2, 1fr) 40px;
@@ -57,27 +59,69 @@ body {
                        "sidebar   footer     footer";
 }
 
+/* HAMBURGER/LEFT ARROW MENU DISPLAY */
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: clamp(45px, 6vw, 60px);
+}
+
+.sidebar-label-checkbox:hover {
+  transform: scale(1.1);
+}
+
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #ffffff;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+
+.ham5 .top {
+  stroke-dasharray: 40 82;
+}
+.ham5 .bottom {
+  stroke-dasharray: 40 82;
+}
+.ham5.active .top {
+  stroke-dasharray: 14 82;
+  stroke-dashoffset: -72px;
+}
+.ham5.active .bottom {
+  stroke-dasharray: 14 82;
+  stroke-dashoffset: -72px;
+}
+
 /* SIDEBAR COLLAPSE */
 .header-left input[type="checkbox"] {
   display: none;
 } 
 
-.header-left span {
-  color: white;
-} 
-
-.sidebar-custom-checkbox {
+.sidebar-label-checkbox {
   display: flex;
   min-width: 60px;  
-  height: 25px; 
-  border: 0.05rem solid rgb(245, 238, 238);
+  height: 55px;
   border-radius: 5px;
-  margin-left: 20px;
+  margin-left: 10px;
   cursor: pointer;
   position: relative;
   align-items: center; 
   justify-content: center; 
-  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
 } 
 
 .sidebar.collapsed {
@@ -96,7 +140,8 @@ body {
 }
 
 /* Prevent list images from being dragged */
-.sidebar.collapsed #menu img {
+.sidebar.collapsed #menu img,
+#menu img {
   pointer-events: auto;
   -webkit-user-drag: none; 
   -moz-user-drag: none; 
@@ -109,13 +154,14 @@ body {
 }
 
 .sidebar.collapsed #menu li {
-  width: clamp(30px, 20vw, 50px);
+  width: 50px;
   pointer-events: none;
   color: transparent;
 }
 
 .sidebar.collapsed .project {
   width: clamp(30px, 20vw, 55px);
+  padding-left: 17px;
 }
 
 .sidebar.collapsed button#clickProject {
@@ -131,7 +177,7 @@ body {
 .sidebar.collapsed button.btn-drop-up-toggle {
   margin-left: -17px;
   height: 35px;
-  width: clamp(20px, 40vw, 55px);
+  width: clamp(20px, 3vw, 55px);
 }
 
 .sidebar.collapsed .drop-up-wrapper {
@@ -148,11 +194,9 @@ body {
 .header-left {
   background-color: var(--header-bg-color);
   grid-area: logo;
-
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* gap: 50px; */
   padding-left: 40px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -171,8 +215,9 @@ body {
   flex-direction: column;
   gap: 40px;
   padding-top: 25px;
-  width: var(--sidebar-width); 
+  width: var(--sidebar-width);
   transition: width 0.3s ease;
+  position: relative;
 }
 
 .sidebar ul#menu {
@@ -185,16 +230,16 @@ body {
 
 .sidebar ul#menu li {
   list-style-type: none;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   cursor: pointer;
   color: var(--font-color);
   font-weight: 400;
   display: flex;
   align-items: center;
   gap: 15px;
-  width: clamp(140px, 20vw, 230px);
+  width: clamp(170px, 20vw, 230px);
   padding-left: 10px;
-  height: 40px;
+  height: clamp(32px, 6vw, 40px);
 }
 
 .sidebar ul#menu li:hover,
@@ -204,7 +249,7 @@ body {
 }
 
 #menu li img {
-  height: 30px;
+  height: clamp(25px, 3vw, 30px);
 }
 
 /* PROJECT SECTION SIDEBAR */
@@ -213,6 +258,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
+  max-height: 50vh;
 }
 
 .project-flex {
@@ -221,18 +268,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 5px;
 }
 
 #project-container div#project-main-title {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   color: var(--font-color);
   font-weight: 500;
-  min-width: 150px;
+  min-width: 120px;
 }
 
 #project-container button#clickProject {
-  width: clamp(20px, 5vw, 45px);
-  height: 40px;
+  width: 45px;
+  height: clamp(30px, 5vw, 40px);
   background-color: transparent;
   border: none;
   border-radius: 10px;
@@ -251,7 +299,7 @@ body {
 }
 
 button#clickProject img {
-  height: 37px;
+  height: clamp(32px, 6vw, 37px);
   align-self: center;
 }
 
@@ -260,25 +308,29 @@ button#clickProject img {
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  width: clamp(150px, 40vw, 250px);
+  width: clamp(180px, 40vw, 250px);
   margin-left: 28px;
   gap: 50px;
   cursor: pointer;
-  padding: 0;
-  padding-left: 17px;
+  padding-left: 13px;
   transition: width 0.3s ease;
+  position: relative;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .item-highlight {
   border: 0.5px solid var(--accent-color);
   transition: width 0.3s ease;
   border-radius: 10px;
-  height: 40px;
+  height: clamp(30px, 4vw, inherit);
 }
 
 .project div.project-title {
-  font-size: 1.2rem;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   color: var(--font-color);
+  word-break: break-all;
+  padding: 2px 0;
 }
 
 .project div.project-title::before {
@@ -332,6 +384,7 @@ button {
   -moz-user-select: none;     
   -ms-user-select: none;      
   user-select: none;         
+  outline: none;
 }
 
 /* Drop up menu */
@@ -347,7 +400,7 @@ div.drop-up-menu {
   background-color: #2f2d2d;
   min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 10;
   cursor:auto;
   padding: 12px 0 12px 10px;
 }
@@ -371,37 +424,9 @@ button.deleteProject {
   transition: transform 0.4s ease;
 }
 
-button.editProject:hover,
-button.deleteProject:hover {
-  transform: scale(1.08);
-}
-
-button.editProject::before {
-  content: "";
-  position: absolute; 
-  top: 50%; 
-  left: -20px; 
-  width: 20px; 
-  height: 20px; 
-  background: url(../assets/images/edit.svg);
-  background-size: cover;
-  transform: translateY(-50%);
-}
-
-button.deleteProject::before {
-  content: ""; 
-  position: absolute;
-  top: 50%; 
-  left: -20px; 
-  width: 20px; 
-  height: 20px; 
-  background: url(../assets/images/delete.svg);
-  background-size: cover;
-  transform: translateY(-50%);
-}
-
+/* PROJECT FORM/MODAL */
 .project-dialog {
-  width: clamp(150px, 30vw, 350px);
+  width: clamp(230px, 30vw, 350px);
   border-radius: 10px;
   border: none;
   border: 1px solid black;
@@ -415,14 +440,14 @@ button.deleteProject::before {
 }
 
 label[for="projectName"] {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
 .project-form input[type="text"] {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.313);
   outline: none;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
 .project-btn-modal {
@@ -439,8 +464,8 @@ label[for="projectName"] {
   color: var(--font-color-content);
   border-radius: 8px;
   padding: 5px;
-  width: clamp(30px, 40vw, 150px);
-  font-size: 1.1rem;
+  width: clamp(120px, 20vw, 150px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   border: 1px solid black;
 }
 
@@ -480,7 +505,7 @@ label[for="projectName"] {
 
 .content-wrapper div#section-title {
   margin-top: 50px;
-  font-size: 1.9rem;
+  font-size: clamp(1.6rem, 4vw, 1.9rem);
   align-self: center;
   font-weight: 500;
 }
@@ -494,7 +519,7 @@ label[for="projectName"] {
   border: none;
   background-color: transparent;
   padding-left: 30px;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   transition: transform 0.4s ease;
   margin-top: 5px;
 }
@@ -519,11 +544,15 @@ label[for="projectName"] {
   display: flex;
   background-color: rgb(255, 255, 255);
   border: 0.5px solid rgb(0, 0, 0);
-  border-radius: 15px;
+  border-radius: 10px;
   width: var(--task-width);
   height: 50px;
   gap: 50px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.task:hover {
+  outline: 1.2px solid black;
 }
 
 .task:last-of-type {
@@ -531,7 +560,7 @@ label[for="projectName"] {
 }
 
 .task:first-of-type {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .wrap-content {
@@ -567,8 +596,8 @@ label[for="projectName"] {
 
 .custom-checkbox {
   display: flex;
-  width: 25px;  
-  height: 25px; 
+  width: clamp(20px, 4vw, 25px);  
+  height: clamp(20px, 4vw, 25px); 
   border: 0.05rem solid black;
   border-radius: 5px;
   margin-left: 20px;
@@ -610,11 +639,11 @@ input[type="checkbox"]:checked {
 }
 
 div.task-title {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
 }
 
 div.date {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   text-align: start;
   padding-right: 5px;
   padding-left: 50px;
@@ -626,7 +655,7 @@ div.date {
 }
 
 div.priority {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   padding: 5px 10px;
   border-radius: 10px;
 }
@@ -658,7 +687,6 @@ div.drop-up-menu {
   background-color: #2f2d2d;
   min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
   cursor:auto;
   padding: 12px 0 12px 10px;
 }
@@ -684,45 +712,50 @@ button.deleteTask {
 }
 
 button.editTask:hover,
-button.deleteTask:hover {
+button.deleteTask:hover,
+button.editProject:hover,
+button.deleteProject:hover {
   transform: scale(1.08);
 }
 
-button.editTask::before {
-  content: "";
-  position: absolute; 
-  top: 50%; 
-  left: -20px; 
-  width: 20px; 
-  height: 20px; 
+button.editTask::before,
+button.editProject::before {
   background: url(../assets/images/edit.svg);
   background-size: cover;
   transform: translateY(-50%);
 }
 
-button.deleteTask::before {
+button.deleteTask::before,
+button.deleteProject::before {
+  background: url(../assets/images/delete.svg);
+  background-size: cover;
+  transform: translateY(-50%);
+}
+
+button.deleteTask::before,
+button.editTask::before,
+button.deleteProject::before,
+button.editProject::before {
   content: ""; 
   position: absolute;
   top: 50%; 
   left: -20px; 
   width: 20px; 
   height: 20px; 
-  background: url(../assets/images/delete.svg);
-  background-size: cover;
-  transform: translateY(-50%);
 }
 
 button.deleteAll {
   border-radius: 10px;
   border: none;
-  border: 1px solid rgba(0, 0, 0, 0.494);
   width: clamp(50px, 40vw, 120px);
-  height: 35px;
+  height: clamp(30px, 4vw, 35px);
   align-self: center;
   cursor: pointer;
-  background-color: rgba(71, 74, 249, 0.065);
-  font-size: 1.2rem;
+  background-color: rgb(255, 255, 255);
+  font-size: clamp(1rem, 4vw, 1.2rem);
   margin-top: 10px;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
 }
 
 .flex-task:has(.deleteAll) {
@@ -732,15 +765,19 @@ button.deleteAll {
 }
 
 button.deleteAll:hover {
-  background-color: rgb(196, 211, 239);
+  background-color: rgb(242, 242, 242);
 }
 
+button.deleteAll:active {
+  transform: scale(1.1);
+}
+
+/* TASK FORM/MODAL */
 ::placeholder {
   color: rgba(123, 122, 122, 0.701);
 }
 
-.task-dialog {
-  width: clamp(100px, 30vw, 550px);
+.task-dialog { 
   border-radius: 10px;
   border: none;
   border: 1px solid black;
@@ -750,20 +787,20 @@ button.deleteAll:hover {
   display: flex;
   flex-direction: column;
   gap: 20px; 
-  width: 90%;
+  width: 100%;
   padding: 10px 15px;
 }
 
 .task-form .flex-inputs {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .task-form input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.313);
   outline: none;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
 .task-form #taskName {
@@ -777,7 +814,7 @@ button.deleteAll:hover {
   width: 100%;
   height: 100px;
   resize: none;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
 .task-form select {
@@ -786,8 +823,10 @@ button.deleteAll:hover {
   outline: none;
   cursor: pointer;
   padding-bottom: 2px;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
+
+
 
 #priority:focus option:first-of-type {
   display: none;
@@ -796,7 +835,7 @@ button.deleteAll:hover {
 .task-form #date {
   position: relative;
   padding-bottom: 2px;
-  width: clamp(70px, 40vw, 100px);
+  width: 100px;
 }
 
 /* Make whole calendar input clickable */
@@ -815,7 +854,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 label[for="taskName"],
 label[for="description"] {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   margin-bottom: -10px;
 }
 
@@ -833,9 +872,9 @@ label[for="description"] {
   color: var(--font-color-content);
   border-radius: 8px;
   padding: 5px;
-  width: clamp(30px, 40vw, 120px);
   border: 1px solid black;
-  font-size: 1.1rem;
+  width: clamp(120px, 20vw, 150px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
 dialog {
@@ -853,13 +892,14 @@ dialog {
 }
 
 .footer img {
-  height: 20px;
-  width: 20px;
+  height: clamp(15px, 4vw, 20px);
+  width: clamp(15px, 4vw, 20px);
   transition: transform 0.4s ease;
 }
 
 .footer span {
   color: var(--font-color-content);
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .footer a {
@@ -869,7 +909,7 @@ dialog {
   gap: 5px;
   justify-content: center;
   align-items: center;
-  transition: margin-right 0.3s ease; /* Ensure the margin-left has a smooth transition */
+  transition: margin-right 0.3s ease; 
 }
 
 .footer img:hover {
@@ -881,16 +921,304 @@ dialog {
 }
 
 .footer a:visited {
-  color: var(--font-color);
+  color: var(--font-color-content);
   text-decoration: none;
 }
 
-.footer span {
-  font-size: 1rem;
+/* MOBILE/RESPONSIVE */
+@media (max-width: 768px) {
+  body {
+    touch-action: manipulation;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 70px repeat(2, 1fr) 40px;
+  
+    grid-template-areas: "logo      content"
+                         "sidebar   content"
+                         "sidebar   content"
+                         "sidebar   footer";
+  }
+
+  .content-wrapper {
+    grid-area: content;
+    justify-content: start;
+    overflow-x: hidden;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    width: 200px;
+    transition: none;
+    transition: width 0.3s;
+  }
+
+  .sidebar.collapsed-mobile {
+    width: 70px;
+  }
+
+  .header-left {
+    grid-area: logo;
+    background-color: black;
+    width: 200px; 
+    border-bottom: 1px solid var(--accent-color);
+    transition: width 0.3s;
+  }
+
+  .header-left.collapsed-mobile {
+    width: 70px;
+  }
+
+  /* Make project names disappear */
+  .sidebar.collapsed-mobile #menu li span,
+  .sidebar.collapsed-mobile #project-main-title,
+  .sidebar.collapsed-mobile .project-title {
+    display: none;
+  }
+
+  .sidebar.collapsed #menu li img {
+    margin-right: 40px;
+  }
+  
+  /* Prevent list images from being dragged */
+  .sidebar.collapsed #menu img,
+  #menu img {
+    pointer-events: auto;
+    -webkit-user-drag: none; 
+    -moz-user-drag: none; 
+    -o-user-drag: none; 
+  }
+  
+  .sidebar.collapsed-mobile #menu li {
+    width: 46px;
+    pointer-events: none;
+    color: transparent;
+  }
+  
+  .sidebar.collapsed-mobile .project {
+    width: clamp(30px, 20vw, 55px);
+  }
+
+  .sidebar.collapsed-mobile #clickProject {
+    margin-left: -13px;
+  }
+  
+  .sidebar.collapsed-mobile .project-flex {
+    justify-content: center;
+  }
+  
+  .sidebar.collapsed-mobile button.btn-drop-up-toggle {
+    margin-left: -28px;
+  }
+  
+  .sidebar.collapsed-mobile .drop-up-wrapper {
+    width: 32px;
+    padding-left: 38px;
+    margin-left: -11px;
+  }
+
+  .sidebar.collapsed-mobile .project {
+    padding-left: 12px; 
+  }
+
+  .collapsed-mobile + .content-wrapper .task {
+    width: 300px;
+  }
+
+  .collapsed-mobile + .content-wrapper #section-title {
+    align-self: start;
+    margin-left: -42px;
+    margin-top: 22px;
+    padding: 0;
+  }
+
+  .collapsed-mobile + .content-wrapper #clickTask,
+  .collapsed-mobile + .content-wrapper .deleteAll {
+    align-self: start;
+    margin-left: -42px;
+  }
+
+  .sidebar ul#menu {
+    gap: 30px;
+  }
+
+  .sidebar #menu li {
+    margin-left: -19px;
+    margin-top: -15px;
+  }
+
+  .header,
+  .header-title {
+    display: none;
+  }
+
+  #project-container #project-main-title {
+    margin-left: -19px;
+  }
+
+  .sidebar-label-checkbox {
+    margin-left: -36px;
+  }
+
+  .project-flex {
+    margin-bottom: -8px;
+  }
+
+  .project {
+    margin-left: 7px;
+    height: 32px;
+  }
+
+  #createProject,
+  #cancelProject,
+  #createTask,
+  #cancelTask {
+    padding: 5px 2px;
+  }
+
+  .project-dialog {
+    left: 65px;
+    width: 290px;
+  }
+  
+  .project-form {
+    width: 100%;
+    margin-bottom: -5px;
+  }
+
+  .drop-up-wrapper {
+    margin-left: -28px;
+  }
+
+  .project-title {
+    min-width: 100px;
+  }
+
+  .task-dialog {
+    left: 65px;
+    width: 290px;
+  }
+  
+  .flex-inputs {
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .task-form #date {
+    position: relative;
+    width: 100%;
+  }
+
+  .task-form {
+    width: 100%;
+    margin-bottom: -5px;
+  }
+
+  .flex-task {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-wrapper div#section-title {
+    align-self: start;
+    margin: 0;
+    width: 100%;
+    margin-top: 22px;
+    padding-left: 8px;
+    word-break: break-all;
+  }
+
+  .content-wrapper button#clickTask {
+    align-self: start;
+    margin-left: 8px;
+  }
+
+  .content-wrapper .deleteAll {
+    align-self: start;
+    margin-left: 8px;
+  }
+
+  .task {
+    height: 200px;
+    width: 200px;
+  }
+
+  .task:first-child {
+    margin-top: 18px;
+  }
+
+  .task:last-child {
+    margin-bottom: 5px;
+  }
+
+  .left-task {
+    width: 100%;
+    padding-left: 20px;
+    gap: 10px;
+  }
+
+  .right-task {
+    display: initial;
+  }
+
+  .custom-checkbox {
+    margin: 0;
+  }
+
+  div.date {
+    margin-left: -50px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  div.priority {
+    padding: 3.5px 7px;
+    width: 50%;
+    margin-left: 20px;
+    text-align: center;
+  }
+
+  .right-task .drop-up-wrapper {
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .wrap-content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .footer span {
+    padding-top: 2px;
+  }
 }
 
-
-
-
-
-
+@media (hover: none) {
+  .buttons > button:hover {
+    background-color: inherit;
+    color: inherit;
+  } 
+  
+  .buttons > button:active,
+  .sidebar li:hover {
+    background-color: inherit;
+    color: inherit;
+    transform: none;
+  } 
+  
+  .task:hover {
+    border-top: inherit;
+    border-bottom: inherit;
+    transform: none;
+  } 
+}
