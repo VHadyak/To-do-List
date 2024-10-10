@@ -1091,6 +1091,7 @@ dialog {
   #createTask,
   #cancelTask {
     padding: 5px 2px;
+    color: var(--font-color-content);
   }
 
   .project-dialog {
@@ -1158,6 +1159,7 @@ dialog {
   .content-wrapper button#clickTask {
     align-self: start;
     margin-left: 8px;
+    color: var(--font-color-content);
   }
 
   .content-wrapper .deleteAll {
@@ -1227,6 +1229,16 @@ dialog {
   textarea,
   select {
     touch-action: manipulation;
+  }
+
+  input, 
+  select {
+    color: var(--font-color-content);
+  }
+  
+  input,
+  textarea {
+    border-radius: 0px;
   }
 }
 
