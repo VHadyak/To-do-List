@@ -133,7 +133,6 @@ function manageTask(task, newProjectID, oldProjectID, isHighlighted) {
   };
 };
 
-
 // Track tasks that have been completed/marked
 export function markAsCompleteTask(checkbox) {
   const taskUI = checkbox.closest(".task");
@@ -143,7 +142,6 @@ export function markAsCompleteTask(checkbox) {
   
   if (checkbox.checked) {
     completedArr.push(taskObj);
-    checkbox.disabled = true; 
     setTimeout(() => {
       taskUI.remove();
     }, 300);
