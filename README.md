@@ -7,5 +7,5 @@
 # ToDo Project 
 ## -With local storage
 ## -Implemented past due option for tasks that haven't been completed 
-## -Sidebar is scrollable 
+## -Sidebar is collapsable 
 ## -Added some responsiveness
