@@ -441,6 +441,7 @@ button.deleteProject {
 
 label[for="projectName"] {
   font-size: clamp(1rem, 2vw, 1.2rem);
+  font-family: var(--font-family);
 }
 
 .project-form input {
@@ -448,6 +449,7 @@ label[for="projectName"] {
   border-bottom: 1px solid rgba(0, 0, 0, 0.313);
   outline: none;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-family: var(--font-family);
 }
 
 #projectName {
@@ -471,6 +473,7 @@ label[for="projectName"] {
   width: clamp(120px, 20vw, 150px);
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   border: 1px solid black;
+  font-family: var(--font-family);
 }
 
 #createProject:hover,
@@ -483,9 +486,9 @@ label[for="projectName"] {
 /* MAIN CONTENT / TASK SECTION */
 .content-wrapper {
   position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
-  grid-area: content;
+  height: 90vh;
+  overflow-y: scroll;
+  grid-area: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -713,6 +716,7 @@ button.deleteTask {
   color: var(--font-color);
   background-color: transparent;
   transition: transform 0.4s ease;
+  font-family: var(--font-family);
 }
 
 button.editTask:hover,
@@ -793,6 +797,7 @@ button.deleteAll:active {
   gap: 20px; 
   width: 100%;
   padding: 10px 15px;
+  font-family: var(--font-family);
 }
 
 .task-form .flex-inputs {
@@ -805,6 +810,7 @@ button.deleteAll:active {
   border-bottom: 1px solid rgba(0, 0, 0, 0.313);
   outline: none;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-family: var(--font-family);
 }
 
 .task-form #taskName {
@@ -819,6 +825,7 @@ button.deleteAll:active {
   height: 100px;
   resize: none;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-family: var(--font-family);
 }
 
 .task-form select {
@@ -1090,6 +1097,16 @@ dialog {
     left: 65px;
     width: 290px;
   }
+
+  .project-dialog,
+  .task-dialog {
+    overflow: hidden;
+  }
+
+  .project-form,
+  .task-form {
+    overflow-y: auto;
+  }
   
   .project-form {
     width: 100%;
@@ -1204,6 +1221,12 @@ dialog {
 
   .footer span {
     padding-top: 2px;
+  }
+
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
   }
 }
 
