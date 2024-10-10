@@ -467,13 +467,13 @@ label[for="projectName"] {
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: var(--font-color-content);
   border-radius: 8px;
   padding: 5px;
   width: clamp(120px, 20vw, 150px);
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   border: 1px solid black;
   font-family: var(--font-family);
+  font-weight: 400;
 }
 
 #createProject:hover,
@@ -488,7 +488,7 @@ label[for="projectName"] {
   position: relative;
   height: 90vh;
   overflow-y: scroll;
-  grid-area: auto;
+  grid-area: content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -880,12 +880,12 @@ label[for="description"] {
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: var(--font-color-content);
   border-radius: 8px;
   padding: 5px;
   border: 1px solid black;
   width: clamp(120px, 20vw, 150px);
   font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 400;
 }
 
 dialog {
